@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  meetup: one
+  airport_code: MyString
+  midpoint: false
+  country: MyString
+  recommended: false
+  fly_to: MyString
+  city_name: MyString
+
+two:
+  meetup: two
+  airport_code: MyString
+  midpoint: false
+  country: MyString
+  recommended: false
+  fly_to: MyString
+  city_name: MyString

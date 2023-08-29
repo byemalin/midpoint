@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  meetup: one
+  fly_from: MyString
+
+two:
+  user: two
+  meetup: two
+  fly_from: MyString
