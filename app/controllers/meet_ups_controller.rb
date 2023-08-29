@@ -5,6 +5,7 @@ class MeetUpsController < ApplicationController
 
   def create
     authorize @meetup
+    
   end
 
   def delete
