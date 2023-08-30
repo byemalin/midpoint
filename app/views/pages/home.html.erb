@@ -2,8 +2,8 @@
   <%= image_tag "logo.png", class: "mb-4" %>
   <h4 class="mb-3">Bringing far away friends closer together</h4>
     <div class="banner-cities-form">
-      <%= form_with url: meetups_path, method: :post, class: "d-flex justify-content-center" do %>
-      <div class="d-flex flex-row mt-4">
+      <%= form_with url: meetups_path, method: :post, class: "d-flex justify-content-center", data:{ controller: "datepicker"} do %>
+      <div class="d-flex flex-row mt-3">
         <div class="relative">
           <i class="fa-solid fa-magnifying-glass absolute"></i>
           <%= text_field_tag :query,
@@ -28,12 +28,12 @@
             class: "input-cities form-input ps-5",
             placeholder: "Departure date",
             as: :string,
-            data: { datepicker_target: "start_date" }
+            data: { datepicker_target: "departureDate" }
           %>
         </div>
       <% end %>
       </div>
-      <%= button_tag( :class => "btn-navbar btn-search text-align-center mt-4 me-4") do %>
+      <%= button_tag( :class => "btn-navbar btn-search text-align-center mt-5 me-5") do %>
   Search <i class="fa-solid fa-arrow-right" style="color: #9f87b5;"></i>
 <% end %>
     </div>

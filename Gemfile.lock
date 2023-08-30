@@ -249,11 +249,8 @@ DEPENDENCIES
   capybara
   debug
   devise
-
-  font-awesome-sass
-  
   dotenv-rails
-
+  font-awesome-sass
   importmap-rails
   jbuilder
   pg
