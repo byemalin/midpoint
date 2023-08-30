@@ -1,0 +1,22 @@
+.banner-cities {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 640px;
+  background-image: asset_url("Blobs.png");
+  background-size: cover;
+  color: #f7f7f7;
+}
+
+.banner-cities img {
+  width: 240px;
+  height: 40px;
+}
+
+.banner-cities-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

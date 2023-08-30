@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: "pages#home"
 
-  resources :meetups, only: [:show, :index, :destroy]
+  resources :meetups, only: [:show, :index, :destroy, :create]
 
   resources :destinations, only: [:show] do
     resources :flights
