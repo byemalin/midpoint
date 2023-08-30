@@ -1,0 +1,18 @@
+.input-cities {
+  border: 2px solid #f7f7f7;
+  color: #f7f7f7;
+  padding: 12px 16px;
+  width: 191px;
+  background-color: #110F0F;
+  border-radius: 62px;
+  margin-right: 20px;
+}
+
+.input-cities input {
+  padding-left: 5px;
+}
+
+input:hover:active {
+  outline: 0;
+  box-shadow: 0 0 3rem #822fe5;
+}

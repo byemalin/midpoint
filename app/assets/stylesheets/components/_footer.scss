@@ -1,0 +1,68 @@
+.footer-main-cities {}
+
+.footer-banner-cities {
+  color: #f7f7f7;
+  background-color: #110F0F;
+  margin: 0 100px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 36px 64px;
+  position: relative;
+  top: 92px
+}
+
+.footer-banner-cities h3 {
+  width: 550px;
+}
+
+.footer-banner-cities img {
+  width: 155px;
+}
+
+.footer-content-cities {
+  background-color: #110F0F;
+  padding: 0px 50px;
+  padding-top: 20px;
+  color: #f7f7f7;
+}
+
+.footer-content-cities img {
+  width: 170px;
+  margin: 10px 0;
+}
+
+.footer-content-cities p {
+  width: 250px;
+  margin: 0;
+}
+
+.footer-content-cities li {
+  display: inline;
+  list-style: none;
+}
+
+.footer-links-cities {
+  width: 60%;
+}
+
+.footer-links-cities li {
+  margin: 0 40px 0 40px;
+}
+
+.footer-content-cities>div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+
+.payment-types-footer-cities {
+  gap: 12px;
+}
+
+.payment-types-footer-cities li {
+  font-size: 35px;
+}

@@ -1,13 +1,41 @@
-<h1>Midpoint Home Page</h1>
-<div class="row">
-  <div class="col-sm-8 my-3">
-    <%= form_with url: meetups_path, method: :post, class: "d-flex" do %>
-    <%= text_field_tag :query,
-      params[:query],
-      class: "form-control p-5",
-      placeholder: "Please enter an airport code"
-    %>
-    <%= submit_tag "Search", name: "", class:"btn btn-primary" %>
-    <% end %>
+<div class="banner-cities">
+  <%= image_tag "logo.png", class: "mb-4" %>
+  <h4 class="mb-3">Bringing far away friends closer together</h4>
+    <div class="banner-cities-form">
+      <%= form_with url: meetups_path, method: :post, class: "d-flex justify-content-center" do %>
+      <div class="d-flex flex-row mt-4">
+        <div class="relative">
+          <i class="fa-solid fa-magnifying-glass absolute"></i>
+          <%= text_field_tag :query,
+            params[:query],
+            class: "input-cities searchbar-cities form-input ps-5",
+            placeholder: "First city"
+          %>
+        </div>
+        <div class="relative">
+          <i class="fa-regular fa-calendar absolute"></i>
+          <%= text_field_tag :query_s_date,
+            params[:query_s_date],
+            class: "input-cities form-input ps-5",
+            placeholder: "Second city",
+            as: :string
+          %>
+        </div>
+        <div class="relative">
+          <i class="fa-regular fa-calendar absolute"></i>
+          <%= text_field_tag :query_s_date,
+            params[:query_s_date],
+            class: "input-cities form-input ps-5",
+            placeholder: "Departure date",
+            as: :string,
+            data: { datepicker_target: "start_date" }
+          %>
+        </div>
+      <% end %>
+      </div>
+      <%= button_tag( :class => "btn-navbar btn-search text-align-center mt-4 me-4") do %>
+  Search <i class="fa-solid fa-arrow-right" style="color: #9f87b5;"></i>
+<% end %>
+    </div>
   </div>
 </div>
