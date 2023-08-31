@@ -9,8 +9,7 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
-
-ActiveRecord::Schema[7.0].define(version: 2023_08_31_113900) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_31_150434) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +19,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_113900) do
     t.boolean "is_recommended"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
     t.string "fly_to_code"
     t.string "fly_to_city"
     t.string "fly_to_country"
@@ -37,6 +38,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_113900) do
     t.boolean "has_airport_change_2"
     t.float "latitude"
     t.float "longitude"
+    t.datetime "local_arrival_1"
+    t.datetime "local_arrival_2"
     t.index ["meetup_id"], name: "index_destinations_on_meetup_id"
   end
 
@@ -48,6 +51,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_113900) do
     t.string "fly_from_1"
     t.string "fly_from_2"
     t.bigint "user_id"
+    t.float "departure_city1_lat"
+    t.float "departure_city1_lon"
+    t.float "departure_city2_lat"
+    t.float "departure_city2_lon"
+    t.string "city_from_1"
+    t.string "city_from_2"
     t.index ["user_id"], name: "index_meetups_on_user_id"
   end
 
