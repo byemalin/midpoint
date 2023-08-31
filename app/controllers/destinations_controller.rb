@@ -1,5 +1,4 @@
 class DestinationsController < ApplicationController
-  def index
-    
+  def show
   end
 end

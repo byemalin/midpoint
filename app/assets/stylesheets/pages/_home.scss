@@ -20,3 +20,14 @@
   align-items: center;
   justify-content: center;
 }
+
+.banner-cities input:focus {
+  outline: 0;
+  box-shadow: 0 0 4rem #705eb6;
+}
+
+
+.banner-cities input:hover:active {
+  outline: 0;
+  box-shadow: 0 0 4rem #705eb6;
+}

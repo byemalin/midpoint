@@ -33,7 +33,14 @@ class MeetupsController < ApplicationController
   end
 
   def show
-    meetup.destinations
+    @destinations = meetup.destinations
+    @markers = @destinations.geocoded.map do |destination|
+      {
+        lat: destination.latitude,
+        lng: destination.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {destination: destination})
+      }
+    end
     # destinations = results.map do |destination|
     #   [destination[:fly_to_1], destination[:total_price]]
     # end
