@@ -37,3 +37,6 @@
 
 # Add .env so it's not committed
 .env
+
+#Mac OS Metadata files
+.DS_Store

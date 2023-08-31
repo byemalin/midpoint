@@ -1,0 +1,58 @@
+// Import Google fonts
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+// To use a font file (.woff) uncomment following lines
+@font-face {
+  font-family: "MyriadPro";
+  src: font-url('MyriadPro-Bold.woff');
+}
+// $my-font: "Font Name";
+
+
+// Define fonts for body and headers
+$body-font: "Roboto", "Helvetica", "sans-serif";
+$headers-font: "MyriadPro", "Helvetica", "sans-serif";
+
+html{
+  font-size: 16px;
+  font-family: $body-font;
+}
+
+*{
+  color: $midpoint-offwhite;
+  line-height: normal;
+}
+
+h1, h2, h3, h4, h5{
+  font-family: $headers-font;
+  font-weight: 700;
+  color: $midpoint-offwhite;
+  margin:0;
+}
+
+a{
+  text-decoration: none;
+}
+
+h1{
+  font-size: 64px;
+}
+h2{
+  font-size: 48px;
+}
+h3{
+  font-size: 40px;
+}
+h4{
+  font-size: 32px;
+}
+h5{
+  font-size: 20px;
+}
+small{
+  font-size: 14px;
+  font-weight: 500;
+}
+p{
+  margin: 0;
+}

@@ -1,0 +1,47 @@
+.card-midpoint{
+  border-radius: 16px;
+  border: 1px solid $midpoint-grey;
+  background: $midpoint-dark-grey;
+
+  padding: 24px;
+}
+
+.destination-card-midpoint{
+  width: 353px;
+  height: 340px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  img {
+    width: 305px;
+    height: 189px;
+    border-radius: 16px;
+  }
+}
+
+.destination-card-midpoint > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+
+  p{
+    color: $midpoint-grey;
+  }
+}
+
+.tag {
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.tag-recommended{
+  background: $midpoint-secondary;
+  color: $midpoint-black;
+}
+
+.tag-midpoint{
+  background: $midpoint-primary;
+}
