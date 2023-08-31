@@ -6,23 +6,33 @@
 
 <h1>Trip Summary</h1>
 
-<div>
-  <p>From <%= @destination.meetup.city_from_1 %>, <%= @destination.meetup.fly_from_1 %> to <%= @destination.fly_to_city %> (<% @destination.fly_to_code %>), <%= @destination.fly_to_country %> </p>
+<div class="">
+  <p>From <%= @destination.meetup.city_from_1 %>, <%= @destination.meetup.fly_from_1 %> to <%= @destination.fly_to_city %> (<%= @destination.fly_to_code %>), <%= @destination.fly_to_country %> </p>
   <p><%= @destination.price_1 %> € </p>
-  <p><%= @destination.duration_1 / 60 %> mins </p>
-  <p>Departure: <%= @destination.local_departure_1 %> </p>
+  <p><%= @destination.duration_1 / 60 /60 %> h <%= @destination.duration_1 % 60 % 60 %> m </p>
+  <p>Departure: <%= @destination.local_departure_1.strftime('%d:%m %y')%> at <%= @destination.local_departure_1.strftime('%I:%M %p')%> </p>
   <p>Arrival: <%= @destination.local_arrival_1 %> </p>
-  <p>By: <%= @destination.airlines_1 %> </p>
+  <p>By: <%= @destination.airlines_1.to_s%> </p>
   <p>Has <%= @destination.has_airport_change_1 == false ? "0" : "" %> connections </p>
-
+  <%= link_to "Buy this trip", @destination.deep_link_1, :target => "_blank" %>
 </div>
-
-
+<br>
+<div class="">
+  <p>From <%= @destination.meetup.city_from_2 %>, <%= @destination.meetup.fly_from_2 %> to <%= @destination.fly_to_city %> (<%= @destination.fly_to_code %>), <%= @destination.fly_to_country %> </p>
+  <p><%= @destination.price_2 %> € </p>
+  <p><%= @destination.duration_2 / 60 /60 %> h <%= @destination.duration_2 % 60 % 60 %> m </p>
+  <p>Departure: <%= @destination.local_departure_2.strftime('%d:%m %y')%> at <%= @destination.local_departure_2.strftime('%I:%M %p')%> </p>
+  <p>Arrival: <%= @destination.local_arrival_2 %> </p>
+  <p>By: <%= @destination.airlines_2.to_s%> </p>
+  <p>Has <%= @destination.has_airport_change_2 == false ? "0" : "" %> connections </p>
+  <%= link_to "Buy this trip", @destination.deep_link_2, :target => "_blank" %>
+</div>
+<br>
 <div class="bg-primary">
   <p>Flight 1 <%= @destination.price_1 %> € </p>
   <p>Flight 2 <%= @destination.price_2 %> € </p>
   <p>Total <%= @destination.price_1 + @destination.price_2 %> € </p>
-  <%# <%= link_to "Create trip", meetup_path, class:"btn-spaces btn-secondary-spaces" do%> %>
+  <%#  %>
 </div>
 
 <%# meetup_id: @meetup.id,

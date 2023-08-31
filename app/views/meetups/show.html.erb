@@ -2,10 +2,5 @@
 
 <% @meetup.destinations.each do |destination| %>
   <%= render "destinations/destination_card", destination: destination %>
-  <h3><%= destination.price_1 + destination.price_2 %></h3>
-  <p>To <%= destination.fly_to_city %></p>
-  <p>At <%= destination.local_departure_1 %> From <%= @meetup.fly_from_1 %></p>
-  <p>At <%= destination.local_departure_2 %> From <%= @meetup.fly_from_2 %></p>
   <p> <%= link_to "show", destination_path(destination) %>
-  <br>
 <% end %>
