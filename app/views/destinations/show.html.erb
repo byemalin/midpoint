@@ -1,0 +1,22 @@
+<h1>Destination Show Placeholder</h1>
+
+<%= link_to meetup_path(@destination.meetup.id), class:"btn-spaces btn-secondary-spaces" do%>
+  <i class="fa-solid fa-arrow-left"></i>
+<% end %>
+
+<p><%= @destination.meetup.city_from_1 %></p>
+<p><%= @destination.price_1 %> € </p>
+<p><%= @destination.duration_1 / 60 %> mins </p>
+
+<p><%= @destination.fly_to_city %></p>
+
+<p><%= @destination.meetup.city_from_2 %></p>
+<p><%= @destination.price_2 %> € </p>
+<p><%= @destination.duration_2 / 60 %> mins </p>
+<br>
+<div>
+  <p>Flight 1 <%= @destination.price_1 %> € </p>
+  <p>Flight 2 <%= @destination.price_2 %> € </p>
+  <p>Total <%= @destination.price_1 + @destination.price_2 %> € </p>
+  <%= link_to "Create trip", summary_path(@destination.id), class:"btn-spaces btn-secondary-spaces" %>
+</div>
