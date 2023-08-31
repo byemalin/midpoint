@@ -3,4 +3,8 @@ class Destination < ApplicationRecord
   has_many :flights, dependent: :destroy
 
   geocoded_by :fly_to_city
+
+  def total_price
+    self.price_1 + self.price_2
+  end
 end

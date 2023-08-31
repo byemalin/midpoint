@@ -1,21 +1,17 @@
-.input-cities {
-  border: 2px solid #f7f7f7;
-  color: #f7f7f7;
+.search-input-midpoint {
+  border: 1px solid $midpoint-offwhite;
   padding: 12px 16px;
   width: 191px;
-  background-color: #110F0F;
+  background-color: #00000000;
   border-radius: 62px;
   margin-right: 40px;
 }
 
-.input-cities input {
-  padding-left: 10px;
-}
+// .input-cities input {
+//   padding-left: 10px;
+// }
 
 
 input::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #f7f7f7;
-  opacity: 1;
-  /* Firefox */
+  color: $midpoint-offwhite;
 }

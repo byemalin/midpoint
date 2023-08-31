@@ -13,7 +13,7 @@
               <i class="fa-solid fa-magnifying-glass absolute"></i>
               <%= text_field_tag :query,
                 params[:query],
-                class: "input-cities searchbar-cities form-input ps-5",
+                class: "search-input-midpoint searchbar-cities form-input ps-5",
                 placeholder: "First city"
               %>
             </div>
@@ -21,7 +21,7 @@
               <i class="fa-regular fa-calendar absolute"></i>
               <%= text_field_tag :query_s_date,
                 params[:query_s_date],
-                class: "input-cities form-input ps-5",
+                class: "search-input-midpoint form-input ps-5",
                 placeholder: "Second city",
                 as: :string
               %>
@@ -30,7 +30,7 @@
               <i class="fa-regular fa-calendar absolute"></i>
               <%= text_field_tag :query_s_date,
                 params[:query_s_date],
-                class: "input-cities form-input ps-5",
+                class: "search-input-midpoint form-input ps-5",
                 placeholder: "Departure date",
                 as: :string,
                 data: { datepicker_target: "start_date" }

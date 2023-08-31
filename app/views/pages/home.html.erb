@@ -1,6 +1,6 @@
 <div class="banner-cities">
   <%= image_tag "logo.png", class: "mb-4" %>
-  <h4 class="mb-3">Bringing far away friends closer together</h4>
+  <p class="mb-3">Bringing far away friends closer together</p>
     <div class="banner-cities-form">
       <%= form_with url: meetups_path, method: :post, class: "d-flex justify-content-center", data:{ controller: "datepicker"} do %>
       <div class="d-flex flex-row mt-3">
@@ -8,7 +8,7 @@
           <i class="fa-solid fa-magnifying-glass absolute"></i>
           <%= text_field_tag :fly_from_1,
             params[:fly_from_1],
-            class: "input-cities searchbar-cities form-input ps-5",
+            class: "search-input-midpoint searchbar-cities form-input ps-5",
             placeholder: "First city"
           %>
         </div>
@@ -16,16 +16,16 @@
           <i class="fa-solid fa-magnifying-glass absolute"></i>
           <%= text_field_tag :fly_from_2,
             params[:fly_from_2],
-            class: "input-cities form-input ps-5",
+            class: "search-input-midpoint form-input ps-5",
             placeholder: "Second city",
             as: :string
           %>
         </div>
-        <div class="relative"3>
+        <div class="relative">
           <i class="fa-regular fa-calendar absolute"></i>
           <%= text_field_tag :date_from,
             params[:date_from],
-            class: "input-cities form-input ps-5",
+            class: "search-input-midpoint form-input ps-5",
             placeholder: "Departure date",
             as: :string,
             data: { datepicker_target: "departureDate" }

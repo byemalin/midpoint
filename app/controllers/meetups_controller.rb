@@ -31,6 +31,8 @@ class MeetupsController < ApplicationController
           price_2:info[:price_2],
           local_departure_1: info[:local_departure_1],
           local_departure_2: info[:local_departure_2],
+          local_arrival_1: info[:local_arrival_1],
+          local_arrival_2: info[:local_arrival_2],
           duration_1: info[:duration_1],
           duration_2: info[:duration_2],
           airlines_1: info[:airlines_1],
@@ -58,9 +60,6 @@ class MeetupsController < ApplicationController
         lng: destination.longitude
       }
     end
-    # destinations = results.map do |destination|
-    #   [destination[:fly_to_1], destination[:total_price]]
-    # end
   end
 
   private
