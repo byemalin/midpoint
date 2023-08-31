@@ -1,11 +1,17 @@
-class MeetUpsController < ApplicationController
+class MeetupsController < ApplicationController
+
+  def index
+  end
+  
   def show
     authorize @meetup
+    @destinations = Destination.all
+    # iterate over the destinations
   end
 
   def create
     authorize @meetup
-    
+
   end
 
   def delete
