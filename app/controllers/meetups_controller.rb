@@ -1,5 +1,6 @@
 class MeetupsController < ApplicationController
   def create
+    authorize @meetup
     @meetup = Meetup.new(meetup_params)
     @meetup.user = current_user
     if @meetup.save

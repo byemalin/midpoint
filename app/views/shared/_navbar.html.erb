@@ -5,7 +5,7 @@
         <% if user_signed_in? %>
         <ul>
           <li>
-             <%= form_with url: meetups_path, method: :get, class: "d-flex justify-content-around align-items-center", data:{ controller: "datepicker", datepicker_disabled_dates_value: [].to_json} do %>
+             <%= form_with url: meetups_path, method: :get, class: "d-flex justify-content-around align-items-center", data:{ controller: "datepicker"} do %>
           <li>
               <%= link_to "My Trips", meetups_path, class: "navbar-link" %>
             </li>
