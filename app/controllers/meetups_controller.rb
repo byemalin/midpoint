@@ -4,13 +4,39 @@ class MeetupsController < ApplicationController
     @meetup.user = current_user
     if @meetup.save
       results = FlightApi.new.destinations(@meetup.fly_from_1, @meetup.fly_from_2, @meetup.date_from)
-      destinations = results.map do |destination|
-        [destination[:fly_to_1], destination[:total_price]]
+      destination = results.each do |info|
+        Destination.create!(
+          meetup_id: @meetup.id,
+          is_midpoint: false,
+          is_recommended: false,
+          fly_to_code: info[:fly_to_1],
+          fly_to_city: info[:city_to_1],
+          fly_to_country: info[:country_to_1]
+          price_1:info[:price_1],
+          price_2:info[:price_2],
+          local_departure_1: info[:local_departure_1],
+          local_departure_2: info[:local_departure_2],
+          duration_1: info[:duration_1],
+          duration_2: info[:duration_2],
+          airlines_1: info[:airlines_1],
+          airlines_2: info[:airlines_2],
+          deep_link_1: info[:deep_link_1],
+          deep_link_2: info[:deep_link_2],
+          has_airport_change_1: info[:has_airport_change_1],
+          has_airport_change_2: info[:has_airport_change_2]
+        )
       end
       redirect_to meetup_path(@meetup)
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    meetup.destinations
+    # destinations = results.map do |destination|
+    #   [destination[:fly_to_1], destination[:total_price]]
+    # end
   end
 
   private
