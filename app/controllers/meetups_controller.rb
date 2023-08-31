@@ -42,7 +42,7 @@ class MeetupsController < ApplicationController
   end
 
   def show
-    @meetup = Meetup.find(params[:id]);
+    @meetup = Meetup.find(params[:id])
     @destinations = @meetup.destinations
     @markers = @destinations.geocoded.map do |destination|
       {
