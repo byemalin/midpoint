@@ -6,16 +6,16 @@
       <div class="d-flex flex-row mt-3">
         <div class="relative">
           <i class="fa-solid fa-magnifying-glass absolute"></i>
-          <%= text_field_tag :query,
-            params[:query],
+          <%= text_field_tag :fly_from_1,
+            params[:fly_from_1],
             class: "input-cities searchbar-cities form-input ps-5",
             placeholder: "First city"
           %>
         </div>
         <div class="relative">
           <i class="fa-solid fa-magnifying-glass absolute"></i>
-          <%= text_field_tag :query_s_date,
-            params[:query_s_date],
+          <%= text_field_tag :fly_from_2,
+            params[:fly_from_2],
             class: "input-cities form-input ps-5",
             placeholder: "Second city",
             as: :string
@@ -23,19 +23,19 @@
         </div>
         <div class="relative"3>
           <i class="fa-regular fa-calendar absolute"></i>
-          <%= text_field_tag :query_s_date,
-            params[:query_s_date],
+          <%= text_field_tag :date_from,
+            params[:date_from],
             class: "input-cities form-input ps-5",
             placeholder: "Departure date",
             as: :string,
             data: { datepicker_target: "departureDate" }
           %>
         </div>
-      <% end %>
+        <div>
+          <%= submit_tag "Search", name: "", class: "btn btn-primary btn-search" %>
+        </div>
       </div>
-      <%= button_tag( :class => "btn-navbar btn-search text-align-center mt-5 me-5") do %>
-  Search <i class="fa-solid fa-arrow-right" style="color: #9f87b5;"></i>
-<% end %>
+      <% end %>
     </div>
   </div>
 </div>
