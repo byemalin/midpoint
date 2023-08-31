@@ -10,32 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_29_095139) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_30_152156) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "destinations", force: :cascade do |t|
     t.bigint "meetup_id", null: false
-    t.string "airport_code"
-    t.boolean "midpoint?"
-    t.string "country"
-    t.boolean "recommended?"
-    t.string "fly_to"
-    t.string "city_name"
+    t.boolean "is_midpoint"
+    t.boolean "is_recommended"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "fly_to_code"
+    t.string "fly_to_city"
+    t.string "fly_to_country"
+    t.float "price_1"
+    t.float "price_2"
+    t.datetime "local_departure_1"
+    t.datetime "local_departure_2"
+    t.integer "duration_1"
+    t.integer "duration_2"
+    t.string "airlines_1"
+    t.string "airlines_2"
+    t.string "deep_link_1"
+    t.string "deep_link_2"
+    t.boolean "has_airport_change_1"
+    t.boolean "has_airport_change_2"
     t.index ["meetup_id"], name: "index_destinations_on_meetup_id"
-  end
-
-  create_table "flights", force: :cascade do |t|
-    t.bigint "destination_id", null: false
-    t.bigint "user_id", null: false
-    t.integer "price"
-    t.integer "duration"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["destination_id"], name: "index_flights_on_destination_id"
-    t.index ["user_id"], name: "index_flights_on_user_id"
   end
 
   create_table "meetups", force: :cascade do |t|
@@ -43,16 +43,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_095139) do
     t.date "date_to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "user_meet_ups", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "meetup_id", null: false
-    t.string "fly_from"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["meetup_id"], name: "index_user_meet_ups_on_meetup_id"
-    t.index ["user_id"], name: "index_user_meet_ups_on_user_id"
+    t.string "fly_from_1"
+    t.string "fly_from_2"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_meetups_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -68,8 +62,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_095139) do
   end
 
   add_foreign_key "destinations", "meetups"
-  add_foreign_key "flights", "destinations"
-  add_foreign_key "flights", "users"
-  add_foreign_key "user_meet_ups", "meetups"
-  add_foreign_key "user_meet_ups", "users"
+  add_foreign_key "meetups", "users"
 end
