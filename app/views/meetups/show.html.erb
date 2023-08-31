@@ -1,5 +1,7 @@
 <h1>Meetups Show Placeholder</h1>
 
+<div class="d-flex">
+  <div>
 <% @meetup.destinations.each do |destination| %>
   <%= render "destinations/destination_card", destination: destination %>
   <h3><%= destination.price_1 + destination.price_2 %></h3>
@@ -9,3 +11,16 @@
   <p> <%= link_to "show", destination_path(destination) %>
   <br>
 <% end %>
+  </div>
+  <div style="width: 50%; height: 500px; margin-left: 200px"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+    data-map-departure-city1-lat-value="<%= @meetup.departure_city1_lat %>"
+    data-map-departure-city1-lon-value="<%= @meetup.departure_city1_lon %>"
+    data-map-departure-city2-lat-value="<%= @meetup.departure_city2_lat %>"
+    data-map-departure-city2-lon-value="<%= @meetup.departure_city2_lon %>"
+    >
+    <%# Add new values for d cities %>
+  </div>
+</div>
