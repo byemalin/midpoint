@@ -1,0 +1,45 @@
+
+
+<%= link_to destination_path(@destination.id), class:"btn-spaces btn-secondary-spaces" do%>
+  <i class="fa-solid fa-arrow-left"></i>
+<% end %>
+
+<h1>Trip Summary</h1>
+
+<div>
+  <p>From <%= @destination.meetup.city_from_1 %>, <%= @destination.meetup.fly_from_1 %> to <%= @destination.fly_to_city %> (<% @destination.fly_to_code %>), <%= @destination.fly_to_country %> </p>
+  <p><%= @destination.price_1 %> € </p>
+  <p><%= @destination.duration_1 / 60 %> mins </p>
+  <p>Departure: <%= @destination.local_departure_1 %> </p>
+  <p>Arrival: <%= @destination.local_arrival_1 %> </p>
+  <p>By: <%= @destination.airlines_1 %> </p>
+  <p>Has <%= @destination.has_airport_change_1 == false ? "0" : "" %> connections </p>
+
+</div>
+
+
+<div class="bg-primary">
+  <p>Flight 1 <%= @destination.price_1 %> € </p>
+  <p>Flight 2 <%= @destination.price_2 %> € </p>
+  <p>Total <%= @destination.price_1 + @destination.price_2 %> € </p>
+  <%# <%= link_to "Create trip", meetup_path, class:"btn-spaces btn-secondary-spaces" do%> %>
+</div>
+
+<%# meetup_id: @meetup.id,
+          is_midpoint: false,
+          is_recommended: false,
+          fly_to_code: info[:fly_to_1],
+          fly_to_city: info[:city_to_1],
+          fly_to_country: info[:country_to_1],
+          price_1:info[:price_1],
+          price_2:info[:price_2],
+          local_departure_1: info[:local_departure_1],
+          local_departure_2: info[:local_departure_2],
+          duration_1: info[:duration_1],
+          duration_2: info[:duration_2],
+          airlines_1: info[:airlines_1],
+          airlines_2: info[:airlines_2],
+          deep_link_1: info[:deep_link_1],
+          deep_link_2: info[:deep_link_2],
+          has_airport_change_1: info[:has_airport_change_1],
+          has_airport_change_2: info[:has_airport_change_2] %>
