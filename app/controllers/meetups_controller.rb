@@ -1,26 +1,20 @@
 class MeetupsController < ApplicationController
-
-  def index
-  end
-  
-  def show
-    authorize @meetup
-    @destinations = Destination.all
-    # iterate over the destinations
-  end
-
   def create
-    authorize @meetup
-
+    @meetup = Meetup.new(meetup_params)
+    @meetup.user = current_user
+    if @meetup.save
+      results = FlightApi.new.destinations(@meetup.fly_from_1, @meetup.fly_from_2, @meetup.date_from)
+      destinations = results.map do |destination|
+        [destination[:fly_to_1], destination[:total_price]]
+      end
+      redirect_to meetup_path(@meetup)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
-  def delete
-    authorize @meetup
-  end
-
-  def update
-    @meetup = Meetup.find(params[:id])
-    authorize @meetup
-    @meetup.update
+  private
+  def meetup_params
+    params.require(:meetup).permit(:fly_from_1, :fly_from_2, :date_from)
   end
 end
