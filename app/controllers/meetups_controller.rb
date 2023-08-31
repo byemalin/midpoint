@@ -1,10 +1,17 @@
 class MeetupsController < ApplicationController
   def create
-    @meetup = Meetup.new(meetup_params)
+    # raise
+    # @meetup = Meetup.new(meetup_params)
+    @meetup = Meetup.new(
+      # name: "MEETUP TEST",
+      fly_from_1: params[:fly_from_1],
+      fly_from_2: params[:fly_from_2],
+      date_from: params[:date_from]
+    )
     @meetup.user = current_user
     if @meetup.save
       results = FlightApi.new.destinations(@meetup.fly_from_1, @meetup.fly_from_2, @meetup.date_from)
-      destination = results.each do |info|
+      results.each do |info|
         Destination.create!(
           meetup_id: @meetup.id,
           is_midpoint: false,
@@ -49,6 +56,6 @@ class MeetupsController < ApplicationController
 
   private
   def meetup_params
-    params.require(:meetup).permit(:fly_from_1, :fly_from_2, :date_from)
+    # params.require(:meetups).permit(:fly_from_1, :fly_from_2, :date_from)
   end
 end

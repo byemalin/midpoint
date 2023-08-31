@@ -31,11 +31,11 @@
             data: { datepicker_target: "departureDate" }
           %>
         </div>
-      <% end %>
+        <div>
+          <%= submit_tag "Search", name: "", class: "btn btn-primary btn-search" %>
+        </div>
       </div>
-      <%= button_tag( :class => "btn-navbar btn-search text-align-center mt-5 me-5") do %>
-  Search <i class="fa-solid fa-arrow-right" style="color: #9f87b5;"></i>
-<% end %>
+      <% end %>
     </div>
   </div>
 </div>
