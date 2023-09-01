@@ -1,57 +1,44 @@
-.footer-main-cities {}
-
-.footer-banner-cities {
-  color: #f7f7f7;
-  background-color: #110F0F;
-  margin: 0 100px;
-  border-radius: 20px;
+body{
+  height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  padding: 36px 64px;
+}
+.footer-midpoint{
+  height: 314px;
+  bottom: 0;
   position: relative;
-  top: 92px
 }
-
-.footer-banner-cities h3 {
-  width: 550px;
-}
-
-.footer-banner-cities img {
-  width: 155px;
-}
-
-.footer-content-cities {
-  background-color: #110F0F;
+.footer-content-midpoint {
   padding: 0px 50px;
   padding-top: 20px;
   color: #f7f7f7;
 }
 
-.footer-content-cities img {
+.footer-content-midpoint img {
   width: 170px;
   margin: 10px 0;
 }
 
-.footer-content-cities p {
+.footer-content-midpoint p {
   width: 250px;
   margin: 0;
 }
 
-.footer-content-cities li {
+.footer-content-midpoint li {
   display: inline;
   list-style: none;
 }
 
-.footer-links-cities {
+.footer-links-midpoint {
   width: 60%;
 }
 
-.footer-links-cities li {
+.footer-links-midpoint li {
   margin: 0 40px 0 40px;
 }
 
-.footer-content-cities>div {
+.footer-content-midpoint > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -59,10 +46,10 @@
 }
 
 
-.payment-types-footer-cities {
+.payment-types-footer-midpoint {
   gap: 12px;
 }
 
-.payment-types-footer-cities li {
+.payment-types-footer-midpoint li {
   font-size: 35px;
 }

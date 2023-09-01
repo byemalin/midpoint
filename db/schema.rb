@@ -20,8 +20,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_150434) do
     t.boolean "is_recommended"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "latitude"
-    t.float "longitude"
     t.string "fly_to_code"
     t.string "fly_to_city"
     t.string "fly_to_country"
