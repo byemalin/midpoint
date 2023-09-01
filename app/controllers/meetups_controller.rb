@@ -14,6 +14,9 @@ class MeetupsController < ApplicationController
       # departure_city2_lon: dep_city2_coords[1]
       # Add 4 new properties for departure cities
     )
+
+    calculate_midpoint(@meetup)
+
     @meetup.user = current_user
     if @meetup.save
       results = FlightApi.new.destinations(@meetup.fly_from_1, @meetup.fly_from_2, @meetup.date_from)
@@ -70,5 +73,13 @@ class MeetupsController < ApplicationController
   def get_coords(destination_name)
     # results = Geocoder.search(destination_name)
     # results.first.coordinates
+    puts destination_name
+    results = Geocoder.search(destination_name)
+    results.first.coordinates
+  end
+
+  def calculate_midpoint(meetup)
+    midpoint = ([(meetup.departure_city1_lat + meetup.departure_city1_lon)/2,(meetup.departure_city2_lat + meetup.departure_city2_lon) / 2])
+    puts midpoint
   end
 end
