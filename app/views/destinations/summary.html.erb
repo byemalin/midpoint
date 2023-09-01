@@ -1,55 +1,50 @@
 
 
-<%= link_to destination_path(@destination.id), class:"btn-spaces btn-secondary-spaces" do%>
-  <i class="fa-solid fa-arrow-left"></i>
-<% end %>
 
-<h1>Trip Summary</h1>
 
-<div class="">
+<div class="container-midpoint flex-left-align-column mt-3 mb-3">
+  <%= link_to destination_path(@destination.id), class:"btn-midpoint btn-navigation-midpoint" do%>
+    <i class="fa-solid fa-arrow-left"></i>
+  <% end %>
+</div>
+
+<div class="container-midpoint dflex">
+
+  <div>
+    <h3>Trip Summary</h3>
+  </div>
+</div>
+
+
+
+<div class="container">
   <p>From <%= @destination.meetup.city_from_1 %>, <%= @destination.meetup.fly_from_1 %> to <%= @destination.fly_to_city %> (<%= @destination.fly_to_code %>), <%= @destination.fly_to_country %> </p>
   <p><%= @destination.price_1 %> € </p>
   <p><%= @destination.duration_1 / 60 /60 %> h <%= @destination.duration_1 % 60 % 60 %> m </p>
-  <p>Departure: <%= @destination.local_departure_1.strftime('%d:%m %y')%> at <%= @destination.local_departure_1.strftime('%I:%M %p')%> </p>
-  <p>Arrival: <%= @destination.local_arrival_1 %> </p>
+  <p>Departure: <%= @destination.local_departure_1.strftime('%d/%m/%Y')%> at <%= @destination.local_departure_1.strftime('%I:%M %p')%> </p>
+  <p>Arrival: <%= @destination.local_arrival_1.strftime('%d/%m/%Y')%> at <%= @destination.local_arrival_1.strftime('%I:%M %p')%></p>
   <p>By: <%= @destination.airlines_1.split(", ").to_sentence%> </p>
   <p>Has <%= @destination.has_airport_change_1 == false ? "0" : "" %> connections </p>
   <%= link_to "Buy this trip", @destination.deep_link_1, :target => "_blank" %>
 </div>
+
 <br>
-<div class="">
+<div class="container">
+
   <p>From <%= @destination.meetup.city_from_2 %>, <%= @destination.meetup.fly_from_2 %> to <%= @destination.fly_to_city %> (<%= @destination.fly_to_code %>), <%= @destination.fly_to_country %> </p>
   <p><%= @destination.price_2 %> € </p>
   <p><%= @destination.duration_2 / 60 /60 %> h <%= @destination.duration_2 % 60 % 60 %> m </p>
-  <p>Departure: <%= @destination.local_departure_2.strftime('%d:%m %y')%> at <%= @destination.local_departure_2.strftime('%I:%M %p')%> </p>
-  <p>Arrival: <%= @destination.local_arrival_2 %> </p>
+  <p>Departure: <%= @destination.local_departure_2.strftime('%d/%m/%Y')%> at <%= @destination.local_departure_2.strftime('%I:%M %p')%> </p>
+  <p>Arrival: <%= @destination.local_arrival_2.strftime('%d/%m/%Y')%> at <%= @destination.local_arrival_2.strftime('%I:%M %p')%> </p>
   <p>By: <%= @destination.airlines_2.split(", ").to_sentence%> </p>
   <p>Has <%= @destination.has_airport_change_2 == false ? "0" : "" %> connections </p>
   <%= link_to "Buy this trip", @destination.deep_link_2, :target => "_blank" %>
 </div>
 <br>
-<div class="bg-primary">
+<div class="container bg-primary">
+
   <p>Flight 1 <%= @destination.price_1 %> € </p>
   <p>Flight 2 <%= @destination.price_2 %> € </p>
   <p>Total <%= @destination.price_1 + @destination.price_2 %> € </p>
   <%#  %>
 </div>
-
-<%# meetup_id: @meetup.id,
-          is_midpoint: false,
-          is_recommended: false,
-          fly_to_code: info[:fly_to_1],
-          fly_to_city: info[:city_to_1],
-          fly_to_country: info[:country_to_1],
-          price_1:info[:price_1],
-          price_2:info[:price_2],
-          local_departure_1: info[:local_departure_1],
-          local_departure_2: info[:local_departure_2],
-          duration_1: info[:duration_1],
-          duration_2: info[:duration_2],
-          airlines_1: info[:airlines_1],
-          airlines_2: info[:airlines_2],
-          deep_link_1: info[:deep_link_1],
-          deep_link_2: info[:deep_link_2],
-          has_airport_change_1: info[:has_airport_change_1],
-          has_airport_change_2: info[:has_airport_change_2] %>

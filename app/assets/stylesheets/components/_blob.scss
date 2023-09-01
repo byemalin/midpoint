@@ -1,7 +1,7 @@
 .blob{
   position: absolute;
   z-index: -1;
-  animation: Blob-spin infinite 80s linear;
+  animation: Blob-spin infinite 60s linear;
 }
 
 .blue-blob{
@@ -17,6 +17,16 @@
 .purple-blob{
   top: -5vh;
   right: -30vw;
+}
+
+.blob-container{
+  position: absolute;
+  z-index: -1;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  overflow: hidden;
 }
 
 

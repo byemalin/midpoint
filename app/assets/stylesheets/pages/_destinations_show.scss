@@ -1,0 +1,44 @@
+
+
+.destinations-show{
+
+  margin-top: 100px;
+
+  .flight-info{
+    display: flex;
+    text-align: center;
+  }
+
+  .flight-info > div{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cities-container-midpoint{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .arrow-container-midpoint{
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .arrow-container-midpoint > div{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .flip{
+    transform: rotate(180deg);
+  }
+
+  .payment-summary-container{
+    width:100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+}

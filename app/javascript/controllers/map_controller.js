@@ -136,7 +136,4 @@ export default class extends Controller {
     bounds.extend([this.departureCity2LonValue, this.departureCity2LatValue])
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0})
   }
-
-  #addAnimationToJourney() {
-  }
 }

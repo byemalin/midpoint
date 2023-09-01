@@ -1,8 +1,11 @@
 class MeetupsController < ApplicationController
   def create
     # @meetup = Meetup.new(meetup_params)
-    # dep_city1_coords = get_coords(params[:fly_from_1])
-    # dep_city2_coords = get_coords(params[:fly_from_2])
+#     dep_city1_coords = get_coords(params[:fly_from_1])
+#     dep_city2_coords = get_coords(params[:fly_from_2])
+#     dep_city1 = get_coords(params[:fly_from_2])
+#     dep_city2 = get_coords(params[:fly_from_2])
+
     @meetup = Meetup.new(
       # name: "MEETUP TEST",
       fly_from_1: params[:fly_from_1],
@@ -48,9 +51,20 @@ class MeetupsController < ApplicationController
           deep_link_2: info[:deep_link_2],
           has_airport_change_1: info[:has_airport_change_1],
           has_airport_change_2: info[:has_airport_change_2],
+          latitude: coords[0],
+          longitude: coords[1]
+          )
+          # unsplash_url = "https://api.unsplash.com/photos/random?client_id=#{ENV["ACCESS_KEY"]}&query=#{fly_to_city}"
+          # photo_serialized = URI.open(unsplash_url).read
+          # photo_json = JSON.parse(photo_serialized)
+          # photo_url = photo_json["urls"]["small"]
+          # photo_url = Unsplash::Photo.search("#{info[:city_to_1]}, #{info[:country_to_1]}").first[:urls][:small]
+          # file = URI.open(photo_url)
+          # destination.photo.attach(io: file, filename: "fly_to_city.png", content_type: "image/png")
+          # destination.save!
           # latitude: coords[0],
           # longitude:coords[1]
-        )
+
       end
       # find_midpoint(@meetup)
       redirect_to meetup_path(@meetup)
