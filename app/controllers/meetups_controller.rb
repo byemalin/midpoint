@@ -51,8 +51,8 @@ class MeetupsController < ApplicationController
           deep_link_2: info[:deep_link_2],
           has_airport_change_1: info[:has_airport_change_1],
           has_airport_change_2: info[:has_airport_change_2],
-          latitude: coords[0],
-          longitude: coords[1]
+          # latitude: coords[0],
+          # longitude: coords[1]
           )
           # unsplash_url = "https://api.unsplash.com/photos/random?client_id=#{ENV["ACCESS_KEY"]}&query=#{fly_to_city}"
           # photo_serialized = URI.open(unsplash_url).read
