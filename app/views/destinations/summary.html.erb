@@ -16,35 +16,39 @@
 </div>
 
 
+<div class="container-midpoint">
+  <div class="card-midpoint">
+    <h4>From <%= @destination.meetup.city_from_1 %>, <%= @destination.meetup.fly_from_1 %> to <%= @destination.fly_to_city %> (<%= @destination.fly_to_code %>), <%= @destination.fly_to_country %> </h4>
+    <p><%= @destination.price_1 %> € </p>
+    <p><%= @destination.duration_1 / 60 /60 %> h <%= @destination.duration_1 % 60 % 60 %> m </p>
+    <p>Departure: <%= @destination.local_departure_1.strftime('%d/%m/%Y')%> at <%= @destination.local_departure_1.strftime('%I:%M %p')%> </p>
+    <p>Arrival: <%= @destination.local_arrival_1.strftime('%d/%m/%Y')%> at <%= @destination.local_arrival_1.strftime('%I:%M %p')%></p>
+    <p>By: <%= @destination.airlines_1.split(", ").to_sentence%> </p>
+    <br>
+    <br>
+    <%= link_to "Buy this trip", @destination.deep_link_1, :target => "_blank", class: "mt-5 btn-midpoint btn-primary-midpoint"  %>
+  </div>
 
-<div class="container">
-  <p>From <%= @destination.meetup.city_from_1 %>, <%= @destination.meetup.fly_from_1 %> to <%= @destination.fly_to_city %> (<%= @destination.fly_to_code %>), <%= @destination.fly_to_country %> </p>
-  <p><%= @destination.price_1 %> € </p>
-  <p><%= @destination.duration_1 / 60 /60 %> h <%= @destination.duration_1 % 60 % 60 %> m </p>
-  <p>Departure: <%= @destination.local_departure_1.strftime('%d/%m/%Y')%> at <%= @destination.local_departure_1.strftime('%I:%M %p')%> </p>
-  <p>Arrival: <%= @destination.local_arrival_1.strftime('%d/%m/%Y')%> at <%= @destination.local_arrival_1.strftime('%I:%M %p')%></p>
-  <p>By: <%= @destination.airlines_1.split(", ").to_sentence%> </p>
-  <p>Has <%= @destination.has_airport_change_1 == false ? "0" : "" %> connections </p>
-  <%= link_to "Buy this trip", @destination.deep_link_1, :target => "_blank" %>
-</div>
+  <br>
 
-<br>
-<div class="container">
+  <div class="card-midpoint">
+    <h4>From <%= @destination.meetup.city_from_2 %>, <%= @destination.meetup.fly_from_2 %> to <%= @destination.fly_to_city %> (<%= @destination.fly_to_code %>), <%= @destination.fly_to_country %> </h4>
+    <p><%= @destination.price_2 %> € </p>
+    <p><%= @destination.duration_2 / 60 /60 %> h <%= @destination.duration_2 % 60 % 60 %> m </p>
+    <p>Departure: <%= @destination.local_departure_2.strftime('%d/%m/%Y')%> at <%= @destination.local_departure_2.strftime('%I:%M %p')%> </p>
+    <p>Arrival: <%= @destination.local_arrival_2.strftime('%d/%m/%Y')%> at <%= @destination.local_arrival_2.strftime('%I:%M %p')%> </p>
+    <p>By: <%= @destination.airlines_2.split(", ").to_sentence%> </p>
+    <br>
+    <br>
+    <%= link_to "Buy this trip", @destination.deep_link_2, :target => "_blank", class: "mt-5 btn-midpoint btn-primary-midpoint" %>
+  </div>
 
-  <p>From <%= @destination.meetup.city_from_2 %>, <%= @destination.meetup.fly_from_2 %> to <%= @destination.fly_to_city %> (<%= @destination.fly_to_code %>), <%= @destination.fly_to_country %> </p>
-  <p><%= @destination.price_2 %> € </p>
-  <p><%= @destination.duration_2 / 60 /60 %> h <%= @destination.duration_2 % 60 % 60 %> m </p>
-  <p>Departure: <%= @destination.local_departure_2.strftime('%d/%m/%Y')%> at <%= @destination.local_departure_2.strftime('%I:%M %p')%> </p>
-  <p>Arrival: <%= @destination.local_arrival_2.strftime('%d/%m/%Y')%> at <%= @destination.local_arrival_2.strftime('%I:%M %p')%> </p>
-  <p>By: <%= @destination.airlines_2.split(", ").to_sentence%> </p>
-  <p>Has <%= @destination.has_airport_change_2 == false ? "0" : "" %> connections </p>
-  <%= link_to "Buy this trip", @destination.deep_link_2, :target => "_blank" %>
-</div>
-<br>
-<div class="container bg-primary">
+  <br>
 
-  <p>Flight 1 <%= @destination.price_1 %> € </p>
-  <p>Flight 2 <%= @destination.price_2 %> € </p>
-  <p>Total <%= @destination.price_1 + @destination.price_2 %> € </p>
-  <%#  %>
+  <div class="card-midpoint">
+    <p>Flight 1 <%= @destination.price_1 %> € </p>
+    <p>Flight 2 <%= @destination.price_2 %> € </p>
+    <p>Total <%= @destination.price_1 + @destination.price_2 %> € </p>
+    <%#  %>
+  </div>
 </div>
