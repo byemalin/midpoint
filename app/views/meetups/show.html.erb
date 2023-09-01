@@ -2,10 +2,9 @@
 
 <div class="d-flex">
   <div>
-<% @meetup.destinations.each do |destination| %>
-  <%= render "destinations/destination_card", destination: destination %>
-  <p> <%= link_to "show", destination_path(destination) %>
-<% end %>
+    <% @meetup.destinations.each do |destination| %>
+      <%= render "destinations/destination_card", destination: destination %>
+    <% end %>
   </div>
   <div style="width: 50%; height: 500px; margin-left: 200px"
     data-controller="map"

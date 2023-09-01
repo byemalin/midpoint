@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
 
+# API for seeding free, high-definition photos
+gem 'unsplash'
+
 # Dotenv
 gem 'dotenv-rails', groups: [:development, :test]
 

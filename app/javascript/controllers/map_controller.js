@@ -135,7 +135,4 @@ export default class extends Controller {
       marker.lng, marker.lat ]))
       this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0})
   }
-
-  #addAnimationToJourney() {
-  }
 }
