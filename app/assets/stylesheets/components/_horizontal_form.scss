@@ -1,0 +1,23 @@
+
+.horizontal-form-input-fields-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap:40px;
+}
+
+.horizontal-form{
+  gap:40px;
+  .submit-container-centered{
+    display: flex;
+    justify-content: center;
+  }
+  i{
+    position:absolute;
+    left: 20px;
+    top: 15px;
+  }
+  .relative{
+    position: relative;
+  }
+}
