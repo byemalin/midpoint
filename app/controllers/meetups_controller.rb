@@ -63,7 +63,7 @@ class MeetupsController < ApplicationController
           # destination.save!
           # latitude: coords[0],
           # longitude:coords[1]
-        )
+        
       end
       find_midpoint(@meetup)
       redirect_to meetup_path(@meetup)
