@@ -6,6 +6,12 @@
   padding: 24px;
 }
 
+.cards-midpoint-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
 // DESTINATION CARD:
 
 .destination-card-midpoint{
