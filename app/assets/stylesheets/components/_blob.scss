@@ -1,0 +1,30 @@
+.blob{
+  position: absolute;
+  z-index: -1;
+  animation: Blob-spin infinite 80s linear;
+}
+
+.blue-blob{
+  top: -5vh;
+  left: -30vw;
+}
+
+.orange-blob{
+  top: -5vh;
+  left: -40vw;
+}
+
+.purple-blob{
+  top: -5vh;
+  right: -30vw;
+}
+
+
+@keyframes Blob-spin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
