@@ -1,12 +1,18 @@
-.search-input-midpoint {
+input, input[type="text"], .search-input-midpoint{
   border: 1px solid $midpoint-offwhite;
   padding: 12px 16px;
   width: 191px;
   background-color: #00000000;
   border-radius: 62px;
-  // margin-right: 40px;
 }
 
 input::placeholder {
   color: $midpoint-offwhite;
 }
+
+// .new_user{
+// }
+
+// .search-input-midpoint{
+
+// }

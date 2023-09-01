@@ -1,6 +1,5 @@
 class MeetupsController < ApplicationController
   def create
-    raise
     # @meetup = Meetup.new(meetup_params)
     # dep_city1_coords = get_coords(params[:fly_from_1])
     # dep_city2_coords = get_coords(params[:fly_from_2])
