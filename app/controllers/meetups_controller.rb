@@ -93,9 +93,6 @@ class MeetupsController < ApplicationController
 
   def get_coords(destination_name)
 
-    # results = Geocoder.search(destination_name)
-    # results.first.coordinates
-#     puts destination_name
 
     results = Geocoder.search(destination_name)
     if results.empty?
