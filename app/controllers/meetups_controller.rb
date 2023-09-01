@@ -51,7 +51,7 @@ class MeetupsController < ApplicationController
           has_airport_change_1: info[:has_airport_change_1],
           has_airport_change_2: info[:has_airport_change_2],
           latitude: coords[0],
-          longitude: coords[1],
+          longitude: coords[1]
           )
           # unsplash_url = "https://api.unsplash.com/photos/random?client_id=#{ENV["ACCESS_KEY"]}&query=#{fly_to_city}"
           # photo_serialized = URI.open(unsplash_url).read
@@ -63,7 +63,7 @@ class MeetupsController < ApplicationController
           # destination.save!
           # latitude: coords[0],
           # longitude:coords[1]
-        )
+
       end
       find_midpoint(@meetup)
       redirect_to meetup_path(@meetup)
@@ -93,9 +93,6 @@ class MeetupsController < ApplicationController
 
   def get_coords(destination_name)
 
-    # results = Geocoder.search(destination_name)
-    # results.first.coordinates
-#     puts destination_name
 
     results = Geocoder.search(destination_name)
     if results.empty?
