@@ -1,0 +1,34 @@
+<%= form_with url: meetups_path, method: :get, class: "horizontal-form", data:{ controller: "datepicker", datepicker_disabled_dates_value: [].to_json} do %>
+
+  <div class="relative">
+      <i class="fa-solid fa-magnifying-glass absolute"></i>
+      <%= text_field_tag :fly_from_1,
+        params[:fly_from_1],
+        class: "search-input-midpoint searchbar-cities form-input ps-5",
+        placeholder: "First city"
+      %>
+  </div>
+
+  <div class="relative">
+      <i class="fa-solid fa-magnifying-glass absolute"></i>
+      <%= text_field_tag :fly_from_2,
+        params[:fly_from_2],
+        class: "search-input-midpoint form-input ps-5",
+        placeholder: "Second city",
+        as: :string
+      %>
+  </div>
+
+  <div class="relative">
+      <i class="fa-regular fa-calendar absolute"></i>
+      <%= text_field_tag :date_from,
+        params[:date_from],
+        class: "search-input-midpoint form-input ps-5",
+        placeholder: "Departure date",
+        as: :string,
+        data: { datepicker_target: "departureDate" }
+      %>
+  </div>
+
+  <%= submit_tag "Search", name: "", class: "btn-midpoint btn-primary-midpoint" %>
+<% end %>
