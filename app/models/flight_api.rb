@@ -38,7 +38,8 @@ class FlightApi
         duration: info['duration']['departure'],
         airlines: info['airlines'].join(", "),
         deep_link: info['deep_link'],
-        has_airport_change: info['has_airport_change']
+        has_airport_change: info['has_airport_change'],
+        city_from_1: info['cityFrom']
       }
     end
 
@@ -69,7 +70,8 @@ class FlightApi
         duration: info['duration']['departure'],
         airlines: info['airlines'].join(", "),
         deep_link: info['deep_link'],
-        has_airport_change: info['has_airport_change']
+        has_airport_change: info['has_airport_change'],
+        city_from_2: info['cityFrom']
       }
     end
 
@@ -102,6 +104,7 @@ class FlightApi
                                 airlines_1: info1[:airlines],
                                 deep_link_1: info1[:deep_link],
                                 has_airport_change_1: info1[:has_airport_change],
+                                city_from_1: info1[:city_from_1],
 
                                 price_2: info2[:price],
                                 local_departure_2: info2[:local_departure],
@@ -109,7 +112,8 @@ class FlightApi
                                 duration_2: info2[:duration],
                                 airlines_2: info2[:airlines],
                                 deep_link_2: info2[:deep_link],
-                                has_airport_change_2: info2[:has_airport_change]
+                                has_airport_change_2: info2[:has_airport_change],
+                                city_from_2: info2[:city_from_2]
                             }
         end
       end

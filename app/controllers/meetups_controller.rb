@@ -3,8 +3,6 @@ class MeetupsController < ApplicationController
     # @meetup = Meetup.new(meetup_params)
 #     dep_city1_coords = get_coords(params[:fly_from_1])
 #     dep_city2_coords = get_coords(params[:fly_from_2])
-#     dep_city1 = get_coords(params[:fly_from_2])
-#     dep_city2 = get_coords(params[:fly_from_2])
 
     @meetup = Meetup.new(
       # name: "MEETUP TEST",
@@ -26,6 +24,8 @@ class MeetupsController < ApplicationController
     @meetup.user = current_user
     if @meetup.save
       results = FlightApi.new.destinations(@meetup.fly_from_1, @meetup.fly_from_2, @meetup.date_from)
+      @meetup.update(city_from_1: results.first[:city_from_1], city_from_2: results.first[:city_from_2])
+
       results.each do |info|
         # coords = get_coords(info[:city_to_1])
         # next unless coords
