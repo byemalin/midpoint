@@ -17,11 +17,13 @@ class MeetupsController < ApplicationController
 
     # calculate_midpoint(@meetup)
 
+
     @meetup.user = current_user
     if @meetup.save
       results = FlightApi.new.destinations(@meetup.fly_from_1, @meetup.fly_from_2, @meetup.date_from)
       results.each do |info|
         coords = get_coords(info[:city_to_1])
+        next unless coords
         Destination.create!(
           meetup_id: @meetup.id,
           is_midpoint: false,
@@ -47,10 +49,12 @@ class MeetupsController < ApplicationController
           # longitude:coords[1]
         )
       end
+      find_midpoint(@meetup)
       redirect_to meetup_path(@meetup)
     else
       render :new, status: :unprocessable_entity
     end
+    # iterate over destinations and set midpoint flag to true for closest
   end
 
   def show
@@ -62,6 +66,7 @@ class MeetupsController < ApplicationController
         lng: destination.longitude
       }
     end
+    @midpoint_destination = @destinations.find_by(is_midpoint: true)
   end
 
   private
@@ -71,15 +76,22 @@ class MeetupsController < ApplicationController
   end
 
   def get_coords(destination_name)
+
     # results = Geocoder.search(destination_name)
     # results.first.coordinates
-    puts destination_name
+#     puts destination_name
+
     results = Geocoder.search(destination_name)
+    if results.empty?
+      return
+    end
     results.first.coordinates
   end
 
-  def calculate_midpoint(meetup)
+  def find_midpoint(meetup)
     midpoint = ([(meetup.departure_city1_lat + meetup.departure_city1_lon)/2,(meetup.departure_city2_lat + meetup.departure_city2_lon) / 2])
-    puts midpoint
+    midpoint_destination = meetup.destinations.near(midpoint)
+    puts "This is the #{midpoint_destination}"
+    midpoint_destination.update(is_midpoint: true)
   end
 end
