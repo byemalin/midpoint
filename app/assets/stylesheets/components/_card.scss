@@ -6,6 +6,8 @@
   padding: 24px;
 }
 
+// DESTINATION CARD:
+
 .destination-card-midpoint{
   width: 353px;
   height: 340px;
@@ -44,4 +46,11 @@
 
 .tag-midpoint{
   background: $midpoint-primary;
+}
+
+
+// PAYMENT SUMMARY CARD:
+
+.payment-summary-card-midpoint{
+  width: 386px;
 }

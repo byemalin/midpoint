@@ -1,22 +1,46 @@
-<h1>Destination Show Placeholder</h1>
+  <div class="container-midpoint flex-left-align-column mt-3 mb-3">
+    <%= link_to meetup_path(@destination.meetup.id), class:"btn-midpoint btn-navigation-midpoint" do%>
+      <i class="fa-solid fa-arrow-left"></i>
+    <% end %>
+  </div>
+<div class="container-midpoint destinations-show">
+  <%# Back Button %>
 
-<%= link_to meetup_path(@destination.meetup.id), class:"btn-spaces btn-secondary-spaces" do%>
-  <i class="fa-solid fa-arrow-left"></i>
-<% end %>
+  <%# Flight 2 Info %>
+  <div class="flight-info justify-content-end">
+    <div>
+      <h4><%= @destination.duration_2 / 60 %> mins </h4>
+      <h4>€<%= @destination.price_2 %></h4>
+    </div>
+  </div>
 
-<p><%= @destination.meetup.city_from_1 %></p>
-<p><%= @destination.price_1 %> € </p>
-<p><%= @destination.duration_1 / 60 %> mins </p>
+  <div class="arrow-container-midpoint">
+    <div>
+      <%= image_tag "big-arrow.svg" %>
+    </div>
+  </div>
 
-<p><%= @destination.fly_to_city %></p>
+  <div class="cities-container-midpoint">
+    <h1><%= @destination.meetup.fly_from_1 %></h1>
+    <h1><%= @destination.fly_to_code %></h1>
+    <h1><%= @destination.meetup.fly_from_2 %></h1>
+  </div>
 
-<p><%= @destination.meetup.city_from_2 %></p>
-<p><%= @destination.price_2 %> € </p>
-<p><%= @destination.duration_2 / 60 %> mins </p>
-<br>
-<div>
-  <p>Flight 1 <%= @destination.price_1 %> € </p>
-  <p>Flight 2 <%= @destination.price_2 %> € </p>
-  <p>Total <%= @destination.price_1 + @destination.price_2 %> € </p>
-  <%= link_to "Create trip", summary_path(@destination.id), class:"btn-spaces btn-secondary-spaces" %>
+  <div class="flip arrow-container-midpoint">
+    <div>
+      <%= image_tag "big-arrow.svg" %>
+    </div>
+  </div>
+
+  <%# Flight 1 Info %>
+  <div class="flight-info">
+    <div>
+      <h4><%= @destination.duration_1 / 60 %> mins </h4>
+      <h4>€<%= @destination.price_1 %></h4>
+    </div>
+  </div>
+
+  <div class="payment-summary-container">
+    <%= render "shared/payment_summary_card", destination: @destination %>
+  </div>
 </div>
