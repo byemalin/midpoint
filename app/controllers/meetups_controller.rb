@@ -15,7 +15,7 @@ class MeetupsController < ApplicationController
       # Add 4 new properties for departure cities
     )
 
-    calculate_midpoint(@meetup)
+    # calculate_midpoint(@meetup)
 
     @meetup.user = current_user
     if @meetup.save
