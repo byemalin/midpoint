@@ -1,7 +1,9 @@
 
 
 <div class="card-midpoint destination-card-midpoint">
-  <%= image_tag "stock/oslo-stock.jpg"%>
+  <%= image_tag "stock/oslo-stock.jpg" %>
+  <%#= image_tag Unsplash::Photo.search("#{destination.fly_to_city}, #{destination.fly_to_country}").first[:urls][:small] %>
+
   <div>
     <div>
       <h4><%= destination.fly_to_city %></h4>

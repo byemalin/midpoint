@@ -23,6 +23,7 @@ class MeetupsController < ApplicationController
       results = FlightApi.new.destinations(@meetup.fly_from_1, @meetup.fly_from_2, @meetup.date_from)
       results.each do |info|
         coords = get_coords(info[:city_to_1])
+
         Destination.create!(
           meetup_id: @meetup.id,
           is_midpoint: false,
@@ -45,8 +46,16 @@ class MeetupsController < ApplicationController
           has_airport_change_1: info[:has_airport_change_1],
           has_airport_change_2: info[:has_airport_change_2],
           latitude: coords[0],
-          longitude:coords[1]
-        )
+          longitude: coords[1],
+          )
+          # unsplash_url = "https://api.unsplash.com/photos/random?client_id=#{ENV["ACCESS_KEY"]}&query=#{fly_to_city}"
+          # photo_serialized = URI.open(unsplash_url).read
+          # photo_json = JSON.parse(photo_serialized)
+          # photo_url = photo_json["urls"]["small"]
+          # photo_url = Unsplash::Photo.search("#{info[:city_to_1]}, #{info[:country_to_1]}").first[:urls][:small]
+          # file = URI.open(photo_url)
+          # destination.photo.attach(io: file, filename: "fly_to_city.png", content_type: "image/png")
+          # destination.save!
       end
       redirect_to meetup_path(@meetup)
     else
