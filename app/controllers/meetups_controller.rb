@@ -1,17 +1,20 @@
 class MeetupsController < ApplicationController
   def create
     # @meetup = Meetup.new(meetup_params)
-    # dep_city1_coords = get_coords(params[:fly_from_1])
-    # dep_city2_coords = get_coords(params[:fly_from_2])
+    dep_city1_coords = get_coords(params[:fly_from_1])
+    dep_city2_coords = get_coords(params[:fly_from_2])
+    dep_city1 = get_coords(params[:fly_from_2])
+    dep_city2 = get_coords(params[:fly_from_2])
+
     @meetup = Meetup.new(
       # name: "MEETUP TEST",
       fly_from_1: params[:fly_from_1],
       fly_from_2: params[:fly_from_2],
       date_from: params[:date_from],
-      # departure_city1_lat: dep_city1_coords[0],
-      # departure_city1_lon: dep_city1_coords[1],
-      # departure_city2_lat: dep_city2_coords[0],
-      # departure_city2_lon: dep_city2_coords[1]
+      departure_city1_lat: dep_city1_coords[0],
+      departure_city1_lon: dep_city1_coords[1],
+      departure_city2_lat: dep_city2_coords[0],
+      departure_city2_lon: dep_city2_coords[1]
       # Add 4 new properties for departure cities
     )
 

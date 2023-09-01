@@ -1,19 +1,19 @@
-
-
 <div class="card-midpoint destination-card-midpoint">
-  <%= image_tag "stock/oslo-stock.jpg"%>
-  <div>
+  <%= link_to destination_path(destination) do %>
+    <%= image_tag "stock/oslo-stock.jpg"%>
     <div>
-      <h4><%= destination.fly_to_city %></h4>
-      <p><%= destination.fly_to_country %></p>
+      <div>
+        <h4><%= destination.fly_to_city %></h4>
+        <p><%= destination.fly_to_country %></p>
+      </div>
+      <%# Reccomended and Midpoint Tags: %>
+      <% if destination.is_recommended %>
+        <div class="tag tag-recommended">Recommended</div>
+      <% end %>
+      <% if destination.is_midpoint %>
+        <div class="d-none tag tag-midpoint">Midpoint</div>
+      <% end %>
     </div>
-    <%# Reccomended and Midpoint Tags: %>
-    <% if destination.is_recommended %>
-      <div class="tag tag-recommended">Recommended</div>
-    <% end %>
-    <% if destination.is_midpoint %>
-      <div class="d-none tag tag-midpoint">Midpoint</div>
-    <% end %>
-  </div>
-  <h5>€<%= destination.total_price %></h5>
+    <h5>€<%= destination.total_price %></h5>
+  <% end %>
 </div>
