@@ -36,7 +36,7 @@ class FlightApi
         local_departure: info['local_departure'],
         local_arrival: info['local_arrival'],
         duration: info['duration']['departure'],
-        airlines: info['airlines'],
+        airlines: info['airlines'].join(", "),
         deep_link: info['deep_link'],
         has_airport_change: info['has_airport_change']
       }
@@ -67,7 +67,7 @@ class FlightApi
         local_departure: info['local_departure'],
         local_arrival: info['local_arrival'],
         duration: info['duration']['departure'],
-        airlines: info['airlines'],
+        airlines: info['airlines'].join(", "),
         deep_link: info['deep_link'],
         has_airport_change: info['has_airport_change']
       }
