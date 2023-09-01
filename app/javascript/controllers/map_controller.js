@@ -122,12 +122,12 @@ export default class extends Controller {
   }
 
   #addMarkersToMap() {
-    // this.markersValue.forEach((marker) => {
-    //   console.log(marker)
-    //   new mapboxgl.Marker({opacity: 0})
-    //   .setLngLat([ marker.lng, marker.lat ])
-    //   .addTo(this.map)
-    // })
+    this.markersValue.forEach((marker) => {
+      console.log(marker)
+      new mapboxgl.Marker()
+      .setLngLat([ marker.lng, marker.lat ])
+      .addTo(this.map)
+    })
     new mapboxgl.Marker({color: "#705eb6"})
     .setLngLat([this.departureCity1LonValue, this.departureCity1LatValue] )
     .addTo(this.map)
