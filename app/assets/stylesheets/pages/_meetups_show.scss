@@ -1,0 +1,10 @@
+.meetups-show{
+  display: flex;
+  justify-content: center;
+  gap:33px;
+  position: relative;
+  .map{
+    position: sticky;
+    top:100px;
+  }
+}
