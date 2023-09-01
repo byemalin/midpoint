@@ -1,33 +1,34 @@
 class MeetupsController < ApplicationController
   def create
     # @meetup = Meetup.new(meetup_params)
-    dep_city1_coords = get_coords(params[:fly_from_1])
-    dep_city2_coords = get_coords(params[:fly_from_2])
-    dep_city1 = get_coords(params[:fly_from_2])
-    dep_city2 = get_coords(params[:fly_from_2])
+#     dep_city1_coords = get_coords(params[:fly_from_1])
+#     dep_city2_coords = get_coords(params[:fly_from_2])
+#     dep_city1 = get_coords(params[:fly_from_2])
+#     dep_city2 = get_coords(params[:fly_from_2])
 
     @meetup = Meetup.new(
       # name: "MEETUP TEST",
       fly_from_1: params[:fly_from_1],
       fly_from_2: params[:fly_from_2],
       date_from: params[:date_from],
-      departure_city1_lat: dep_city1_coords[0],
-      departure_city1_lon: dep_city1_coords[1],
-      departure_city2_lat: dep_city2_coords[0],
-      departure_city2_lon: dep_city2_coords[1]
+      departure_city1_lat: 48.8566,
+      departure_city1_lon: 2.3522,
+      departure_city2_lat: 59.9319,
+      departure_city2_lon: 10.7522
+      # departure_city1_lat: dep_city1_coords[0],
+      # departure_city1_lon: dep_city1_coords[1],
+      # departure_city2_lat: dep_city2_coords[0],
+      # departure_city2_lon: dep_city2_coords[1]
+      # Store coords in a city table, create a new city if doesn't exist already
       # Add 4 new properties for departure cities
     )
-
-    # calculate_midpoint(@meetup)
-
 
     @meetup.user = current_user
     if @meetup.save
       results = FlightApi.new.destinations(@meetup.fly_from_1, @meetup.fly_from_2, @meetup.date_from)
       results.each do |info|
-        coords = get_coords(info[:city_to_1])
-
-        next unless coords
+        # coords = get_coords(info[:city_to_1])
+        # next unless coords
 
         Destination.create!(
           meetup_id: @meetup.id,
@@ -63,8 +64,9 @@ class MeetupsController < ApplicationController
           # destination.save!
           # latitude: coords[0],
           # longitude:coords[1]
+
       end
-      find_midpoint(@meetup)
+      # find_midpoint(@meetup)
       redirect_to meetup_path(@meetup)
     else
       render :new, status: :unprocessable_entity
@@ -81,7 +83,7 @@ class MeetupsController < ApplicationController
         lng: destination.longitude
       }
     end
-    @midpoint_destination = @destinations.find_by(is_midpoint: true)
+    # @midpoint_destination = @destinations.find_by(is_midpoint: true)
   end
 
   private
@@ -90,20 +92,18 @@ class MeetupsController < ApplicationController
     # params.require(:meetups).permit(:fly_from_1, :fly_from_2, :date_from)
   end
 
-  def get_coords(destination_name)
+  # def get_coords(destination_name)
+  #   results = Geocoder.search(destination_name)
+  #   if results.empty?
+  #     return
+  #   end
+  #   results.first.coordinates
+  # end
 
-
-    results = Geocoder.search(destination_name)
-    if results.empty?
-      return
-    end
-    results.first.coordinates
-  end
-
-  def find_midpoint(meetup)
-    midpoint = ([(meetup.departure_city1_lat + meetup.departure_city1_lon)/2,(meetup.departure_city2_lat + meetup.departure_city2_lon) / 2])
-    midpoint_destination = meetup.destinations.near(midpoint)
-    puts "This is the #{midpoint_destination}"
-    midpoint_destination.update(is_midpoint: true)
-  end
+  # def find_midpoint(meetup)
+  #   midpoint = ([(meetup.departure_city1_lat + meetup.departure_city1_lon)/2,(meetup.departure_city2_lat + meetup.departure_city2_lon) / 2])
+  #   midpoint_destination = meetup.destinations.near(midpoint).first
+  #   puts "This is the #{midpoint_destination}"
+  #   midpoint_destination.update(is_midpoint: true)
+  # end
 end

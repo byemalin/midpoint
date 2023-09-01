@@ -9,7 +9,6 @@ export default class extends Controller {
     departureCity1Lon: Number,
     departureCity2Lat: Number,
     departureCity2Lon: Number,
-
   }
 
   connect() {
@@ -131,8 +130,10 @@ export default class extends Controller {
 
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
-    this.markersValue.forEach(marker => bounds.extend([
-      marker.lng, marker.lat ]))
-      this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0})
+    // this.markersValue.forEach(marker => bounds.extend([
+    //   marker.lng, marker.lat ]))
+    bounds.extend([this.departureCity1LonValue, this.departureCity1LatValue])
+    bounds.extend([this.departureCity2LonValue, this.departureCity2LatValue])
+    this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0})
   }
 }
