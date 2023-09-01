@@ -2,15 +2,12 @@
   <%# LOGO %>
   <%= image_tag "logo.png" %>
 
-  <div>
-    <% if user_signed_in? %>
+  <% if user_signed_in? %>
+    <div>
       <%= link_to "My Trips", "#", class: "navbar-link" %>
       <%= link_to "Not Sure", "#", class: "navbar-link" %>
-    <% else %>
-      <%= link_to "Sign Up", new_user_session_path, class: "btn-midpoint btn-secondary-midpoint" %>
-      <%= link_to "Login", new_user_session_path, class: "navbar-link" %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 
   <%# All pages other than Home: %>
   <% if params[:action] != 'home' %>
@@ -18,4 +15,12 @@
       <%= render "meetups/horizontal_form"%>
     </div>
   <% end %>
+
+  <% if !user_signed_in? %>
+    <div>
+      <%= link_to "Sign Up", new_user_session_path, class: "btn-midpoint btn-secondary-midpoint" %>
+      <%= link_to "Login", new_user_session_path, class: "navbar-link" %>
+    </div>
+  <% end %>
+
 </div>
