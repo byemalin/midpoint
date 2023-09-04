@@ -94,6 +94,7 @@ class MeetupsController < ApplicationController
 
     @markers = @destinations.geocoded.map do |destination|
       {
+        id: destination.id,
         lat: destination.latitude,
         lng: destination.longitude
       }
