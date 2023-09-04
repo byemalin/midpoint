@@ -31,6 +31,8 @@ export default class extends Controller {
           'geometry': {
             'coordinates': [
               [this.departureCity1LonValue, this.departureCity1LatValue],
+              // Log the coordinates of the hovered elements
+              // Add lat,lon of hovered elements
               [this.departureCity2LonValue, this.departureCity2LatValue],
           ],
           'type': 'LineString'
@@ -112,6 +114,10 @@ export default class extends Controller {
     });
   }
 
+  getCoords(event) {
+    console.log(event.currentTarget)
+  }
+
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
       new mapboxgl.Marker()
@@ -130,10 +136,11 @@ export default class extends Controller {
 
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
-    // this.markersValue.forEach(marker => bounds.extend([
-    //   marker.lng, marker.lat ]))
     bounds.extend([this.departureCity1LonValue, this.departureCity1LatValue])
     bounds.extend([this.departureCity2LonValue, this.departureCity2LatValue])
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0})
   }
+
+
+  
 }

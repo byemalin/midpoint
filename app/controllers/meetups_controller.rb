@@ -1,8 +1,12 @@
 class MeetupsController < ApplicationController
   def create
     # @meetup = Meetup.new(meetup_params)
-#     dep_city1_coords = get_coords(params[:fly_from_1])
-#     dep_city2_coords = get_coords(params[:fly_from_2])
+    # dep_city1_coords = GeocodingApi.new.get_coords(params[:fly_from_1])
+    # dep_city2_coords = GeocodingApi.new.get_coords(params[:fly_from_2])
+    # dep_city1_coords = get_coords(params[:fly_from_1])
+    # binding.pry
+    # puts dep_city1_coords
+    # dep_city2_coords = get_coords(params[:fly_from_2])
 
     @meetup = Meetup.new(
       # name: "MEETUP TEST",
@@ -12,7 +16,7 @@ class MeetupsController < ApplicationController
       departure_city1_lat: 48.8566,
       departure_city1_lon: 2.3522,
       departure_city2_lat: 59.9319,
-      departure_city2_lon: 10.7522
+      departure_city2_lon: 10.7522,
       # departure_city1_lat: dep_city1_coords[0],
       # departure_city1_lon: dep_city1_coords[1],
       # departure_city2_lat: dep_city2_coords[0],
@@ -27,8 +31,8 @@ class MeetupsController < ApplicationController
       @meetup.update(city_from_1: results.first[:city_from_1], city_from_2: results.first[:city_from_2])
 
       results.each do |info|
-        # coords = get_coords(info[:city_to_1])
-        # next unless coords
+        coords = get_coords("#{info[:city_to_1]}, #{info[:country_to_1]}")
+        next unless coords
 
         Destination.create!(
           meetup_id: @meetup.id,
@@ -51,9 +55,9 @@ class MeetupsController < ApplicationController
           deep_link_2: info[:deep_link_2],
           has_airport_change_1: info[:has_airport_change_1],
           has_airport_change_2: info[:has_airport_change_2],
-          # latitude: coords[0],
-          # longitude: coords[1]
-          )
+          latitude: coords[0],
+          longitude: coords[1]
+        )
           # unsplash_url = "https://api.unsplash.com/photos/random?client_id=#{ENV["ACCESS_KEY"]}&query=#{fly_to_city}"
           # photo_serialized = URI.open(unsplash_url).read
           # photo_json = JSON.parse(photo_serialized)
@@ -66,7 +70,7 @@ class MeetupsController < ApplicationController
           # longitude:coords[1]
 
       end
-      # find_midpoint(@meetup)
+      find_midpoint(@meetup)
       redirect_to meetup_path(@meetup)
     else
       render :new, status: :unprocessable_entity
@@ -83,27 +87,32 @@ class MeetupsController < ApplicationController
         lng: destination.longitude
       }
     end
-    # @midpoint_destination = @destinations.find_by(is_midpoint: true)
+    @midpoint_destination = @destinations.find_by(is_midpoint: true)
   end
 
   private
 
   def meetup_params
-    # params.require(:meetups).permit(:fly_from_1, :fly_from_2, :date_from)
+    params.require(:meetups).permit(:fly_from_1, :fly_from_2, :date_from, :city_to_1)
   end
 
-  # def get_coords(destination_name)
-  #   results = Geocoder.search(destination_name)
-  #   if results.empty?
-  #     return
-  #   end
-  #   results.first.coordinates
-  # end
+  def get_coords(destination_name)
+    GeocodingApi.new.get_coords(destination_name)
+    # results = Geocoder.search(destination_name)
+    # if results.empty?
+    #   return
+    # end
+    # puts destination_name
+    # results.first.coordinates
+  end
 
-  # def find_midpoint(meetup)
-  #   midpoint = ([(meetup.departure_city1_lat + meetup.departure_city1_lon)/2,(meetup.departure_city2_lat + meetup.departure_city2_lon) / 2])
-  #   midpoint_destination = meetup.destinations.near(midpoint).first
-  #   puts "This is the #{midpoint_destination}"
-  #   midpoint_destination.update(is_midpoint: true)
-  # end
+  def find_midpoint(meetup)
+    midpoint = Geocoder::Calculations.geographic_center([
+      [meetup.departure_city1_lat, meetup.departure_city1_lon],
+      [meetup.departure_city2_lat, meetup.departure_city2_lon]
+    ])
+    midpoint_destination = meetup.destinations.near(midpoint, 3000, units: :km).first
+    puts "This is the #{midpoint_destination}"
+    midpoint_destination.update(is_midpoint: true)
+  end
 end
