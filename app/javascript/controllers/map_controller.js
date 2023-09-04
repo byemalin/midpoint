@@ -121,15 +121,18 @@ export default class extends Controller {
       animateDashArray(this.map, 0, dashArraySequence);
   }
 
-  getCoords(event) {
-    console.log(event.currentTarget)
-  }
+  // getCoords(event) {
+  //   console.log(event.currentTarget)
+  // }
 
   #addMarkersToMap() {
+
+    this.markers = {}
     this.markersValue.forEach((marker) => {
-      new mapboxgl.Marker()
+      const mapMarker = new mapboxgl.Marker()
       .setLngLat([ marker.lng, marker.lat ])
       .addTo(this.map)
+      this.markers[marker.id] = mapMarker
     })
     new mapboxgl.Marker({color: "#705eb6"})
     .setLngLat([this.departureCity1LonValue, this.departureCity1LatValue] )
@@ -148,14 +151,28 @@ export default class extends Controller {
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0})
   }
 
-  log({detail: {destinationId}}) {
+  renderChange({detail: {destinationId}}) {
     // remove layer
     this.map.removeLayer("line-background")
     this.map.removeLayer("line-dashed")
     this.map.removeSource("line")
     const destination = this.markersValue.find(element => element.id === destinationId)
+    const selectedMarker = this.markers[destinationId]
+    for (const [_id, marker] of Object.entries(this.markers)) {
+      this.#setMarkerColor(marker, "rgb(63, 177, 206)")
+    }
+    this.#setMarkerColor(selectedMarker, "#705eb6")
     this.#renderJourneyPath(destination)
   }
+
+  #setMarkerColor(marker, color) {
+    let markerElement = marker.getElement();
+    markerElement
+      .querySelectorAll('svg path[fill="' + marker._color + '"]')[0]
+      .setAttribute("fill", color);
+    marker._color = color;
+  }
+
 
 }
 
