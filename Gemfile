@@ -6,6 +6,9 @@ ruby "3.1.2"
 # API for seeding free, high-definition photos
 gem 'unsplash'
 
+# Gem to display inline SVG
+gem 'inline_svg'
+
 # Dotenv
 gem 'dotenv-rails', groups: [:development, :test]
 

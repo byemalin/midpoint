@@ -1,29 +1,28 @@
-  <div class="container-midpoint flex-left-align-column mt-3 mb-3">
-    <%= link_to meetup_path(@destination.meetup.id), class:"btn-midpoint btn-navigation-midpoint" do%>
-      <i class="fa-solid fa-arrow-left"></i>
-    <% end %>
-  </div>
+<div class="container-midpoint flex-left-align-column mt-3 mb-3">
+  <%= link_to meetup_path(@destination.meetup.id), class:"btn-midpoint btn-navigation-midpoint" do%>
+    <i class="fa-solid fa-arrow-left"></i>
+  <% end %>
+</div>
 <div class="container-midpoint destinations-show">
-  <%# Back Button %>
 
-  <%# Flight 2 Info %>
-  <div class="flight-info justify-content-end">
-    <div>
-      <h4><%= @destination.duration_2 / 60 %> mins </h4>
-      <h4>€<%= @destination.price_2 %></h4>
-    </div>
+<%# Flight 2 Info %>
+<div class="flight-info justify-content-end">
+  <div>
+    <h4><%= @destination.duration_2 / 60 / 60 %> h <%= @destination.duration_2 / 60 % 60 %> min </h4>
+    <h4>€<%= @destination.price_2 %></h4>
   </div>
+</div>
 
-  <div class="arrow-container-midpoint">
-    <div>
-      <%= image_tag "big-arrow.svg" %>
-    </div>
+<div class="arrow-container-midpoint">
+  <div>
+    <%= image_tag "big-arrow.svg" %>
   </div>
+</div>
 
   <div class="cities-container-midpoint">
-    <h1><%= @destination.meetup.fly_from_1 %></h1>
-    <h1><%= @destination.fly_to_code %></h1>
-    <h1><%= @destination.meetup.fly_from_2 %></h1>
+    <h1><%= @destination.meetup.city_from_1 %></h1>
+    <h1><%= @destination.fly_to_city %></h1>
+    <h1><%= @destination.meetup.city_from_2 %></h1>
   </div>
 
   <div class="flip arrow-container-midpoint">
@@ -35,10 +34,47 @@
   <%# Flight 1 Info %>
   <div class="flight-info">
     <div>
-      <h4><%= @destination.duration_1 / 60 %> mins </h4>
+      <h4><%= @destination.duration_1 / 60 / 60 %> h <%= @destination.duration_1 / 60 % 60 %> min </h4>
       <h4>€<%= @destination.price_1 %></h4>
     </div>
   </div>
+
+<%# Summary section%>
+<div class="container-midpoint dflex">
+  <div>
+    <h3>Trip Summary</h3>
+  </div>
+</div>
+
+
+<div class="container-midpoint">
+  <div class="card-midpoint">
+    <h4>From <%= @destination.meetup.city_from_1 %>, <%= @destination.meetup.fly_from_1 %> to <%= @destination.fly_to_city %> (<%= @destination.fly_to_code %>), <%= @destination.fly_to_country %> </h4>
+    <p><%= @destination.price_1 %> € </p>
+    <p><%= @destination.duration_1 / 60 / 60 %> h <%= @destination.duration_1 / 60 % 60 %> mins </p>
+    <p>Departure: <%= @destination.local_departure_1.strftime('%d/%m/%Y')%> at <%= @destination.local_departure_1.strftime('%I:%M %p')%> </p>
+    <p>Arrival: <%= @destination.local_arrival_1.strftime('%d/%m/%Y')%> at <%= @destination.local_arrival_1.strftime('%I:%M %p')%></p>
+    <p>By: <%= @destination.airlines_1.split(", ").to_sentence%> </p>
+    <br>
+    <br>
+    <%= link_to "Buy this trip", @destination.deep_link_1, :target => "_blank", class: "mt-5 btn-midpoint btn-primary-midpoint"  %>
+  </div>
+
+  <br>
+
+  <div class="card-midpoint">
+    <h4>From <%= @destination.meetup.city_from_2 %>, <%= @destination.meetup.fly_from_2 %> to <%= @destination.fly_to_city %> (<%= @destination.fly_to_code %>), <%= @destination.fly_to_country %> </h4>
+    <p><%= @destination.price_2 %> € </p>
+    <p><%= @destination.duration_2 / 60 /60 %> h <%= @destination.duration_2 / 60 % 60 %> m </p>
+    <p>Departure: <%= @destination.local_departure_2.strftime('%d/%m/%Y')%> at <%= @destination.local_departure_2.strftime('%I:%M %p')%> </p>
+    <p>Arrival: <%= @destination.local_arrival_2.strftime('%d/%m/%Y')%> at <%= @destination.local_arrival_2.strftime('%I:%M %p')%> </p>
+    <p>By: <%= @destination.airlines_2.split(", ").to_sentence%> </p>
+    <br>
+    <br>
+    <%= link_to "Buy this trip", @destination.deep_link_2, :target => "_blank", class: "mt-5 btn-midpoint btn-primary-midpoint" %>
+  </div>
+
+  <br>
 
   <div class="payment-summary-container">
     <%= render "shared/payment_summary_card", destination: @destination %>

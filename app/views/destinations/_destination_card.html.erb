@@ -17,5 +17,6 @@
       <% end %>
     </div>
     <h5>€<%= destination.total_price %></h5>
+    <p><%="%2dh%02dmin" % [destination.duration_1 / 3600, destination.duration_1 / 60 % 60 ]%> & <%="%2dh%02dmin" % [destination.duration_2 / 3600, destination.duration_2 / 60 % 60 ]%></p>
   <% end %>
 </div>

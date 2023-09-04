@@ -31,11 +31,10 @@ body{
 
 .footer-links-midpoint {
   width: 60%;
+  display: flex;
+  justify-content: space-between;
 }
 
-.footer-links-midpoint li {
-  margin: 0 40px 0 40px;
-}
 
 .footer-content-midpoint > div {
   display: flex;

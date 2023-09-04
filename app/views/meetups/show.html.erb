@@ -1,14 +1,12 @@
-
-
 <div class="container-midpoint meetups-show">
 
   <div class="cards-midpoint-grid-2">
-    <% @meetup.destinations.each do |destination| %>
+    <% @destinations.each do |destination| %>
       <%= render "destinations/destination_card", destination: destination %>
     <% end %>
   </div>
 
-  <div style="width: 100%; height: 80vh;"
+  <div style="width: 100%; height: 85vh;"
     class="card-midpoint map"
     data-controller="map"
     data-map-markers-value="<%= @markers.to_json %>"

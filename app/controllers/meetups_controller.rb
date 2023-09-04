@@ -80,7 +80,18 @@ class MeetupsController < ApplicationController
 
   def show
     @meetup = Meetup.find(params[:id])
-    @destinations = @meetup.destinations
+
+    case params[:sort]
+    when "total_price"
+      order = "price_1 + price_2"
+    when "total_duration"
+      order = "duration_1 + duration_2"
+    else
+      order = "duration_1 * price_1 + duration_2 * price_2"
+    end
+
+    @destinations = @meetup.destinations.order(Arel.sql(order)).limit(10)
+
     @markers = @destinations.geocoded.map do |destination|
       {
         lat: destination.latitude,

@@ -4,15 +4,15 @@
   border-radius: 62px;
 }
 
-.btn-secondary-midpoint{
+.btn-primary-midpoint{
   color: $midpoint-offwhite;
   background-color: $midpoint-primary;
+  border: none;
 }
 
-.btn-primary-midpoint{
-  color: $midpoint-primary;
+.btn-secondary-midpoint{
+  color: $midpoint-offwhite;
   background-color: $midpoint-offwhite;
-  border: 1px solid $midpoint-primary;
 }
 
 .btn-navigation-midpoint{
