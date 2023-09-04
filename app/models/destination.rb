@@ -1,7 +1,7 @@
 class Destination < ApplicationRecord
   belongs_to :meetup
-  has_many :flights, dependent: :destroy
   has_one_attached :photo
+  belongs_to :airport_to, class_name: "Airport"
 
   geocoded_by :fly_to_city
 

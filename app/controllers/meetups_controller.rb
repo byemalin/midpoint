@@ -9,10 +9,11 @@ class MeetupsController < ApplicationController
       fly_from_1: params[:fly_from_1],
       fly_from_2: params[:fly_from_2],
       date_from: params[:date_from],
-      departure_city1_lat: 48.8566,
-      departure_city1_lon: 2.3522,
-      departure_city2_lat: 59.9319,
-      departure_city2_lon: 10.7522
+      # departure_city1_lat: 48.8566,
+      # departure_city1_lon: 2.3522,
+      # departure_city2_lat: 59.9319,
+      # departure_city2_lon: 10.7522
+      
       # departure_city1_lat: dep_city1_coords[0],
       # departure_city1_lon: dep_city1_coords[1],
       # departure_city2_lat: dep_city2_coords[0],
