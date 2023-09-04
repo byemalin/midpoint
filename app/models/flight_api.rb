@@ -13,8 +13,8 @@ class FlightApi
 # 4. Only select unique cities from that array
 
   def destinations(fly_from_1, fly_from_2, date)
-  depart_input_1 = File.read("db/seeds/CDG.json") # Fake json data (comment when using API)
-  depart_1 = JSON.parse(depart_input_1) # Fake json data (comment when using API)
+    depart_input_1 = File.read("db/seeds/CDG.json") # Fake json data (comment when using API)
+    depart_1 = JSON.parse(depart_input_1) # Fake json data (comment when using API)
 
     # #API call for city_from_1 (comment when using fake seeds)
     # uri_1 = URI("https://api.tequila.kiwi.com/v2/search?date_from=#{date}&fly_from=#{fly_from_1}&date_to=#{date}&sort=price&limit=500")
@@ -39,7 +39,8 @@ class FlightApi
         airlines: info['airlines'].join(", "),
         deep_link: info['deep_link'],
         has_airport_change: info['has_airport_change'],
-        city_from_1: info['cityFrom']
+        city_from: info['cityFrom'],
+        fly_from: info['flyFrom']
       }
     end
 
@@ -71,7 +72,8 @@ class FlightApi
         airlines: info['airlines'].join(", "),
         deep_link: info['deep_link'],
         has_airport_change: info['has_airport_change'],
-        city_from_2: info['cityFrom']
+        city_from: info['cityFrom'],
+        fly_from: info['flyFrom']
       }
     end
 
@@ -88,37 +90,39 @@ class FlightApi
         fly_to_2 = info2[:fly_to]
         price_2 = info2[:price]
 
-        if fly_to_2 == fly_to_1
-          total_price = price_1 + price_2
-          results_matched << {
-                                total_price: total_price,
+        next unless fly_to_2 == fly_to_1
 
-                                city_to_1: info1[:city_to],
-                                fly_to_1: info1[:fly_to],
-                                country_to_1: info1[:country_to],
+        total_price = price_1 + price_2
+        results_matched << {
+          total_price: total_price,
 
-                                price_1: info1[:price],
-                                local_departure_1: info1[:local_departure],
-                                local_arrival_1: info1[:local_arrival],
-                                duration_1: info1[:duration],
-                                airlines_1: info1[:airlines],
-                                deep_link_1: info1[:deep_link],
-                                has_airport_change_1: info1[:has_airport_change],
-                                city_from_1: info1[:city_from_1],
+          city_to_1: info1[:city_to],
+          fly_to_1: info1[:fly_to],
+          country_to_1: info1[:country_to],
 
-                                price_2: info2[:price],
-                                local_departure_2: info2[:local_departure],
-                                local_arrival_2: info2[:local_arrival],
-                                duration_2: info2[:duration],
-                                airlines_2: info2[:airlines],
-                                deep_link_2: info2[:deep_link],
-                                has_airport_change_2: info2[:has_airport_change],
-                                city_from_2: info2[:city_from_2]
-                            }
-        end
+          price_1: info1[:price],
+          local_departure_1: info1[:local_departure],
+          local_arrival_1: info1[:local_arrival],
+          duration_1: info1[:duration],
+          airlines_1: info1[:airlines],
+          deep_link_1: info1[:deep_link],
+          has_airport_change_1: info1[:has_airport_change],
+          city_from_1: info1[:city_from],
+          fly_from_1: info1[:fly_from],
+
+          price_2: info2[:price],
+          local_departure_2: info2[:local_departure],
+          local_arrival_2: info2[:local_arrival],
+          duration_2: info2[:duration],
+          airlines_2: info2[:airlines],
+          deep_link_2: info2[:deep_link],
+          has_airport_change_2: info2[:has_airport_change],
+          city_from_2: info2[:city_from],
+          fly_from_2: info2[:fly_from]
+        }
       end
     end
     # 6. Store this into an array of destinations [{city_to_1: "Miami", fly_to_1: "MIA", price_1: 50, ...} ... ]
-    results_matched_srt = results_matched.sort_by { |price| price[:total_price] }
+    results_matched.sort_by { |price| price[:total_price] }
   end
 end
