@@ -4,6 +4,10 @@
 
 body{
   background-color: $midpoint-black;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 html, body {
