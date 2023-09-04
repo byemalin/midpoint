@@ -1,3 +1,8 @@
+<div>
+ <%= link_to "Best", meetup_path(@meetup.id), class:"btn-midpoint btn-primary-midpoint"%>
+ <%= link_to "Cheapest", meetup_path(@meetup.id, sort: "total_price"), class:"btn-midpoint btn-secondary-midpoint"%>
+ <%= link_to "Fastest", meetup_path(@meetup.id, sort: "total_duration"), class:"btn-midpoint btn-secondary-midpoint"%>
+</div>
 <div class="container-midpoint meetups-show"
     data-controller="map"
     data-map-markers-value="<%= @markers.to_json %>"
@@ -7,11 +12,6 @@
     data-map-departure-city2-lat-value="<%= @meetup.departure_city2_lat %>"
     data-map-departure-city2-lon-value="<%= @meetup.departure_city2_lon %>"
     data-map-midpoint-value="<%= @midpoint_destination %>">
-<div>
- <%= link_to "Best", meetup_path(@meetup.id), class:"btn-midpoint btn-primary-midpoint"%>
- <%= link_to "Cheapest", meetup_path(@meetup.id, sort: "total_price"), class:"btn-midpoint btn-secondary-midpoint"%>
- <%= link_to "Fastest", meetup_path(@meetup.id, sort: "total_duration"), class:"btn-midpoint btn-secondary-midpoint"%>
-</div>
 
 <div class="container-midpoint meetups-show">
   <div class="cards-midpoint-grid-2">
@@ -26,4 +26,5 @@
   >
     <%# Add new values for d cities %>
   </div>
+</div>
 </div>
