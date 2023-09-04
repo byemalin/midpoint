@@ -1,3 +1,12 @@
+<div class="container-midpoint meetups-show"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+    data-map-departure-city1-lat-value="<%= @meetup.departure_city1_lat %>"
+    data-map-departure-city1-lon-value="<%= @meetup.departure_city1_lon %>"
+    data-map-departure-city2-lat-value="<%= @meetup.departure_city2_lat %>"
+    data-map-departure-city2-lon-value="<%= @meetup.departure_city2_lon %>"
+    data-map-midpoint-value="<%= @midpoint_destination %>">
 <div>
  <%= link_to "Best", meetup_path(@meetup.id), class:"btn-midpoint btn-primary-midpoint"%>
  <%= link_to "Cheapest", meetup_path(@meetup.id, sort: "total_price"), class:"btn-midpoint btn-secondary-midpoint"%>
@@ -13,15 +22,8 @@
 
   <div style="width: 100%; height: 85vh;"
     class="card-midpoint map"
-    data-controller="map"
-    data-map-markers-value="<%= @markers.to_json %>"
-    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-    data-map-departure-city1-lat-value="<%= @meetup.departure_city1_lat %>"
-    data-map-departure-city1-lon-value="<%= @meetup.departure_city1_lon %>"
-    data-map-departure-city2-lat-value="<%= @meetup.departure_city2_lat %>"
-    data-map-departure-city2-lon-value="<%= @meetup.departure_city2_lon %>"
-    data-map-midpoint-value="<%= @midpoint_destination %>"
-    >
+    data-map-target="mapContainer"
+  >
     <%# Add new values for d cities %>
   </div>
 </div>
