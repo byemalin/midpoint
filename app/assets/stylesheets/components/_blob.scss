@@ -1,11 +1,11 @@
 .blob{
   position: absolute;
   z-index: -1;
-  animation: Blob-spin infinite 40s linear;
+  animation: Blob-spin infinite 50s linear;
 }
 
 .blue-blob{
-  top: -5vh;
+  top: 0;
   left: -30vw;
 }
 
@@ -15,12 +15,12 @@
 }
 
 .purple-blob{
-  top: -5vh;
+  top: 0;
   right: -30vw;
 }
 
 .blob-container{
-  position: absolute;
+  position: fixed;
   z-index: -1;
   top:0;
   right:0;
