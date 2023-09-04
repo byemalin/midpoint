@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :meetups, only: [:show, :create]
   resources :destinations, only: [:show]
 
-  get "destinations/:id/summary", to: "destinations#summary", as: "summary"
+ # get "destinations/:id/summary", to: "destinations#summary", as: "summary"
 end
