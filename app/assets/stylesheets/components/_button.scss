@@ -11,12 +11,15 @@
 }
 
 .btn-secondary-midpoint{
-  color: $midpoint-offwhite;
+  color: $midpoint-black;
   background-color: $midpoint-offwhite;
 }
 
-.btn-navigation-midpoint{
+.btn-tertiary-midpoint{
+  color: $midpoint-offwhite;
   border: 1px solid $midpoint-offwhite;
-  width: 105px;
-  padding: 10px 30px;
+}
+
+.btn-small-midpoint{
+  padding: 7px 30px;
 }

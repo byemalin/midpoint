@@ -15,34 +15,36 @@
 // DESTINATION CARD:
 
 .destination-card-midpoint{
-  width: 353px;
-  height: 340px;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
   img {
-    width: 305px;
+    width: 100%;
     height: 189px;
     border-radius: 16px;
+    margin-bottom: 20px;
   }
 }
 
 .destination-card-midpoint > div {
-  display: flex;
+  // display: flex;
   justify-content: space-between;
-  align-items: center;
-
+  gap: 5px;
 
   p{
     color: $midpoint-grey;
   }
 }
 
+// tags
+
 .tag {
   padding: 4px 8px;
   border-radius: 4px;
+  margin-bottom: 5px;
 }
 
 .tag-recommended{
@@ -52,11 +54,4 @@
 
 .tag-midpoint{
   background: $midpoint-primary;
-}
-
-
-// PAYMENT SUMMARY CARD:
-
-.payment-summary-card-midpoint{
-  width: 386px;
 }
