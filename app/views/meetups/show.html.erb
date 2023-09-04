@@ -1,30 +1,56 @@
-<div>
- <%= link_to "Best", meetup_path(@meetup.id), class:"btn-midpoint btn-primary-midpoint"%>
- <%= link_to "Cheapest", meetup_path(@meetup.id, sort: "total_price"), class:"btn-midpoint btn-secondary-midpoint"%>
- <%= link_to "Fastest", meetup_path(@meetup.id, sort: "total_duration"), class:"btn-midpoint btn-secondary-midpoint"%>
-</div>
-<div class="container-midpoint meetups-show"
-    data-controller="map"
-    data-map-markers-value="<%= @markers.to_json %>"
-    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-    data-map-departure-city1-lat-value="<%= @meetup.departure_city1_lat %>"
-    data-map-departure-city1-lon-value="<%= @meetup.departure_city1_lon %>"
-    data-map-departure-city2-lat-value="<%= @meetup.departure_city2_lat %>"
-    data-map-departure-city2-lon-value="<%= @meetup.departure_city2_lon %>"
-    data-map-midpoint-value="<%= @midpoint_destination %>">
+<div
+  class="container-midpoint meetups-show"
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+  data-map-departure-city1-lat-value="<%= @meetup.departure_city1_lat %>"
+  data-map-departure-city1-lon-value="<%= @meetup.departure_city1_lon %>"
+  data-map-departure-city2-lat-value="<%= @meetup.departure_city2_lat %>"
+  data-map-departure-city2-lon-value="<%= @meetup.departure_city2_lon %>"
+  data-map-midpoint-value="<%= @midpoint_destination %>"
+>
 
-<div class="container-midpoint meetups-show">
-  <div class="cards-midpoint-grid-2">
-    <% @destinations.each do |destination| %>
-      <%= render "destinations/destination_card", destination: destination %>
-    <% end %>
+  <div>
+    <div class="mb-4">
+
+      <%=
+        link_to "Best",
+        meetup_path(@meetup.id),
+        class:"btn-midpoint btn-small-midpoint #{params[:sort] ? 'btn-tertiary-midpoint' : 'btn-primary-midpoint'}"
+      %>
+
+      <%=
+        link_to "Cheapest",
+        meetup_path(@meetup.id, sort: "total_price"),
+        class:"btn-midpoint btn-small-midpoint #{params[:sort] == 'total_price' ? 'btn-primary-midpoint' : 'btn-tertiary-midpoint'}"
+      %>
+
+      <%=
+        link_to "Fastest",
+        meetup_path(@meetup.id, sort: "total_duration"),
+        class:"btn-midpoint btn-small-midpoint #{params[:sort] == 'total_duration' ? 'btn-primary-midpoint' : 'btn-tertiary-midpoint'}"
+      %>
+
+    </div>
+    <div class="cards-midpoint-grid-2">
+      <% @destinations.each do |destination| %>
+        <%= render "destinations/destination_card", destination: destination %>
+      <% end %>
+    </div>
   </div>
 
-  <div style="width: 100%; height: 85vh;"
-    class="card-midpoint map"
-    data-map-target="mapContainer"
-  >
-    <%# Add new values for d cities %>
+  <div class="sticky-container">
+    <h4>Meetup from <%= @meetup.city_from_1 %> and <%=  @meetup.city_from_2 %></h4>
+
+    <div
+      style="width: 100%; height: 85vh;"
+      class="card-midpoint map"
+      data-map-target="mapContainer"
+    >
+      <%# Add new values for d cities %>
+    </div>
+
   </div>
+
 </div>
 </div>

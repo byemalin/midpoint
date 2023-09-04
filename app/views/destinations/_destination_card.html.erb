@@ -3,20 +3,43 @@
   <%= link_to destination_path(destination) do %>
     <%= image_tag "stock/oslo-stock.jpg"%>
 
-    <div>
+    <div class="d-flex justify-content-between align-items-center">
       <div>
         <h4><%= destination.fly_to_city %></h4>
-        <p><%= destination.fly_to_country %></p>
+        <p class="midpoint-grey"><%= destination.fly_to_country %></p>
       </div>
+
       <%# Reccomended and Midpoint Tags: %>
-      <% if destination.is_recommended %>
-        <div class="tag tag-recommended">Recommended</div>
-      <% end %>
-      <% if destination.is_midpoint %>
-        <div class="d-none tag tag-midpoint">Midpoint</div>
-      <% end %>
+      <div class="text-center">
+        <% if destination.is_recommended %>
+          <div class="tag tag-recommended">Recommended</div>
+        <% end %>
+        <% if destination.is_midpoint %>
+          <div class="tag tag-midpoint">Midpoint</div>
+        <% end %>
+      </div>
+
     </div>
-    <h5>€<%= destination.total_price %></h5>
-    <p><%="%2dh%02dmin" % [destination.duration_1 / 3600, destination.duration_1 / 60 % 60 ]%> & <%="%2dh%02dmin" % [destination.duration_2 / 3600, destination.duration_2 / 60 % 60 ]%></p>
+
+    <br>
+
+    <div class="d-flex justify-content-between">
+      <small>Flight 1</small>
+      <small class="midpoint-grey"><%="%2dh %02dmin" % [destination.duration_1 / 3600, destination.duration_1 / 60 % 60 ]%></small>
+      <small class="midpoint-grey">€<%= destination.price_1 %></small>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <small>Flight 2</small>
+      <small class="midpoint-grey"><%="%2dh %02dmin" % [destination.duration_2 / 3600, destination.duration_2 / 60 % 60 ]%></small>
+      <small class="midpoint-grey">€<%= destination.price_2 %></small>
+    </div>
+
+    <br>
+
+    <div class="d-flex justify-content-between">
+      <small>Total</small>
+      <h4>€<%= destination.total_price %></h5>
+    </div>
   <% end %>
 </div>

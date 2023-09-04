@@ -1,11 +1,15 @@
 .meetups-show{
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   gap:33px;
-  position: relative;
-  .map{
+
+  .sticky-container{
     position: sticky;
-    top: 128px;
-    padding-top: 100px;
+    top: 100px;
   }
+}
+
+.meetups-show > div{
+  width: 50%;
 }
