@@ -28,7 +28,12 @@ class MeetupsController < ApplicationController
     @meetup.user = current_user
     if @meetup.save
       results = FlightApi.new.destinations(@meetup.fly_from_1, @meetup.fly_from_2, @meetup.date_from)
-      @meetup.update(city_from_1: results.first[:city_from_1], city_from_2: results.first[:city_from_2])
+      @meetup.update(
+        city_from_1: results.first[:city_from_1],
+        city_from_2: results.first[:city_from_2],
+        fly_from_1: results.first[:fly_from_1],
+        fly_from_2: results.first[:fly_from_2]
+      )
 
       results.each do |info|
         coords = get_coords("#{info[:city_to_1]}, #{info[:country_to_1]}")
@@ -41,8 +46,8 @@ class MeetupsController < ApplicationController
           fly_to_code: info[:fly_to_1],
           fly_to_city: info[:city_to_1],
           fly_to_country: info[:country_to_1],
-          price_1:info[:price_1],
-          price_2:info[:price_2],
+          price_1: info[:price_1],
+          price_2: info[:price_2],
           local_departure_1: info[:local_departure_1],
           local_departure_2: info[:local_departure_2],
           local_arrival_1: info[:local_arrival_1],
@@ -82,12 +87,12 @@ class MeetupsController < ApplicationController
     @meetup = Meetup.find(params[:id])
 
     case params[:sort]
-    when "total_price"
-      order = "price_1 + price_2"
-    when "total_duration"
-      order = "duration_1 + duration_2"
+    when 'total_price'
+      order = 'price_1 + price_2'
+    when 'total_duration'
+      order = 'duration_1 + duration_2'
     else
-      order = "duration_1 * price_1 + duration_2 * price_2"
+      order = 'duration_1 * price_1 + duration_2 * price_2'
     end
 
     @destinations = @meetup.destinations.order(Arel.sql(order)).limit(10)
