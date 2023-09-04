@@ -3,10 +3,10 @@
   justify-content: center;
   align-items: flex-start;
   gap:33px;
-  position: relative;
+
   .sticky-container{
     position: sticky;
-    top: 0;
+    top: 100px;
   }
 }
 
