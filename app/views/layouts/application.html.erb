@@ -23,15 +23,21 @@
 
     <%= render "shared/footer" %>
 
-    <div class="blob-container">
-      <div class="blob orange-blob">
-        <%= image_tag "blobs/orange-blob.svg" %>
+
+    <%# All pages other than Home: %>
+    <% if params[:action] != 'home' %>
+
+      <div class="blob-container">
+        <div class="blob blue-blob">
+          <%= image_tag "blobs/blue-blob.svg" %>
+        </div>
+
+        <div class="blob purple-blob">
+          <%= image_tag "blobs/purple-blob.svg" %>
+        </div>
       </div>
 
-      <div class="blob purple-blob">
-        <%= image_tag "blobs/purple-blob.svg" %>
-      </div>
-    </div>
+    <% end %>
 
   </body>
 </html>
