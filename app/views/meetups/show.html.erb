@@ -12,9 +12,25 @@
 
   <div>
     <div class="mb-4">
-      <%= link_to "Best", meetup_path(@meetup.id), class:"btn-midpoint btn-primary-midpoint btn-small-midpoint"%>
-      <%= link_to "Cheapest", meetup_path(@meetup.id, sort: "total_price"), class:"btn-midpoint btn-tertiary-midpoint btn-small-midpoint"%>
-      <%= link_to "Fastest", meetup_path(@meetup.id, sort: "total_duration"), class:"btn-midpoint btn-tertiary-midpoint btn-small-midpoint"%>
+
+      <%=
+        link_to "Best",
+        meetup_path(@meetup.id),
+        class:"btn-midpoint btn-small-midpoint #{params[:sort] ? 'btn-tertiary-midpoint' : 'btn-primary-midpoint'}"
+      %>
+
+      <%=
+        link_to "Cheapest",
+        meetup_path(@meetup.id, sort: "total_price"),
+        class:"btn-midpoint btn-small-midpoint #{params[:sort] == 'total_price' ? 'btn-primary-midpoint' : 'btn-tertiary-midpoint'}"
+      %>
+
+      <%=
+        link_to "Fastest",
+        meetup_path(@meetup.id, sort: "total_duration"),
+        class:"btn-midpoint btn-small-midpoint #{params[:sort] == 'total_duration' ? 'btn-primary-midpoint' : 'btn-tertiary-midpoint'}"
+      %>
+
     </div>
     <div class="cards-midpoint-grid-2">
       <% @destinations.each do |destination| %>
