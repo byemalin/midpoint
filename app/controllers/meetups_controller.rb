@@ -80,7 +80,7 @@ class MeetupsController < ApplicationController
       find_midpoint(@meetup)
       redirect_to meetup_path(@meetup)
     else
-      render :new, status: :unprocessable_entity
+      render "pages/home", status: :unprocessable_entity
     end
     # iterate over destinations and set midpoint flag to true for closest
   end

@@ -12,7 +12,7 @@
   <% end %>
 
   <%# All pages other than Home: %>
-  <% if params[:action] != 'home' %>
+  <% if action_name != 'home' && action_name != 'create'%>
     <div>
       <%= render "meetups/horizontal_form"%>
     </div>
