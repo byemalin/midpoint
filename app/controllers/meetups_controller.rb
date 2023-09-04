@@ -132,4 +132,8 @@ class MeetupsController < ApplicationController
     puts "This is the #{midpoint_destination}"
     midpoint_destination.update(is_midpoint: true)
   end
+
+  def get_recommended
+  end
+
 end
