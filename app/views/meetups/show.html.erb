@@ -1,9 +1,7 @@
-
-
 <div class="container-midpoint meetups-show">
 
   <div class="cards-midpoint-grid-2">
-    <% @meetup.destinations.each do |destination| %>
+    <% @destinations.each do |destination| %>
       <%= render "destinations/destination_card", destination: destination %>
     <% end %>
   </div>

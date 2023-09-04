@@ -14,7 +14,7 @@ class FlightApi
 
   def destinations(fly_from_1, fly_from_2, date)
   depart_input_1 = File.read("db/seeds/CDG.json") # Fake json data (comment when using API)
-    depart_1 = JSON.parse(depart_input_1) # Fake json data (comment when using API)
+  depart_1 = JSON.parse(depart_input_1) # Fake json data (comment when using API)
 
     # #API call for city_from_1 (comment when using fake seeds)
     # uri_1 = URI("https://api.tequila.kiwi.com/v2/search?date_from=#{date}&fly_from=#{fly_from_1}&date_to=#{date}&sort=price&limit=500")
