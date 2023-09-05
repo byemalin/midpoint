@@ -40,7 +40,8 @@ class FlightApi
         deep_link: info['deep_link'],
         has_airport_change: info['has_airport_change'],
         city_from: info['cityFrom'],
-        fly_from: info['flyFrom']
+        fly_from: info['flyFrom'],
+        country_from: info['countryFrom']['name'],
       }
     end
 
@@ -73,7 +74,8 @@ class FlightApi
         deep_link: info['deep_link'],
         has_airport_change: info['has_airport_change'],
         city_from: info['cityFrom'],
-        fly_from: info['flyFrom']
+        fly_from: info['flyFrom'],
+        country_from: info['countryFrom']['name'],
       }
     end
 
@@ -108,6 +110,7 @@ class FlightApi
           deep_link_1: info1[:deep_link],
           has_airport_change_1: info1[:has_airport_change],
           city_from_1: info1[:city_from],
+          country_from_1: info1[:country_from],
           fly_from_1: info1[:fly_from],
 
           price_2: info2[:price],
@@ -118,6 +121,7 @@ class FlightApi
           deep_link_2: info2[:deep_link],
           has_airport_change_2: info2[:has_airport_change],
           city_from_2: info2[:city_from],
+          country_from_2: info2[:country_from],
           fly_from_2: info2[:fly_from]
         }
       end
