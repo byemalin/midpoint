@@ -1,4 +1,4 @@
-.card-midpoint{
+.card-midpoint {
   border-radius: 16px;
   border: 1px solid $midpoint-grey;
   background: $midpoint-dark-grey;
@@ -6,9 +6,10 @@
   padding: 24px;
 
   transition: 100ms;
+  scroll-margin-top: 128px;
 }
 
-.card-midpoint:hover{
+.card-midpoint:hover {
   filter: brightness(110%);
 }
 
@@ -20,7 +21,7 @@
 
 // DESTINATION CARD:
 
-.destination-card-midpoint{
+.destination-card-midpoint {
   width: 100%;
 
   display: flex;
@@ -32,15 +33,16 @@
     height: 189px;
     border-radius: 16px;
     margin-bottom: 20px;
+    object-fit: cover
   }
 }
 
-.destination-card-midpoint > div {
+.destination-card-midpoint>div {
   // display: flex;
   justify-content: space-between;
   gap: 5px;
 
-  p{
+  p {
     color: $midpoint-grey;
   }
 }
@@ -53,11 +55,11 @@
   margin-bottom: 5px;
 }
 
-.tag-recommended{
+.tag-recommended {
   background: $midpoint-secondary;
   color: $midpoint-black;
 }
 
-.tag-midpoint{
+.tag-midpoint {
   background: $midpoint-primary;
 }

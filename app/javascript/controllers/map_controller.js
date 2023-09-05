@@ -28,13 +28,23 @@ export default class extends Controller {
     this.map.on('load', () => {
       this.#renderJourneyPath()
     })
+
+    this.animationLoops = {}
   }
 
   #renderJourneyPath(midpoint) {
     let coordinates = [[this.departureCity1LonValue, this.departureCity1LatValue],[this.departureCity2LonValue, this.departureCity2LatValue]]
-    if (midpoint){
-      coordinates.splice(1, 0, [midpoint.lng, midpoint.lat])
+    if (midpoint) {
+      this.#renderLine("line1", [this.departureCity1LonValue, this.departureCity1LatValue], [midpoint.lng, midpoint.lat] )
+      this.#renderLine("line2", [this.departureCity2LonValue, this.departureCity2LatValue], [midpoint.lng, midpoint.lat] )
+
+    } else {
+      this.#renderLine("line", [this.departureCity1LonValue, this.departureCity1LatValue], [this.departureCity2LonValue, this.departureCity2LatValue] )
     }
+  }
+
+  #renderLine(lineName, startPoint, endPoint) {
+    let coordinates = [startPoint,endPoint]
     const geojson = {
       'type': 'FeatureCollection',
       'features': [
@@ -49,76 +59,78 @@ export default class extends Controller {
       ]
     }
 
-      this.map.addSource('line', {
-        type: 'geojson',
-        data: geojson
-      })
+    this.map.addSource(lineName, {
+      type: 'geojson',
+      data: geojson
+    })
 
-      this.map.addLayer({
-        type: 'line',
-        source: 'line',
-        id: 'line-background',
-        paint: {
-          'line-color': 'purple',
-          'line-width': 6,
-          'line-opacity': 0.4
-        }
-      })
-
-
-      this.map.addLayer({
-        type: 'line',
-        source: 'line',
-        id: 'line-dashed',
-        paint: {
-          'line-color': 'purple',
-          'line-width': 6,
-          'line-dasharray': [0, 4, 3]
-        }
-      });
+    this.map.addLayer({
+      type: 'line',
+      source: lineName,
+      id: `${lineName}-background`,
+      paint: {
+        'line-color': 'purple',
+        'line-width': 6,
+            'line-opacity': 0.4
+          }
+        })
 
 
-      const dashArraySequence = [
-        [0, 4, 3],
-        [0.5, 4, 2.5],
-        [1, 4, 2],
-        [1.5, 4, 1.5],
-        [2, 4, 1],
-        [2.5, 4, 0.5],
-        [3, 4, 0],
-        [0, 0.5, 3, 3.5],
-        [0, 1, 3, 3],
-        [0, 1.5, 3, 2.5],
-        [0, 2, 3, 2],
-        [0, 2.5, 3, 1.5],
-        [0, 3, 3, 1],
-        [0, 3.5, 3, 0.5]
-
-      ];
-
-      let step = 0;
-      function animateDashArray(map, timestamp, dashArraySequence) {
-    // Update line-dasharray using the next value in dashArraySequence. The
-    // divisor in the expression `timestamp / 50` controls the animation speed.
-        const newStep = parseInt(
-          (timestamp / 50) % dashArraySequence.length
-        );
-
-        if (newStep !== step) {
-          map.setPaintProperty(
-          'line-dashed',
-          'line-dasharray',
-          dashArraySequence[step]
-          );
-          step = newStep;
-        }
-
-      // Request the next frame of the animation.
-        requestAnimationFrame(()=> {animateDashArray(map, 0, dashArraySequence)});
+    this.map.addLayer({
+      type: 'line',
+      source: lineName,
+      id: `${lineName}-dashed`,
+      paint: {
+        'line-color': 'purple',
+        'line-width': 6,
+        'line-dasharray': [0, 4, 3]
       }
+    });
+
+
+    const dashArraySequence = [
+      [0, 4, 3],
+      [0.5, 4, 2.5],
+      [1, 4, 2],
+      [1.5, 4, 1.5],
+      [2, 4, 1],
+      [2.5, 4, 0.5],
+      [3, 4, 0],
+      [0, 0.5, 3, 3.5],
+      [0, 1, 3, 3],
+      [0, 1.5, 3, 2.5],
+      [0, 2, 3, 2],
+      [0, 2.5, 3, 1.5],
+      [0, 3, 3, 1],
+      [0, 3.5, 3, 0.5]
+
+    ];
+
+    let step = 0;
+    const animateDashArray = (map, timestamp, dashArraySequence, lineName) =>  {
+  // Update line-dasharray using the next value in dashArraySequence. The
+  // divisor in the expression `timestamp / 50` controls the animation speed.
+
+      const newStep = parseInt(
+        (timestamp / 50) % dashArraySequence.length
+      );
+
+      if (newStep !== step) {
+        map.setPaintProperty(
+        `${lineName}-dashed`,
+        'line-dasharray',
+        dashArraySequence[step]
+        );
+        step = newStep;
+      }
+    // Request the next frame of the animation.
+
+      this.animationLoops[lineName] = requestAnimationFrame((timestamp) => {animateDashArray(map, timestamp, dashArraySequence, lineName)});
+    }
 
 // start the animation
-      animateDashArray(this.map, 0, dashArraySequence);
+    animateDashArray(this.map, 0, dashArraySequence, lineName);
+
   }
 
   #addMarkersToMap() {
@@ -150,18 +162,25 @@ export default class extends Controller {
     selectedCard.style.border = "4px solid #705eb6"
     const destinationId = parseInt(selectedCard.dataset.midpointDestIdValue)
     this.#changeDestination(destinationId)
+    this.#fitMapToMarkers(destinationId)
     selectedCard.scrollIntoView()
   }
 
-  #fitMapToMarkers() {
+  #fitMapToMarkers(destinationId) {
+    const destination = this.markersValue.find(element => element.id === destinationId)
     const bounds = new mapboxgl.LngLatBounds()
-    bounds.extend([this.departureCity1LonValue, this.departureCity1LatValue-6])
-    bounds.extend([this.departureCity2LonValue, this.departureCity2LatValue+6])
-    this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0})
+    bounds.extend([this.departureCity1LonValue, this.departureCity1LatValue])
+    if (destination){
+      console.log(destination)
+      bounds.extend([destination.lng, destination.lat])
+    }
+    bounds.extend([this.departureCity2LonValue, this.departureCity2LatValue])
+    this.map.fitBounds(bounds, { padding: 50, maxZoom:4, duration: 0})
   }
 
   renderChange({detail: {destinationId}}) {
     this.#changeDestination(destinationId)
+    this.#fitMapToMarkers(destinationId)
   }
 
   #changeDestination(destinationId) {
@@ -176,9 +195,24 @@ export default class extends Controller {
   }
 
   #removeMapLines() {
-    this.map.removeLayer("line-background")
-    this.map.removeLayer("line-dashed")
-    this.map.removeSource("line")
+    if (this.map.getSource("line")) {
+      this.map.removeLayer("line-dashed")
+      this.map.removeLayer("line-background")
+      this.map.removeSource("line")
+      cancelAnimationFrame(this.animationLoops["line"])
+    }
+    if (this.map.getSource("line1")) {
+      this.map.removeLayer("line1-dashed")
+      this.map.removeLayer("line1-background")
+      this.map.removeSource("line1")
+      cancelAnimationFrame(this.animationLoops["line1"])
+    }
+    if (this.map.getSource("line2")) {
+      this.map.removeLayer("line2-dashed")
+      this.map.removeLayer("line2-background")
+      this.map.removeSource("line2")
+      cancelAnimationFrame(this.animationLoops["line2"])
+    }
   }
 
   #setMarkerColor(marker, color) {
@@ -188,6 +222,4 @@ export default class extends Controller {
       .setAttribute("fill", color);
     marker._color = color;
   }
-
-
 }

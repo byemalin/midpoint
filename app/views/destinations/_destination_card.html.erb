@@ -2,9 +2,9 @@
 
   <%= link_to destination_path(destination) do %>
   <% if destination.airport_to.city_photo.attached? %>
-    <%= cl_image_tag destination.airport_to.city_photo.key %>
+    <%= cl_image_tag destination.airport_to.city_photo.key, alt: "photo of #{destination.airport_to.city_name}" %>
   <%else %>
-     <%= image_tag "stock/oslo-stock.jpg"%>
+     <%= image_tag "stock/oslo-stock.jpg", alt: "photo of #{destination.airport_to.city_name}"%>
   <%end%>
 
     <div class="d-flex justify-content-between align-items-center">
@@ -30,20 +30,20 @@
     <div class="d-flex justify-content-between">
       <small>Flight 1</small>
       <small class="midpoint-grey-color"><%="%2dh %02dmin" % [destination.duration_1 / 3600, destination.duration_1 / 60 % 60 ]%></small>
-      <small class="midpoint-grey-color">€<%= destination.price_1 %></small>
+      <small class="midpoint-grey-color"><%= destination.price_1.truncate %>€</small>
     </div>
 
     <div class="d-flex justify-content-between">
       <small>Flight 2</small>
       <small class="midpoint-grey-color"><%="%2dh %02dmin" % [destination.duration_2 / 3600, destination.duration_2 / 60 % 60 ]%></small>
-      <small class="midpoint-grey-color">€<%= destination.price_2 %></small>
+      <small class="midpoint-grey-color"><%= destination.price_2.truncate %>€</small>
     </div>
 
     <br>
 
     <div class="d-flex justify-content-between">
       <small>Total</small>
-      <h4>€<%= destination.total_price %></h5>
+      <h4><%= destination.total_price.truncate %>€</h5>
     </div>
   <% end %>
 </div>
