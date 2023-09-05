@@ -27,14 +27,32 @@ class MeetupsController < ApplicationController
       # Add 4 new properties for departure cities
     )
 
-    @meetup.user = current_user
+      @meetup.user = current_user
     if @meetup.save
       results = FlightApi.new.destinations(@meetup.fly_from_1, @meetup.fly_from_2, @meetup.date_from)
+      coordinates_from_1 = get_coords("#{results.first[:city_from_1]}, #{results.first[:country_from_1]}")
+      coordinates_from_2 = get_coords("#{results.first[:city_from_2]}, #{results.first[:country_from_2]}")
       @meetup.update(
         city_from_1: results.first[:city_from_1],
         city_from_2: results.first[:city_from_2],
         fly_from_1: results.first[:fly_from_1],
-        fly_from_2: results.first[:fly_from_2]
+        fly_from_2: results.first[:fly_from_2],
+
+        airport_from_1: find_or_create_airport(
+          airport_code: results.first[:fly_from_1],
+          city_name: results.first[:city_from_1],
+          country_name: results.first[:country_from_1],
+          latitude: coordinates_from_1[0],
+          longitude: coordinates_from_1[1],
+        ),
+
+        airport_from_2: find_or_create_airport(
+          airport_code: results.first[:fly_from_2],
+          city_name: results.first[:city_from_2],
+          country_name: results.first[:country_from_2],
+          latitude: coordinates_from_2[0],
+          longitude: coordinates_from_2[1],
+        )
       )
 
       results.each do |info|
@@ -43,6 +61,13 @@ class MeetupsController < ApplicationController
 
         Destination.create!(
           meetup_id: @meetup.id,
+          airport_to: find_or_create_airport(
+            airport_code: info[:fly_to_1],
+            city_name: info[:city_to_1],
+            country_name: info[:country_to_1],
+            latitude: coords[0],
+            longitude: coords[1]
+          ),
           is_midpoint: false,
           is_recommended: false,
           fly_to_code: info[:fly_to_1],
@@ -62,9 +87,9 @@ class MeetupsController < ApplicationController
           deep_link_2: info[:deep_link_2],
           has_airport_change_1: info[:has_airport_change_1],
           has_airport_change_2: info[:has_airport_change_2],
-          latitude: coords[0],
-          longitude: coords[1]
         )
+
+
           # unsplash_url = "https://api.unsplash.com/photos/random?client_id=#{ENV["ACCESS_KEY"]}&query=#{fly_to_city}"
           # photo_serialized = URI.open(unsplash_url).read
           # photo_json = JSON.parse(photo_serialized)
@@ -99,11 +124,11 @@ class MeetupsController < ApplicationController
 
     @destinations = @meetup.destinations.order(Arel.sql(order)).limit(10)
 
-    @markers = @destinations.geocoded.map do |destination|
+    @markers = @destinations.map do |destination|
       {
         id: destination.id,
-        lat: destination.latitude,
-        lng: destination.longitude
+        lat: destination.airport_to.latitude,
+        lng: destination.airport_to.longitude
       }
     end
     @midpoint_destination = @destinations.find_by(is_midpoint: true)
@@ -127,10 +152,11 @@ class MeetupsController < ApplicationController
 
   def find_midpoint(meetup)
     midpoint = Geocoder::Calculations.geographic_center([
-      [meetup.departure_city1_lat, meetup.departure_city1_lon],
-      [meetup.departure_city2_lat, meetup.departure_city2_lon]
+      [meetup.airport_from_1.latitude, meetup.airport_from_1.longitude],
+      [meetup.airport_from_2.latitude, meetup.airport_from_2.longitude]
     ])
-    midpoint_destination = meetup.destinations.near(midpoint, 3000, units: :km).first
+    midpoint_airport = Airport.near(midpoint, 3000, units: :km).where(id: meetup.destinations.pluck(:airport_to_id)).first
+    midpoint_destination = meetup.destinations.find_by(airport_to_id: midpoint_airport)
     puts "This is the #{midpoint_destination}"
     midpoint_destination.update(is_midpoint: true)
   end
@@ -138,4 +164,15 @@ class MeetupsController < ApplicationController
   def find_recommended
   end
 
+  def find_or_create_airport(airport_code:, city_name:, country_name:, latitude:, longitude:)
+    airport = Airport.find_by(airport_code: airport_code)
+    return airport if airport
+    Airport.create!(
+      airport_code: airport_code,
+      city_name: city_name,
+      country_name: country_name,
+      latitude: latitude,
+      longitude: longitude
+    )
+  end
 end
