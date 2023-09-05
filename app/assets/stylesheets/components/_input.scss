@@ -4,15 +4,13 @@ input, input[type="text"], .search-input-midpoint{
   width: 191px;
   background-color: #00000000;
   border-radius: 62px;
+  transition: 100ms;
 }
 
 input::placeholder {
   color: $midpoint-offwhite;
 }
 
-// .new_user{
-// }
-
-// .search-input-midpoint{
-
-// }
+.search-input-midpoint:hover{
+  background-color: #ffffff1f;
+}

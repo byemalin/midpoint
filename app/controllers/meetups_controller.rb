@@ -135,10 +135,12 @@ class MeetupsController < ApplicationController
     ])
     midpoint_airport = Airport.near(midpoint, 3000, units: :km).where(id: meetup.destinations.pluck(:airport_to_id)).first
     midpoint_destination = meetup.destinations.find_by(airport_to_id: midpoint_airport)
-    puts "This is the #{midpoint_destination}"
+    # puts "This is the #{midpoint_destination}"
     midpoint_destination.update(is_midpoint: true)
   end
 
+  def find_recommended
+  end
 
 
   def city_photo_upload(airport)
