@@ -5,7 +5,8 @@
   min-height: 128px !important;
   width: 100%;
   padding: 0 5vw;
-  margin: 0 auto;
+  // margin: 0 auto;
+  margin-bottom: 40px;
 
 
   position: sticky;
@@ -16,6 +17,10 @@
 
   img{
     width: 180px;
+  }
+
+  img:hover{
+    filter: brightness(85%);
   }
 
   .navbar-link {
