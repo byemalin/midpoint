@@ -105,7 +105,7 @@ class MeetupsController < ApplicationController
       find_midpoint(@meetup)
       redirect_to meetup_path(@meetup)
     else
-      render :new, status: :unprocessable_entity
+      render "pages/home", status: :unprocessable_entity
     end
     # iterate over destinations and set midpoint flag to true for closest
   end
@@ -160,6 +160,7 @@ class MeetupsController < ApplicationController
     puts "This is the #{midpoint_destination}"
     midpoint_destination.update(is_midpoint: true)
   end
+
 
   def find_or_create_airport(airport_code:, city_name:, country_name:, latitude:, longitude:)
     airport = Airport.find_by(airport_code: airport_code)
