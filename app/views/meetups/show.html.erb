@@ -40,10 +40,13 @@
   </div>
 
   <div class="sticky-container">
+
+=======
     <div class="d-flex w-100 justify-content-between align-items-center">
       <h4>Trips from <span class="midpoint-primary-color"><%= @meetup.city_from_1 %><span> and <span class="midpoint-primary-color"><%=  @meetup.city_from_2 %></span></h4>
       <h5><%= @destinations.first["local_departure_1"].strftime('%d/%m/%Y')%></h5>
     </div>
+
 
     <div
       style="width: 100%; height: 80vh;"
