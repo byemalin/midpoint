@@ -3,6 +3,10 @@
   position: relative;
   bottom: 0;
   margin-top: 50px;
+  ul{
+    margin: 0;
+    padding: 0;
+  }
 }
 
 .footer-content-midpoint {
@@ -49,4 +53,11 @@
 
 .payment-types-footer-midpoint li {
   font-size: 35px;
+}
+
+
+@media(max-width: 835px) {
+  .footer-content-midpoint > div{
+    flex-direction: column;
+  }
 }
