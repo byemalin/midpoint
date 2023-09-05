@@ -132,6 +132,7 @@ export default class extends Controller {
       const selectedCard = document.querySelector(`[data-midpoint-dest-id-value="${marker.id}"]`)
       mapMarker.getElement().addEventListener("click", () => {
         this.#changeCardFocus(selectedCard)
+        this.#enlargeMapMarker(mapMarker)
       })
     })
     new mapboxgl.Marker({color: "#705eb6"})
@@ -150,7 +151,18 @@ export default class extends Controller {
     selectedCard.style.border = "4px solid #705eb6"
     const destinationId = parseInt(selectedCard.dataset.midpointDestIdValue)
     this.#changeDestination(destinationId)
+    this.#changeMapBound(destinationId)
     selectedCard.scrollIntoView()
+  }
+
+  #changeMapBound(destinationId){
+    const destination = this.markersValue.find(element => element.id === destinationId)
+    console.log(destination)
+    this.map.flyTo({center: [destination.lng, destination.lat], zoom:7});
+    // this.map.fitBounds([
+    //   {lng: destination.lng, lat: destination.lat}
+    // ])
+
   }
 
   #fitMapToMarkers() {
@@ -158,6 +170,10 @@ export default class extends Controller {
     bounds.extend([this.departureCity1LonValue, this.departureCity1LatValue-6])
     bounds.extend([this.departureCity2LonValue, this.departureCity2LatValue+6])
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0})
+  }
+
+  #enlargeMapMarker(marker) {
+    marker.mapSize = "large"
   }
 
   renderChange({detail: {destinationId}}) {
