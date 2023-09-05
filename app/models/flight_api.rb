@@ -25,7 +25,8 @@ class FlightApi
     # }
     # depart_input_1 = res.body
     # depart_1 = JSON.parse(depart_input_1)
-    # #end
+    # #end of API call
+
 
     depart_1_city_price = depart_1['data'].map do |info|
       {
@@ -47,19 +48,19 @@ class FlightApi
 
     depart_1_filtered = depart_1_city_price.uniq { |info| info[:city_to] }
 
-    depart_input_2 = File.read("db/seeds/OSL.json") # Fake json data (comment when using API)
-    depart_2 = JSON.parse(depart_input_2) # Fake json data (comment when using API)
+    # depart_input_2 = File.read("db/seeds/OSL.json") # Fake json data (comment when using API)
+    # depart_2 = JSON.parse(depart_input_2) # Fake json data (comment when using API)
 
-    # #API call for city_from_2 (comment when using fake seeds)
-    # uri_2 = URI("https://api.tequila.kiwi.com/v2/search?date_from=#{date}&fly_from=#{fly_from_2}&date_to=#{date}&sort=price&limit=500")
-    # req = Net::HTTP::Get.new(uri_2)
-    # req['apikey'] = ENV["APIKEY_TEQUILA"]
-    # res = Net::HTTP.start(uri_2.hostname, uri_2.port, use_ssl: uri_2.scheme == 'https') { |http|
-    #   http.request(req)
-    # }
-    # depart_input_2 = res.body
-    # depart_2 = JSON.parse(depart_input_2)
-    # #end
+    #API call for city_from_2 (comment when using fake seeds)
+    uri_2 = URI("https://api.tequila.kiwi.com/v2/search?date_from=#{date}&fly_from=#{fly_from_2}&date_to=#{date}&sort=price&limit=500")
+    req = Net::HTTP::Get.new(uri_2)
+    req['apikey'] = ENV["APIKEY_TEQUILA"]
+    res = Net::HTTP.start(uri_2.hostname, uri_2.port, use_ssl: uri_2.scheme == 'https') { |http|
+      http.request(req)
+    }
+    depart_input_2 = res.body
+    depart_2 = JSON.parse(depart_input_2)
+    #end of API call
 
     depart_2_city_price = depart_2['data'].map do |info|
       {

@@ -8,7 +8,6 @@
 .footer-content-midpoint {
   padding: 0px 50px;
   padding-top: 20px;
-  color: #f7f7f7;
 }
 
 .footer-content-midpoint img {
@@ -30,8 +29,11 @@
   width: 60%;
   display: flex;
   justify-content: space-between;
+  a:hover{
+    color: $midpoint-grey;
+    cursor: pointer;
+  }
 }
-
 
 .footer-content-midpoint > div {
   display: flex;

@@ -30,8 +30,7 @@ class MeetupsController < ApplicationController
       @meetup.user = current_user
     if @meetup.save
       results = FlightApi.new.destinations(@meetup.fly_from_1, @meetup.fly_from_2, @meetup.date_from)
-      coordinates_from_1 = get_coords("#{results.first[:city_from_1]}, #{results.first[:country_from_1]}")
-      coordinates_from_2 = get_coords("#{results.first[:city_from_2]}, #{results.first[:country_from_2]}")
+
       @meetup.update(
         city_from_1: results.first[:city_from_1],
         city_from_2: results.first[:city_from_2],
@@ -42,22 +41,16 @@ class MeetupsController < ApplicationController
           airport_code: results.first[:fly_from_1],
           city_name: results.first[:city_from_1],
           country_name: results.first[:country_from_1],
-          latitude: coordinates_from_1[0],
-          longitude: coordinates_from_1[1],
         ),
 
         airport_from_2: find_or_create_airport(
           airport_code: results.first[:fly_from_2],
           city_name: results.first[:city_from_2],
           country_name: results.first[:country_from_2],
-          latitude: coordinates_from_2[0],
-          longitude: coordinates_from_2[1],
         )
       )
 
       results.each do |info|
-        coords = get_coords("#{info[:city_to_1]}, #{info[:country_to_1]}")
-        next unless coords
 
         Destination.create!(
           meetup_id: @meetup.id,
@@ -65,8 +58,6 @@ class MeetupsController < ApplicationController
             airport_code: info[:fly_to_1],
             city_name: info[:city_to_1],
             country_name: info[:country_to_1],
-            latitude: coords[0],
-            longitude: coords[1]
           ),
           is_midpoint: false,
           is_recommended: false,
@@ -88,19 +79,6 @@ class MeetupsController < ApplicationController
           has_airport_change_1: info[:has_airport_change_1],
           has_airport_change_2: info[:has_airport_change_2],
         )
-
-
-          # unsplash_url = "https://api.unsplash.com/photos/random?client_id=#{ENV["ACCESS_KEY"]}&query=#{fly_to_city}"
-          # photo_serialized = URI.open(unsplash_url).read
-          # photo_json = JSON.parse(photo_serialized)
-          # photo_url = photo_json["urls"]["small"]
-          # photo_url = Unsplash::Photo.search("#{info[:city_to_1]}, #{info[:country_to_1]}").first[:urls][:small]
-          # file = URI.open(photo_url)
-          # destination.photo.attach(io: file, filename: "fly_to_city.png", content_type: "image/png")
-          # destination.save!
-          # latitude: coords[0],
-          # longitude:coords[1]
-
       end
       find_midpoint(@meetup)
       redirect_to meetup_path(@meetup)
@@ -157,22 +135,46 @@ class MeetupsController < ApplicationController
     ])
     midpoint_airport = Airport.near(midpoint, 3000, units: :km).where(id: meetup.destinations.pluck(:airport_to_id)).first
     midpoint_destination = meetup.destinations.find_by(airport_to_id: midpoint_airport)
-    puts "This is the #{midpoint_destination}"
+    # puts "This is the #{midpoint_destination}"
     midpoint_destination.update(is_midpoint: true)
   end
 
   def find_recommended
   end
 
-  def find_or_create_airport(airport_code:, city_name:, country_name:, latitude:, longitude:)
+
+  def city_photo_upload(airport)
+    begin
+    # unsplash_url = "https://api.unsplash.com/photos/random?client_id=#{ENV["UNSPLASH_ACCESS_KEY"]}&query=#{CGI.escape(city_name)}"
+    # photo_serialized = URI.open(unsplash_url).read
+    # photo_json = JSON.parse(photo_serialized)
+    # photo_url = photo_json["urls"]["small"]
+      photo_url = Unsplash::Photo.search("#{airport.city_name}, #{airport.country_name}").first[:urls][:small]
+      file = URI.open(photo_url)
+      airport.city_photo.attach(io: file, filename: "city_name.png", content_type: "image/png")
+      airport.save!
+    rescue Unsplash::Error
+
+    end
+  end
+
+  def find_or_create_airport(airport_code:, city_name:, country_name:)
     airport = Airport.find_by(airport_code: airport_code)
-    return airport if airport
-    Airport.create!(
-      airport_code: airport_code,
-      city_name: city_name,
-      country_name: country_name,
-      latitude: latitude,
-      longitude: longitude
-    )
+    if airport
+      unless airport.city_photo.attached?
+        city_photo_upload(airport)
+      end
+    else
+      coords = get_coords("#{city_name}, #{country_name}")
+      airport = Airport.create!(
+        airport_code: airport_code,
+        city_name: city_name,
+        country_name: country_name,
+        latitude: coords[0],
+        longitude: coords[1]
+      )
+      city_photo_upload(airport)
+    end
+    airport
   end
 end

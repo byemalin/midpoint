@@ -1,12 +1,16 @@
 <div class="card-midpoint destination-card-midpoint" data-controller="midpoint" data-midpoint-target="destination" data-action="mouseenter->midpoint#setMidpoint midpoint:cardHover->map#renderChange" data-midpoint-dest-id-value="<%= destination.id %>">
 
   <%= link_to destination_path(destination) do %>
-    <%= image_tag "stock/oslo-stock.jpg"%>
+  <% if destination.airport_to.city_photo.attached? %>
+    <%= cl_image_tag destination.airport_to.city_photo.key %>
+  <%else %>
+     <%= image_tag "stock/oslo-stock.jpg"%>
+  <%end%>
 
     <div class="d-flex justify-content-between align-items-center">
       <div>
         <h4><%= destination.fly_to_city %></h4>
-        <p class="midpoint-grey"><%= destination.fly_to_country %></p>
+        <p class="midpoint-grey-color"><%= destination.fly_to_country %></p>
       </div>
 
       <%# Reccomended and Midpoint Tags: %>
@@ -25,14 +29,14 @@
 
     <div class="d-flex justify-content-between">
       <small>Flight 1</small>
-      <small class="midpoint-grey"><%="%2dh %02dmin" % [destination.duration_1 / 3600, destination.duration_1 / 60 % 60 ]%></small>
-      <small class="midpoint-grey">€<%= destination.price_1 %></small>
+      <small class="midpoint-grey-color"><%="%2dh %02dmin" % [destination.duration_1 / 3600, destination.duration_1 / 60 % 60 ]%></small>
+      <small class="midpoint-grey-color">€<%= destination.price_1 %></small>
     </div>
 
     <div class="d-flex justify-content-between">
       <small>Flight 2</small>
-      <small class="midpoint-grey"><%="%2dh %02dmin" % [destination.duration_2 / 3600, destination.duration_2 / 60 % 60 ]%></small>
-      <small class="midpoint-grey">€<%= destination.price_2 %></small>
+      <small class="midpoint-grey-color"><%="%2dh %02dmin" % [destination.duration_2 / 3600, destination.duration_2 / 60 % 60 ]%></small>
+      <small class="midpoint-grey-color">€<%= destination.price_2 %></small>
     </div>
 
     <br>
