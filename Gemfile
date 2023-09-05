@@ -2,6 +2,10 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
+
+# OpenAI
+gem "ruby-openai"
+
 # Cloudinary
 gem "cloudinary"
 
