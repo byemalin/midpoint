@@ -3,12 +3,16 @@
   justify-content: space-between;
   align-items: center;
   min-height: 128px !important;
-  width: 90vw;
+  width: 100%;
+  padding: 0 5vw;
   margin: 0 auto;
+
 
   position: sticky;
   top:0;
   z-index: 1;
+
+  // box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.30), 0px 6px 10px 4px rgba(0, 0, 0, 0.15);
 
   img{
     width: 180px;
@@ -32,4 +36,8 @@
     position:absolute;
     left: 20px;
   }
+}
+
+.background-black-transparent-navbar{
+  background-color: #110f0fbc;
 }

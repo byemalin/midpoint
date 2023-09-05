@@ -1,4 +1,4 @@
-<div class= "navbar-midpoint">
+<div class= "navbar-midpoint <%= action_name == 'home' ? '' : 'background-black-transparent-navbar' %>">
   <%# LOGO %>
   <%= link_to root_path do %>
   <%= image_tag "logo.png" %>
