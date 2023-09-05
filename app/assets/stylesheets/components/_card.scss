@@ -4,6 +4,12 @@
   background: $midpoint-dark-grey;
 
   padding: 24px;
+
+  transition: 100ms;
+}
+
+.card-midpoint:hover{
+  filter: brightness(110%);
 }
 
 .cards-midpoint-grid-2 {

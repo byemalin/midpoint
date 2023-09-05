@@ -10,7 +10,7 @@
     <div class="d-flex justify-content-between align-items-center">
       <div>
         <h4><%= destination.fly_to_city %></h4>
-        <p class="midpoint-grey"><%= destination.fly_to_country %></p>
+        <p class="midpoint-grey-color"><%= destination.fly_to_country %></p>
       </div>
 
       <%# Reccomended and Midpoint Tags: %>
@@ -29,14 +29,14 @@
 
     <div class="d-flex justify-content-between">
       <small>Flight 1</small>
-      <small class="midpoint-grey"><%="%2dh %02dmin" % [destination.duration_1 / 3600, destination.duration_1 / 60 % 60 ]%></small>
-      <small class="midpoint-grey">€<%= destination.price_1 %></small>
+      <small class="midpoint-grey-color"><%="%2dh %02dmin" % [destination.duration_1 / 3600, destination.duration_1 / 60 % 60 ]%></small>
+      <small class="midpoint-grey-color">€<%= destination.price_1 %></small>
     </div>
 
     <div class="d-flex justify-content-between">
       <small>Flight 2</small>
-      <small class="midpoint-grey"><%="%2dh %02dmin" % [destination.duration_2 / 3600, destination.duration_2 / 60 % 60 ]%></small>
-      <small class="midpoint-grey">€<%= destination.price_2 %></small>
+      <small class="midpoint-grey-color"><%="%2dh %02dmin" % [destination.duration_2 / 3600, destination.duration_2 / 60 % 60 ]%></small>
+      <small class="midpoint-grey-color">€<%= destination.price_2 %></small>
     </div>
 
     <br>
