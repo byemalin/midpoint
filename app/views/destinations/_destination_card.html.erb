@@ -1,7 +1,11 @@
 <div class="card-midpoint destination-card-midpoint" data-controller="midpoint" data-midpoint-target="destination" data-action="mouseenter->midpoint#setMidpoint midpoint:cardHover->map#renderChange" data-midpoint-dest-id-value="<%= destination.id %>">
 
   <%= link_to destination_path(destination) do %>
-    <%= image_tag "stock/oslo-stock.jpg"%>
+  <% if destination.airport_to.city_photo.attached? %>
+    <%= cl_image_tag destination.airport_to.city_photo.key %>
+  <%else %>
+     <%= image_tag "stock/oslo-stock.jpg"%>
+  <%end%>
 
     <div class="d-flex justify-content-between align-items-center">
       <div>

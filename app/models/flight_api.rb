@@ -13,19 +13,20 @@ class FlightApi
 # 4. Only select unique cities from that array
 
   def destinations(fly_from_1, fly_from_2, date)
-    # depart_input_1 = File.read("db/seeds/CDG.json") # Fake json data (comment when using API)
-    # depart_1 = JSON.parse(depart_input_1) # Fake json data (comment when using API)
+    depart_input_1 = File.read("db/seeds/CDG.json") # Fake json data (comment when using API)
+    depart_1 = JSON.parse(depart_input_1) # Fake json data (comment when using API)
 
-    #API call for city_from_1 (comment when using fake seeds)
-    uri_1 = URI("https://api.tequila.kiwi.com/v2/search?date_from=#{date}&fly_from=#{fly_from_1}&date_to=#{date}&sort=price&limit=500")
-    req = Net::HTTP::Get.new(uri_1)
-    req['apikey'] = ENV["APIKEY_TEQUILA"]
-    res = Net::HTTP.start(uri_1.hostname, uri_1.port, use_ssl: uri_1.scheme == 'https') { |http|
-      http.request(req)
-    }
-    depart_input_1 = res.body
-    depart_1 = JSON.parse(depart_input_1)
-    #end of API call
+    # #API call for city_from_1 (comment when using fake seeds)
+    # uri_1 = URI("https://api.tequila.kiwi.com/v2/search?date_from=#{date}&fly_from=#{fly_from_1}&date_to=#{date}&sort=price&limit=500")
+    # req = Net::HTTP::Get.new(uri_1)
+    # req['apikey'] = ENV["APIKEY_TEQUILA"]
+    # res = Net::HTTP.start(uri_1.hostname, uri_1.port, use_ssl: uri_1.scheme == 'https') { |http|
+    #   http.request(req)
+    # }
+    # depart_input_1 = res.body
+    # depart_1 = JSON.parse(depart_input_1)
+    # #end of API call
+
 
     depart_1_city_price = depart_1['data'].map do |info|
       {
