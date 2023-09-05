@@ -1,12 +1,15 @@
-<%= form_with url: meetups_path, method: :post, class: "horizontal-form", data:{ controller: "datepicker", datepicker_disabled_dates_value: [].to_json} do %>
+<%= form_with url: meetups_path, method: :post, autocomplete: "off", class: "horizontal-form", data:{ controller: "datepicker", datepicker_disabled_dates_value: [].to_json} do %>
 
   <div class="horizontal-form-input-fields-container">
-    <div class="relative">
+    <div class="relative" data-controller="airport-autocomplete">
         <i class="fa-solid fa-magnifying-glass"></i>
         <%= text_field_tag :fly_from_1,
           params[:fly_from_1],
-          class: "search-input-midpoint ps-5",
-          placeholder: "First city"
+          class: "search-input-midpoint ps-5 autocomplete",
+          placeholder: "First city",
+          "data-action": "selection->airport-autocomplete#complete",
+          "data-airport-autocomplete-target": "inputField",
+          autocomplete: "off"
         %>
     </div>
 

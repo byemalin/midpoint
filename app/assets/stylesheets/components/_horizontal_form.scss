@@ -20,4 +20,25 @@
   .relative{
     position: relative;
   }
+
+  ul{
+    background-color: red;
+    list-style-type: none;
+    background-color: #110f0fbc;
+    border-radius: 10px;
+    padding: 0;
+    margin:0;
+    margin-top: 10px;
+    position: absolute;
+  }
+
+  li{
+    padding: 10px;
+    text-decoration: none;
+  }
+
+  .mark, mark {
+    padding: 0.1875em;
+    background-color: red;
+  }
 }
