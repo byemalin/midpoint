@@ -148,9 +148,8 @@ export default class extends Controller {
     const filteredCards = [...allDestinationCards]
     filteredCards.forEach((card) => card.style.border = "1px solid #909090")
     selectedCard.style.border = "4px solid #705eb6"
-    const destinationId = selectedCard.dataset.midpointDestIdValue
-    const destination = this.markersValue.find(element => element.id === destinationId)
-    this.#renderJourneyPath(destination)
+    const destinationId = parseInt(selectedCard.dataset.midpointDestIdValue)
+    this.#changeDestination(destinationId)
     selectedCard.scrollIntoView()
   }
 
@@ -162,9 +161,11 @@ export default class extends Controller {
   }
 
   renderChange({detail: {destinationId}}) {
-    this.map.removeLayer("line-background")
-    this.map.removeLayer("line-dashed")
-    this.map.removeSource("line")
+    this.#changeDestination(destinationId)
+  }
+
+  #changeDestination(destinationId) {
+    this.#removeMapLines()
     const destination = this.markersValue.find(element => element.id === destinationId)
     const selectedMarker = this.markers[destinationId]
     for (const [_id, marker] of Object.entries(this.markers)) {
@@ -172,6 +173,12 @@ export default class extends Controller {
     }
     this.#setMarkerColor(selectedMarker, "#705eb6")
     this.#renderJourneyPath(destination)
+  }
+
+  #removeMapLines() {
+    this.map.removeLayer("line-background")
+    this.map.removeLayer("line-dashed")
+    this.map.removeSource("line")
   }
 
   #setMarkerColor(marker, color) {
