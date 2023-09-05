@@ -22,6 +22,11 @@
     color: $midpoint-offwhite;
     text-decoration: none;
     margin-left: 20px;
+    transition: 100ms;
+  }
+
+  .navbar-link:hover{
+    color: $midpoint-grey;
   }
 
   form{

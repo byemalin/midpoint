@@ -2,6 +2,7 @@
   height: 52px;
   padding: 16px 54px;
   border-radius: 62px;
+  transition: 100ms;
 }
 
 .btn-primary-midpoint{
@@ -22,4 +23,19 @@
 
 .btn-small-midpoint{
   padding: 7px 30px;
+}
+
+
+.btn-primary-midpoint:hover {
+  filter: brightness(85%);
+  border: 1px solid $midpoint-black;
+}
+
+.btn-secondary-midpoint:hover {
+  filter: brightness(85%);
+  border: 1px solid $midpoint-black;
+}
+
+.btn-tertiary-midpoint:hover {
+  background-color: #ffffff1f;
 }

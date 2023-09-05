@@ -135,7 +135,7 @@ class MeetupsController < ApplicationController
     midpoint_destination.update(is_midpoint: true)
   end
 
-  def get_recommended
+  def find_recommended
   end
 
 end
