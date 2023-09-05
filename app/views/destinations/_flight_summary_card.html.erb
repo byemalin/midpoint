@@ -28,7 +28,7 @@
 
   <div class="d-flex w-100 justify-content-between align-items-end">
     <p>Price</p>
-    <h4><%= destination["price_#{flight}"]%> </h4>
+    <h4><%= destination["price_#{flight}"].truncate %>€</h4>
   </div>
 
   <br>

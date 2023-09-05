@@ -13,11 +13,11 @@
     <div class="flight-info justify-content-end">
       <div>
         <h4><%= @destination.duration_1 / 60 / 60 %>h <%= @destination.duration_1 / 60 % 60 %>min </h4>
-        <h4>€<%= @destination.price_1 %></h4>
+        <h4><%= @destination.price_1.truncate %>€</h4>
       </div>
       <div>
         <h4><%= @destination.duration_2 / 60 / 60 %>h <%= @destination.duration_2 / 60 % 60 %>min </h4>
-        <h4>€<%= @destination.price_2 %></h4>
+        <h4><%= @destination.price_2.truncate %>€</h4>
       </div>
     </div>
 
@@ -39,12 +39,17 @@
     </div>
   </div>
 
-
-
   <%# Summary section%>
   <div class="summary-section-midpoint">
     <div class="map card-midpoint">
-      Map
+      <% if @destination.airport_to.city_photo.attached? %>
+        <%= cl_image_tag @destination.airport_to.city_photo.key, alt: "photo of #{@destination.airport_to.city_name}", class: "summary-img" %>
+      <%else %>
+        <%= image_tag "stock/oslo-stock.jpg", alt: "photo of #{@destination.airport_to.city_name}"%>
+      <%end%>
+      <p>Here is what you could see in <%=@destination.airport_to.city_name%>:</p>
+      <br>
+      <%= simple_format (@destination.airport_to.suggestions) %>
     </div>
 
     <div>
@@ -53,10 +58,8 @@
 
       <div class="card-midpoint d-flex justify-content-between">
         <h4>Total</h4>
-        <h4>€<%= @destination.total_price %></h4>
+        <h4><%= @destination.total_price.truncate %>€</h4>
       </div>
     </div>
   </div>
-
-
 </div>
