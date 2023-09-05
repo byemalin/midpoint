@@ -139,8 +139,6 @@ class MeetupsController < ApplicationController
     midpoint_destination.update(is_midpoint: true)
   end
 
-
-
   def city_photo_upload(airport)
     begin
     # unsplash_url = "https://api.unsplash.com/photos/random?client_id=#{ENV["UNSPLASH_ACCESS_KEY"]}&query=#{CGI.escape(city_name)}"
@@ -152,7 +150,6 @@ class MeetupsController < ApplicationController
       airport.city_photo.attach(io: file, filename: "city_name.png", content_type: "image/png")
       airport.save!
     rescue Unsplash::Error
-
     end
   end
 

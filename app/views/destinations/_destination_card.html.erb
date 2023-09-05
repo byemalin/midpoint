@@ -2,9 +2,9 @@
 
   <%= link_to destination_path(destination) do %>
   <% if destination.airport_to.city_photo.attached? %>
-    <%= cl_image_tag destination.airport_to.city_photo.key %>
+    <%= cl_image_tag destination.airport_to.city_photo.key, alt: "photo of #{destination.airport_to.city_name}" %>
   <%else %>
-     <%= image_tag "stock/oslo-stock.jpg"%>
+     <%= image_tag "stock/oslo-stock.jpg", alt: "photo of #{destination.airport_to.city_name}"%>
   <%end%>
 
     <div class="d-flex justify-content-between align-items-center">
