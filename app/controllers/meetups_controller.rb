@@ -161,6 +161,8 @@ class MeetupsController < ApplicationController
     midpoint_destination.update(is_midpoint: true)
   end
 
+  def find_recommended
+  end
 
   def find_or_create_airport(airport_code:, city_name:, country_name:, latitude:, longitude:)
     airport = Airport.find_by(airport_code: airport_code)
