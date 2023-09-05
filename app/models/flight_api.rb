@@ -25,7 +25,7 @@ class FlightApi
     # }
     # depart_input_1 = res.body
     # depart_1 = JSON.parse(depart_input_1)
-    # #end
+    # #end of API call
 
     depart_1_city_price = depart_1['data'].map do |info|
       {

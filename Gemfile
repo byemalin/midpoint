@@ -2,6 +2,8 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
+# Cloudinary
+gem "cloudinary"
 
 # API for seeding free, high-definition photos
 gem 'unsplash'
