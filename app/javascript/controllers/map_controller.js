@@ -121,10 +121,6 @@ export default class extends Controller {
       animateDashArray(this.map, 0, dashArraySequence);
   }
 
-  // getCoords(event) {
-  //   console.log(event.currentTarget)
-  // }
-
   #addMarkersToMap() {
 
     this.markers = {}
@@ -133,6 +129,10 @@ export default class extends Controller {
       .setLngLat([ marker.lng, marker.lat ])
       .addTo(this.map)
       this.markers[marker.id] = mapMarker
+      const selectedCard = document.querySelector(`[data-midpoint-dest-id-value="${marker.id}"]`)
+      mapMarker.getElement().addEventListener("click", () => {
+        this.#changeCardFocus(selectedCard)
+      })
     })
     new mapboxgl.Marker({color: "#705eb6"})
     .setLngLat([this.departureCity1LonValue, this.departureCity1LatValue] )
@@ -141,7 +141,16 @@ export default class extends Controller {
     new mapboxgl.Marker({color: "#705eb6"})
     .setLngLat([this.departureCity2LonValue, this.departureCity2LatValue] )
     .addTo(this.map)
-    // Add markers departure cities
+  }
+
+  #changeCardFocus(selectedCard) {
+    const allDestinationCards = document.querySelectorAll(".destination-card-midpoint")
+    const filteredCards = [...allDestinationCards]
+    filteredCards.forEach((card) => card.style.border = "1px solid #909090")
+    selectedCard.style.border = "4px solid #705eb6"
+    const destinationId = parseInt(selectedCard.dataset.midpointDestIdValue)
+    this.#changeDestination(destinationId)
+    selectedCard.scrollIntoView()
   }
 
   #fitMapToMarkers() {
@@ -152,10 +161,11 @@ export default class extends Controller {
   }
 
   renderChange({detail: {destinationId}}) {
-    // remove layer
-    this.map.removeLayer("line-background")
-    this.map.removeLayer("line-dashed")
-    this.map.removeSource("line")
+    this.#changeDestination(destinationId)
+  }
+
+  #changeDestination(destinationId) {
+    this.#removeMapLines()
     const destination = this.markersValue.find(element => element.id === destinationId)
     const selectedMarker = this.markers[destinationId]
     for (const [_id, marker] of Object.entries(this.markers)) {
@@ -163,6 +173,12 @@ export default class extends Controller {
     }
     this.#setMarkerColor(selectedMarker, "#705eb6")
     this.#renderJourneyPath(destination)
+  }
+
+  #removeMapLines() {
+    this.map.removeLayer("line-background")
+    this.map.removeLayer("line-dashed")
+    this.map.removeSource("line")
   }
 
   #setMarkerColor(marker, color) {
@@ -175,5 +191,3 @@ export default class extends Controller {
 
 
 }
-
-// Remove layer, pass lat and long back through render Journey path
