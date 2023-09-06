@@ -2,7 +2,12 @@ class FindSuggestionsJob < ApplicationJob
   queue_as :default
 
   def perform(airport)
-    airport.update(suggestions: suggestions_from_openai(airport.city_name, airport.country_name))
+    existing_city = Airport.where(city_name: airport.city_name, country_name: airport.country_name).first
+    if existing_city && existing_city.suggestions.present?
+      airport.update(suggestions: existing_city.suggestions)
+    else
+      airport.update(suggestions: suggestions_from_openai(airport.city_name, airport.country_name))
+    end
   end
 
   private

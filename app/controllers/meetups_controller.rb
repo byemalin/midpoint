@@ -73,7 +73,7 @@ class MeetupsController < ApplicationController
       find_midpoint(@meetup)
       redirect_to meetup_path(@meetup)
     else
-      binding.irb
+      # binding.irb
       flash.now[:alert] = @meetup.errors.full_messages.to_sentence
       render "pages/home", status: :unprocessable_entity
     end
