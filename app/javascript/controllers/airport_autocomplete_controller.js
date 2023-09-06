@@ -6,33 +6,37 @@ import autoComplete from "@tarekraafat/autocomplete.js";
 export default class extends Controller {
 
   static targets = [
-    "inputField",
+    "inputField"
   ]
 
   connect() {
     console.log("Airport autocomplete controller connected")
+    console.log(this.element)
 
     const autoCompleteJS = new autoComplete({
-      placeHolder: "First City",
         data: {
             src: async () => {
               try {
-                const source = await fetch(
-                  `/tequila_airports?term=${this.inputFieldTarget.value}`,
-                  {
-                    verb: "GET",
-                    headers: {
-                      accept: "application/json",
+                console.log(this.inputFieldTarget)
+                if (this.inputFieldTarget.value){
+                  const source = await fetch(
+                    `/tequila_airports?term=${this.inputFieldTarget.value}`,
+                    {
+                      verb: "GET",
+                      headers: {
+                        accept: "application/json",
+                      }
                     }
-                  }
-                );
-                const data = await source.json();
+                  );
+                  const data = await source.json();
 
-                const resultsArray = data.locations.map((location) => {
-                  return `${location.name} ${location.city.name} ${location.id}`
-                })
+                  const resultsArray = data.locations.map((location) => {
+                    return `${location.name} ${location.city.name} ${location.id}`
+                  })
 
-                return resultsArray
+                  return resultsArray
+                }
+                return []
 
               } catch (error) {
                 return error;
@@ -42,7 +46,8 @@ export default class extends Controller {
         resultItem: {
             highlight: true,
         },
-        selector: ".autocomplete"
+        // selector: `.autocomplete`
+        selector: `#${this.element.id} .autocomplete`
      });
   }
 
