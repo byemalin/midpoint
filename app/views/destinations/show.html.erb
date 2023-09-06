@@ -47,9 +47,10 @@
       <%else %>
         <%= image_tag "stock/oslo-stock.jpg", alt: "photo of #{@destination.airport_to.city_name}"%>
       <%end%>
-      <p>Here is what you could see in <%=@destination.airport_to.city_name%>:</p>
-      <br>
-      <%= simple_format (@destination.airport_to.suggestions) %>
+      <div class="open-ai-text">
+        <p><b>Here is what you could see in <%=@destination.airport_to.city_name%>:</b></p>
+        <%= simple_format @destination.airport_to.suggestions %>
+      </div>
     </div>
 
     <div>
