@@ -15,29 +15,24 @@ export default class extends Controller {
     const autoCompleteJS = new autoComplete({
       placeHolder: "First City",
         data: {
-            // src: ["Paris", "Potato", "London"]
             src: async () => {
               try {
                 const source = await fetch(
-                  `https://api.tequila.kiwi.com/locations/query?term=${this.inputFieldTarget.value}&locale=en-US&location_types=airport&limit=10&active_only=true`,
+                  `/tequila_airports?term=${this.inputFieldTarget.value}`,
                   {
                     verb: "GET",
                     headers: {
                       accept: "application/json",
-                      apiKey: "KTH3IygbkkyMYtEBPQ6n7xpCK5mMwv3R"
                     }
                   }
                 );
                 const data = await source.json();
 
-                console.log(data.locations)
-
-                const newArray = data.locations.map((location) => {
+                const resultsArray = data.locations.map((location) => {
                   return `${location.name} ${location.city.name} ${location.id}`
                 })
 
-                // console.log(newArray)
-                return newArray
+                return resultsArray
 
               } catch (error) {
                 return error;
