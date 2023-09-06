@@ -1,23 +1,13 @@
 class MeetupsController < ApplicationController
   def create
-    # @meetup = Meetup.new(meetup_params)
+
     # dep_city1_coords = GeocodingApi.new.get_coords(params[:fly_from_1])
     # dep_city2_coords = GeocodingApi.new.get_coords(params[:fly_from_2])
-    # dep_city1_coords = get_coords(params[:fly_from_1])
-    # binding.pry
-    # puts dep_city1_coords
-    # dep_city2_coords = get_coords(params[:fly_from_2])
 
     @meetup = Meetup.new(
-      # name: "MEETUP TEST",
       fly_from_1: params[:fly_from_1],
       fly_from_2: params[:fly_from_2],
       date_from: params[:date_from],
-
-      # departure_city1_lat: 48.8566,
-      # departure_city1_lon: 2.3522,
-      # departure_city2_lat: 59.9319,
-      # departure_city2_lon: 10.7522
 
       # departure_city1_lat: dep_city1_coords[0],
       # departure_city1_lon: dep_city1_coords[1],
@@ -163,7 +153,7 @@ class MeetupsController < ApplicationController
       end
 
       unless airport.suggestions.present?
-        airport.update(suggestions: suggestions_from_openai(city_name, country_name))
+        FindSuggestionsJob.perform_later(airport)
       end
     else
       coords = get_coords("#{city_name}, #{country_name}")
@@ -173,27 +163,10 @@ class MeetupsController < ApplicationController
         country_name: country_name,
         latitude: coords[0],
         longitude: coords[1],
-        suggestions: suggestions_from_openai(city_name, country_name),
       )
       city_photo_upload(airport)
-
+      FindSuggestionsJob.perform_later(airport)
     end
     airport
   end
-
-  def suggestions_from_openai(city_name, country_name)
-    prompt = "Give top 5 places to see in #{city_name}, #{country_name}"
-    client = OpenAI::Client.new
-    # OpenAI.rough_token_count("Your text") #Counting tokens to estimate your costs.
-    response = client.chat(
-    parameters: {
-        model: "gpt-3.5-turbo", # Required.
-        messages: [{ role: "user", content: prompt}], # Required.
-        temperature: 0.7,
-    })
-
-    openai_response = response.dig("choices", 0, "message", "content")
-    openai_response
-  end
-
 end

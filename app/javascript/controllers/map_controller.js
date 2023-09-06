@@ -23,6 +23,10 @@ export default class extends Controller {
       style: "mapbox://styles/mapbox/dark-v11",
       center: [(this.departureCity1LatValue + this.departureCity1LonValue)/2,(this.departureCity2LatValue + this.departureCity2LonValue) / 2]
     })
+    console.log(this.map)
+    // this.map.style.height = "25em"
+    // this.map.style.width = "15em"
+    // this.map.classList.add(".map")
     this.#addMarkersToMap()
     this.#fitMapToMarkers()
     this.map.on('load', () => {
@@ -175,7 +179,7 @@ export default class extends Controller {
       bounds.extend([destination.lng, destination.lat])
     }
     bounds.extend([this.departureCity2LonValue, this.departureCity2LatValue])
-    this.map.fitBounds(bounds, { padding: 50, maxZoom:4, duration: 0})
+    this.map.fitBounds(bounds, { padding: 100, maxZoom:4, duration: 1000})
   }
 
   renderChange({detail: {destinationId}}) {

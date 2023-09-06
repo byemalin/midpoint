@@ -7,6 +7,9 @@
 
   transition: 100ms;
   scroll-margin-top: 128px;
+  p{
+    margin: 2px;
+  }
 }
 
 .card-midpoint:hover {
@@ -17,6 +20,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
+}
+
+.open-ai-text {
+  p {
+    margin: 0.8em;
+  }
 }
 
 // DESTINATION CARD:

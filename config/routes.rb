@@ -6,5 +6,10 @@ Rails.application.routes.draw do
   resources :destinations, only: [:show]
   resources :tequila_airports, only: [:index]
 
+  require "sidekiq/web"
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
  # get "destinations/:id/summary", to: "destinations#summary", as: "summary"
 end
