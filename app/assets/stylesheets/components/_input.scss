@@ -7,6 +7,11 @@ input, input[type="text"], .search-input-midpoint{
   transition: 100ms;
 }
 
+.search-input-midpoint i{
+  position:absolute;
+  left: 20px;
+}
+
 input::placeholder {
   color: $midpoint-offwhite;
 }
@@ -14,6 +19,7 @@ input::placeholder {
 .search-input-midpoint:hover{
   background-color: #ffffff1f;
 }
+
 
 // .search-input-midpoint:active{
 //   outline: 0;
