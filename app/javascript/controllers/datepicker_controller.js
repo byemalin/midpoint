@@ -10,6 +10,12 @@ export default class extends Controller {
   connect() {
       flatpickr(this.departureDateTarget, {
         "dateFormat": "d-m-Y",
+        "disable": [
+          {
+              from: "01-04-2021",
+              to: "07-09-2023"
+          }
+      ]
       })
       // Add option config
   }
