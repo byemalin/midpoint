@@ -5,5 +5,10 @@ Rails.application.routes.draw do
   resources :meetups, only: [:show, :create]
   resources :destinations, only: [:show]
 
+  require "sidekiq/web"
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
  # get "destinations/:id/summary", to: "destinations#summary", as: "summary"
 end
