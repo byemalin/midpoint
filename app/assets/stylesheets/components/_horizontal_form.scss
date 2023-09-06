@@ -25,7 +25,8 @@
     background-color: red;
     list-style-type: none;
     // background-color: #110f0fbc;
-    background-color: #F7F7F7;
+    background-color: $midpoint-dark-grey;
+    border: 1px solid $midpoint-grey;
     border-radius: 10px;
     padding: 0;
     margin:0;
@@ -34,15 +35,18 @@
   }
 
   li{
-    padding: 10px;
+    padding: 10px 0;
+    margin: 0 10px;
+    border-bottom: 1px solid $midpoint-grey;
     // text-decoration: none;
-    color: $midpoint-black;
+    // color: $midpoint-black;
   }
 
   .mark, mark {
-    color: $midpoint-black;
+    color: $midpoint-secondary;
     padding: 0.1875em;
     // background-color: #705eb644;
-    background-color: #ffaa009f;
+    // background-color: #ffaa009f;
+    background-color: $midpoint-dark-grey;
   }
 }
