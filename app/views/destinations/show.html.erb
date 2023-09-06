@@ -41,11 +41,11 @@
 
   <%# Summary section%>
   <div class="summary-section-midpoint">
-    <div class="map card-midpoint">
+    <div class="card-midpoint">
       <% if @destination.airport_to.city_photo.attached? %>
         <%= cl_image_tag @destination.airport_to.city_photo.key, alt: "photo of #{@destination.airport_to.city_name}", class: "summary-img" %>
       <%else %>
-        <%= image_tag "stock/oslo-stock.jpg", alt: "photo of #{@destination.airport_to.city_name}"%>
+        <%= image_tag "stock/oslo-stock.jpg", alt: "photo of #{@destination.airport_to.city_name}", class: "summary-img" %>
       <%end%>
       <% if @destination.airport_to.suggestions.present? %>
         <div class="open-ai-text">
