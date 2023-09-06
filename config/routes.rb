@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
   resources :meetups, only: [:show, :create]
   resources :destinations, only: [:show]
+  resources :tequila_airports, only: [:index]
 
   require "sidekiq/web"
   authenticate :user, ->(user) { user.admin? } do

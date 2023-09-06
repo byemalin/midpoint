@@ -13,31 +13,26 @@ export default class extends Controller {
     console.log("Airport autocomplete controller connected")
 
     const autoCompleteJS = new autoComplete({
-      placeHolder: "City 1 ...",
+      placeHolder: "First City",
         data: {
-            // src: ["Paris", "Potato", "London"]
             src: async () => {
               try {
-                // console.log(this.inputFieldTarget.value);
-
                 const source = await fetch(
-                  `https://api.tequila.kiwi.com/locations/query?term=${this.inputFieldTarget.value}&locale=en-US&location_types=airport&limit=10&active_only=true`,
+                  `/tequila_airports?term=${this.inputFieldTarget.value}`,
                   {
                     verb: "GET",
                     headers: {
                       accept: "application/json",
-                      apiKey: ""
                     }
                   }
                 );
                 const data = await source.json();
 
-                const newArray = data.locations.map((location) => {
-                  return ` ${location.name} ${location.id}`
+                const resultsArray = data.locations.map((location) => {
+                  return `${location.name} ${location.city.name} ${location.id}`
                 })
 
-                // console.log(newArray)
-                return newArray
+                return resultsArray
 
               } catch (error) {
                 return error;
@@ -57,14 +52,6 @@ export default class extends Controller {
     const feedback = event.detail;
     const selection = feedback.selection.value;
 
-    // console.log(this.inputFieldTarget)
-    // console.log(feedback)
-    // console.log(selection)
-    console.log(selection);
-    console.log(selection.split(" "));
-    console.log(selection.split(" ").pop());
-
     this.inputFieldTarget.value = selection.split(" ").pop();
-
   }
 }

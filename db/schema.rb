@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_05_143753) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_06_085138) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,6 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_05_143753) do
     t.datetime "local_arrival_1"
     t.datetime "local_arrival_2"
     t.bigint "airport_to_id"
+    t.boolean "is_cheapest"
     t.index ["airport_to_id"], name: "index_destinations_on_airport_to_id"
     t.index ["meetup_id"], name: "index_destinations_on_meetup_id"
   end
