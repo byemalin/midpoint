@@ -65,6 +65,10 @@
   }
 }
 
+.summary-section-p{
+  color: $midpoint-grey;
+}
+
 .summary-section-midpoint > div{
   width: 50%;
 }
@@ -75,5 +79,10 @@
   margin-bottom: 3%;
   display: flex;
   justify-content: center;
+  border-radius: 3%;
+}
+
+.summary-logo-img{
+  width: 1.5em;
   border-radius: 3%;
 }
