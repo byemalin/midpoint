@@ -5,8 +5,8 @@ class MeetupsController < ApplicationController
     # dep_city2_coords = GeocodingApi.new.get_coords(params[:fly_from_2])
 
     @meetup = Meetup.new(
-      fly_from_1: params[:fly_from_1],
-      fly_from_2: params[:fly_from_2],
+      fly_from_1: params[:fly_from_1].last(3),
+      fly_from_2: params[:fly_from_2].last(3),
       date_from: params[:date_from],
 
       # departure_city1_lat: dep_city1_coords[0],
