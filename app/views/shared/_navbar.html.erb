@@ -1,26 +1,30 @@
 <div class= "navbar-midpoint <%= action_name == 'home' ? '' : 'background-black-transparent-navbar' %>">
-  <%# LOGO %>
-  <%= link_to root_path do %>
-  <%= image_tag "logo.png" %>
-  <% end %>
 
-  <% if user_signed_in? %>
-    <div>
-      <%= link_to "", "#", class: "navbar-link" %>
-      <%# <%= link_to "Not Sure", "#", class: "navbar-link" %>
-    </div>
-  <% end %>
 
   <%# All pages other than Home: %>
   <% if action_name != 'home' && action_name != 'create'%>
+    <%# LOGO %>
+    <%= link_to root_path do %>
+      <%= image_tag "logo.png" %>
+    <% end %>
+    <%# Search Form %>
     <div>
       <%= render "meetups/horizontal_form"%>
     </div>
+  <% else %>
+    <%# empty div for positioning %>
+    <div></div>
   <% end %>
 
-  <% if !user_signed_in? %>
+
+
+  <% if user_signed_in? %>
+    <%= link_to destroy_user_session_path, data: { "turbo-method": :delete } do %>
+      <i class="fa-regular fa-user"></i>
+    <% end %>
+  <% else %>
     <div>
-      <%= link_to "Sign Up", new_user_session_path, class: "btn-midpoint btn-secondary-midpoint" %>
+      <%= link_to "Sign Up", new_user_registration_path, class: "btn-midpoint btn-secondary-midpoint" %>
       <%= link_to "Login", new_user_session_path, class: "navbar-link" %>
     </div>
   <% end %>
