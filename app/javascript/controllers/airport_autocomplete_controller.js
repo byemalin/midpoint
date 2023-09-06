@@ -13,7 +13,7 @@ export default class extends Controller {
     console.log("Airport autocomplete controller connected")
 
     const autoCompleteJS = new autoComplete({
-      placeHolder: "City 1 ...",
+      placeHolder: "First City",
         data: {
             // src: ["Paris", "Potato", "London"]
             src: async () => {
@@ -26,7 +26,7 @@ export default class extends Controller {
                     verb: "GET",
                     headers: {
                       accept: "application/json",
-                      apiKey: ""
+                      apiKey: "KTH3IygbkkyMYtEBPQ6n7xpCK5mMwv3R"
                     }
                   }
                 );
