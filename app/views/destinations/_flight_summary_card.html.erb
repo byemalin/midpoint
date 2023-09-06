@@ -7,27 +7,31 @@
   <br>
 
   <div class="d-flex w-100 justify-content-between align-items-end">
-    <p>Duration</p>
+    <p><i class="fa-regular fa-clock summary-section-p"></i> Duration</p>
     <p><%= destination["duration_#{flight}"] / 60 / 60 %> h <%= destination["duration_#{flight}"] / 60 % 60 %> mins </p>
   </div>
 
   <div class="d-flex w-100 justify-content-between align-items-end">
-    <p>Departure</p>
+    <p><i class="fa-solid fa-plane-departure summary-section-p"></i> Departure</p>
     <p><%= destination["local_departure_#{flight}"].strftime('%d/%m/%Y')%> at <%= destination["local_departure_#{flight}"].strftime('%I:%M %p')%>  </p>
   </div>
 
   <div class="d-flex w-100 justify-content-between align-items-end">
-    <p>Arrival</p>
+    <p><i class="fa-solid fa-plane-arrival summary-section-p"></i> Arrival</p>
     <p><%= destination["local_arrival_#{flight}"].strftime('%d/%m/%Y')%> at <%= destination["local_arrival_#{flight}"].strftime('%I:%M %p')%></p>
   </div>
 
   <div class="d-flex w-100 justify-content-between align-items-end">
-    <p>Airline</p>
-    <p><%= destination["airlines_#{flight}"].split(", ").to_sentence%> </p>
+    <p><i class="fa-solid fa-plane summary-section-p"></i> Airlines</p>
+    <div>
+      <% destination["airlines_#{flight}"].split(", ").each do |code| %>
+      <%= image_tag "https://images.kiwi.com/airlines/32x32/#{code}.png?default=airline.png", alt: "logo of #{code}", class: "summary-logo-img" %>
+      <% end %>
+    </div>
   </div>
 
   <div class="d-flex w-100 justify-content-between align-items-end">
-    <p>Price</p>
+    <p><i class="fa-solid fa-tag summary-section-p"></i> Price</p>
     <h4><%= destination["price_#{flight}"].truncate %>€</h4>
   </div>
 

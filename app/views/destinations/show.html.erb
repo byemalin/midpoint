@@ -59,9 +59,15 @@
       <%= render "flight_summary_card", destination: @destination, flight: 1 %>
       <%= render "flight_summary_card", destination: @destination, flight: 2 %>
 
-      <div class="card-midpoint d-flex justify-content-between">
-        <h4>Total</h4>
-        <h4><%= @destination.total_price.truncate %>€</h4>
+      <div class="card-midpoint">
+        <div class="d-flex justify-content-between">
+          <h4>Total</h4>
+          <h4><%= @destination.total_price.truncate %>€</h4>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p class="midpoint-grey-color">Total per person</p>
+          <p class="midpoint-grey-color"><%= @destination.total_price.truncate/2 %>€</p>
+        </div>
       </div>
     </div>
   </div>
