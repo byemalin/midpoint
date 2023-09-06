@@ -3,6 +3,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
 
+# Sidekiq
+gem "sidekiq", "< 7"
+gem "sidekiq-failures", "~> 1.0"
+
 # OpenAI
 gem "ruby-openai"
 
