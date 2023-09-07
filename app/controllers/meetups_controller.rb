@@ -71,6 +71,9 @@ class MeetupsController < ApplicationController
         )
       end
       find_midpoint(@meetup)
+      find_recommended(@meetup)
+      find_cheapest(@meetup)
+      # find is_recommended
       redirect_to meetup_path(@meetup)
     else
       # binding.irb
@@ -131,18 +134,30 @@ class MeetupsController < ApplicationController
     midpoint_destination.update(is_midpoint: true)
   end
 
+  def find_recommended(meetup)
+    order = 'duration_1 * price_1 + duration_2 * price_2'
+    recommended_destination = meetup.destinations.order(Arel.sql(order)).first
+    recommended_destination.update(is_recommended: true)
+  end
+
+  def find_cheapest(meetup)
+    order = 'price_1 + price_2'
+    cheapest_destination = meetup.destinations.order(Arel.sql(order)).first
+    cheapest_destination.update(is_cheapest: true)
+  end
+
   def city_photo_upload(airport)
-    begin
-    # unsplash_url = "https://api.unsplash.com/photos/random?client_id=#{ENV["UNSPLASH_ACCESS_KEY"]}&query=#{CGI.escape(city_name)}"
-    # photo_serialized = URI.open(unsplash_url).read
-    # photo_json = JSON.parse(photo_serialized)
-    # photo_url = photo_json["urls"]["small"]
-      photo_url = Unsplash::Photo.search("#{airport.city_name}, #{airport.country_name}").first[:urls][:small]
-      file = URI.open(photo_url)
-      airport.city_photo.attach(io: file, filename: "city_name.png", content_type: "image/png")
-      airport.save!
-    rescue Unsplash::Error
-    end
+    # begin
+    # # unsplash_url = "https://api.unsplash.com/photos/random?client_id=#{ENV["UNSPLASH_ACCESS_KEY"]}&query=#{CGI.escape(city_name)}"
+    # # photo_serialized = URI.open(unsplash_url).read
+    # # photo_json = JSON.parse(photo_serialized)
+    # # photo_url = photo_json["urls"]["small"]
+    #   photo_url = Unsplash::Photo.search("#{airport.city_name}, #{airport.country_name}").first[:urls][:small]
+    #   file = URI.open(photo_url)
+    #   airport.city_photo.attach(io: file, filename: "city_name.png", content_type: "image/png")
+    #   airport.save!
+    # rescue Unsplash::Error
+    # end
   end
 
   def find_or_create_airport(airport_code:, city_name:, country_name:)

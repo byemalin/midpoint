@@ -7,7 +7,8 @@
 
   transition: 100ms;
   scroll-margin-top: 128px;
-  p{
+
+  p {
     margin: 2px;
   }
 }
@@ -61,7 +62,10 @@
 .tag {
   padding: 4px 8px;
   border-radius: 4px;
-  margin-bottom: 5px;
+}
+
+.tag-container {
+  margin-top: 5px;
 }
 
 .tag-recommended {
@@ -71,4 +75,8 @@
 
 .tag-midpoint {
   background: $midpoint-primary;
+}
+
+.tag-cheapest {
+  background-color: rgb(52, 183, 52);
 }
