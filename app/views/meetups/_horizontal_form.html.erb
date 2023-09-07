@@ -5,7 +5,7 @@
     <div id="first-city" class="relative" data-controller="airport-autocomplete">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
         <%= text_field_tag :fly_from_1,
-          params[:fly_from_1],
+          @meetup ? @meetup.fly_from_1 : params[:fly_from_1],
           class: "search-input-midpoint ps-5 autocomplete",
           placeholder: "First city",
           "data-action": "selection->airport-autocomplete#complete",
@@ -17,7 +17,7 @@
     <div id="second-city" class="relative"  data-controller="airport-autocomplete">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
         <%= text_field_tag :fly_from_2,
-          params[:fly_from_2],
+          @meetup ? @meetup.fly_from_2 : params[:fly_from_2],
           class: "search-input-midpoint ps-5 autocomplete",
           placeholder: "Second city",
           "data-action": "selection->airport-autocomplete#complete",
@@ -29,7 +29,7 @@
     <div class="relative">
         <i class="fa-regular fa-calendar search-icon"></i>
         <%= text_field_tag :date_from,
-          params[:date_from],
+          @meetup ? @meetup.date_from : params[:date_from],
           class: "search-input-midpoint ps-5",
           placeholder: "Departure date",
           as: :string,

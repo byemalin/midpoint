@@ -17,10 +17,9 @@ class MeetupsController < ApplicationController
       # Add 4 new properties for departure cities
     )
 
-      @meetup.user = current_user
+    @meetup.user = current_user
     if @meetup.save
       results = FlightApi.new.destinations(@meetup.fly_from_1, @meetup.fly_from_2, @meetup.date_from)
-
       @meetup.update(
         city_from_1: results.first[:city_from_1],
         city_from_2: results.first[:city_from_2],
@@ -31,12 +30,14 @@ class MeetupsController < ApplicationController
           airport_code: results.first[:fly_from_1],
           city_name: results.first[:city_from_1],
           country_name: results.first[:country_from_1],
+          country_code: results.first[:country_code_1]
         ),
 
         airport_from_2: find_or_create_airport(
           airport_code: results.first[:fly_from_2],
           city_name: results.first[:city_from_2],
           country_name: results.first[:country_from_2],
+          country_code: results.first[:country_code_2]
         )
       )
 
@@ -48,6 +49,7 @@ class MeetupsController < ApplicationController
             airport_code: info[:fly_to_1],
             city_name: info[:city_to_1],
             country_name: info[:country_to_1],
+            country_code: info[:country_code_to_1],
           ),
           is_midpoint: false,
           is_recommended: false,
@@ -131,7 +133,9 @@ class MeetupsController < ApplicationController
     midpoint_airport = Airport.near(midpoint, 3000, units: :km).where(id: meetup.destinations.pluck(:airport_to_id)).first
     midpoint_destination = meetup.destinations.find_by(airport_to_id: midpoint_airport)
     # puts "This is the #{midpoint_destination}"
-    midpoint_destination.update(is_midpoint: true)
+    if midpoint_destination
+      midpoint_destination.update(is_midpoint: true)
+    end
   end
 
   def find_recommended(meetup)
@@ -147,20 +151,22 @@ class MeetupsController < ApplicationController
   end
 
   def city_photo_upload(airport)
-    begin
-    unsplash_url = "https://api.unsplash.com/photos/random?client_id=#{ENV["UNSPLASH_ACCESS_KEY"]}&query=#{CGI.escape(city_name)}"
-    photo_serialized = URI.open(unsplash_url).read
-    photo_json = JSON.parse(photo_serialized)
-    photo_url = photo_json["urls"]["small"]
-      photo_url = Unsplash::Photo.search("#{airport.city_name}, #{airport.country_name}").first[:urls][:small]
-      file = URI.open(photo_url)
-      airport.city_photo.attach(io: file, filename: "city_name.png", content_type: "image/png")
-      airport.save!
-    rescue Unsplash::Error
+    if airport.country_code == "us" || airport.country_code == "ca"
+      begin
+      # unsplash_url = "https://api.unsplash.com/photos/random?client_id=#{ENV["UNSPLASH_ACCESS_KEY"]}&query=#{CGI.escape(city_name)}"
+      # photo_serialized = URI.open(unsplash_url).read
+      # photo_json = JSON.parse(photo_serialized)
+      # photo_url = photo_json["urls"]["small"]
+        photo_url = Unsplash::Photo.search("#{airport.city_name}, #{airport.country_name}").first[:urls][:small]
+        file = URI.open(photo_url)
+        airport.city_photo.attach(io: file, filename: "city_name.png", content_type: "image/png")
+        airport.save!
+      rescue Unsplash::Error
+      end
     end
   end
 
-  def find_or_create_airport(airport_code:, city_name:, country_name:)
+  def find_or_create_airport(airport_code:, city_name:, country_name:, country_code:)
     airport = Airport.find_by(airport_code: airport_code)
     if airport
       unless airport.city_photo.attached?
@@ -176,6 +182,7 @@ class MeetupsController < ApplicationController
         airport_code: airport_code,
         city_name: city_name,
         country_name: country_name,
+        country_code: country_code,
         latitude: coords[0],
         longitude: coords[1],
       )
