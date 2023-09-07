@@ -71,6 +71,9 @@ class MeetupsController < ApplicationController
         )
       end
       find_midpoint(@meetup)
+      find_recommended(@meetup)
+      find_cheapest(@meetup)
+      # find is_recommended
       redirect_to meetup_path(@meetup)
     else
       # binding.irb
@@ -129,6 +132,18 @@ class MeetupsController < ApplicationController
     midpoint_destination = meetup.destinations.find_by(airport_to_id: midpoint_airport)
     # puts "This is the #{midpoint_destination}"
     midpoint_destination.update(is_midpoint: true)
+  end
+
+  def find_recommended(meetup)
+    order = 'duration_1 * price_1 + duration_2 * price_2'
+    recommended_destination = meetup.destinations.order(Arel.sql(order)).first
+    recommended_destination.update(is_recommended: true)
+  end
+
+  def find_cheapest(meetup)
+    order = 'price_1 + price_2'
+    cheapest_destination = meetup.destinations.order(Arel.sql(order)).first
+    cheapest_destination.update(is_cheapest: true)
   end
 
   def city_photo_upload(airport)
