@@ -13,11 +13,13 @@ class FlightApi
 # 4. Only select unique cities from that array
 
   def destinations(fly_from_1, fly_from_2, date)
+    fly_from_1 = fly_from_1.upcase
+    fly_from_2 = fly_from_2.upcase
     # depart_input_1 = File.read("db/seeds/CDG.json") # Fake json data (comment when using API)
     # depart_1 = JSON.parse(depart_input_1) # Fake json data (comment when using API)
 
     #API call for city_from_1 (comment when using fake seeds)
-    uri_1 = URI("https://api.tequila.kiwi.com/v2/search?date_from=#{date}&fly_from=#{fly_from_1}&date_to=#{date}&sort=price&limit=500")
+    uri_1 = URI("https://api.tequila.kiwi.com/v2/search?date_from=#{date}&fly_from=#{fly_from_1}&date_to=#{date}&sort=price&limit=750")
     req = Net::HTTP::Get.new(uri_1)
     req['apikey'] = ENV["APIKEY_TEQUILA"]
     res = Net::HTTP.start(uri_1.hostname, uri_1.port, use_ssl: uri_1.scheme == 'https') { |http|
@@ -27,13 +29,13 @@ class FlightApi
     depart_1 = JSON.parse(depart_input_1)
     #end of API call
 
-
     depart_1_city_price = depart_1['data'].map do |info|
       {
         fly_to: info['flyTo'],
         price: info['price'],
         city_to: info['cityTo'],
         country_to: info['countryTo']['name'],
+        country_code_to: info['countryTo']['code'],
         local_departure: info['local_departure'],
         local_arrival: info['local_arrival'],
         duration: info['duration']['departure'],
@@ -43,11 +45,11 @@ class FlightApi
         city_from: info['cityFrom'],
         fly_from: info['flyFrom'],
         country_from: info['countryFrom']['name'],
+        country_code_from: info['countryFrom']['code'],
       }
     end
 
     depart_1_filtered = depart_1_city_price.uniq { |info| info[:city_to] }
-
     # depart_input_2 = File.read("db/seeds/OSL.json") # Fake json data (comment when using API)
     # depart_2 = JSON.parse(depart_input_2) # Fake json data (comment when using API)
 
@@ -68,6 +70,7 @@ class FlightApi
         price: info['price'],
         city_to: info['cityTo'],
         country_to: info['countryTo']['name'],
+        country_code_to: info['countryTo']['code'],
         local_departure: info['local_departure'],
         local_arrival: info['local_arrival'],
         duration: info['duration']['departure'],
@@ -77,6 +80,7 @@ class FlightApi
         city_from: info['cityFrom'],
         fly_from: info['flyFrom'],
         country_from: info['countryFrom']['name'],
+        country_code_from: info['countryFrom']['code'],
       }
     end
 
@@ -102,6 +106,7 @@ class FlightApi
           city_to_1: info1[:city_to],
           fly_to_1: info1[:fly_to],
           country_to_1: info1[:country_to],
+          country_code_to_1: info1[:country_code_to],
 
           price_1: info1[:price],
           local_departure_1: info1[:local_departure],
@@ -112,6 +117,7 @@ class FlightApi
           has_airport_change_1: info1[:has_airport_change],
           city_from_1: info1[:city_from],
           country_from_1: info1[:country_from],
+          country_code_from_1: info1[:country_code],
           fly_from_1: info1[:fly_from],
 
           price_2: info2[:price],
@@ -123,7 +129,8 @@ class FlightApi
           has_airport_change_2: info2[:has_airport_change],
           city_from_2: info2[:city_from],
           country_from_2: info2[:country_from],
-          fly_from_2: info2[:fly_from]
+          country_code_from_2: info2[:country_code],
+          fly_from_2: info2[:fly_from],
         }
       end
     end
