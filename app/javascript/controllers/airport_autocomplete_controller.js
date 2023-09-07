@@ -31,7 +31,7 @@ export default class extends Controller {
                   const data = await source.json();
 
                   const resultsArray = data.locations.map((location) => {
-                    return `${location.name} ${location.city.name} ${location.id}`
+                    return `${location.city.name} - ${location.id}`
                   })
 
                   return resultsArray
@@ -57,6 +57,6 @@ export default class extends Controller {
     const feedback = event.detail;
     const selection = feedback.selection.value;
 
-    this.inputFieldTarget.value = selection.split(" ").pop();
+    this.inputFieldTarget.value = selection;
   }
 }
