@@ -1,7 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 import flatpickr from "flatpickr"
+const date = new Date()
 
 export default class extends Controller {
+
 
   static targets = [
     "departureDate",
@@ -13,10 +15,9 @@ export default class extends Controller {
         "disable": [
           {
               from: "01-04-2021",
-              to: "07-09-2023"
+              to: `${date.getDate()-1}-${date.getMonth()}-${date.getFullYear()}`
           }
-      ]
+        ]
       })
-      // Add option config
   }
 }
