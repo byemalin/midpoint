@@ -147,17 +147,17 @@ class MeetupsController < ApplicationController
   end
 
   def city_photo_upload(airport)
-    # begin
-    # # unsplash_url = "https://api.unsplash.com/photos/random?client_id=#{ENV["UNSPLASH_ACCESS_KEY"]}&query=#{CGI.escape(city_name)}"
-    # # photo_serialized = URI.open(unsplash_url).read
-    # # photo_json = JSON.parse(photo_serialized)
-    # # photo_url = photo_json["urls"]["small"]
-    #   photo_url = Unsplash::Photo.search("#{airport.city_name}, #{airport.country_name}").first[:urls][:small]
-    #   file = URI.open(photo_url)
-    #   airport.city_photo.attach(io: file, filename: "city_name.png", content_type: "image/png")
-    #   airport.save!
-    # rescue Unsplash::Error
-    # end
+    begin
+    # unsplash_url = "https://api.unsplash.com/photos/random?client_id=#{ENV["UNSPLASH_ACCESS_KEY"]}&query=#{CGI.escape(city_name)}"
+    # photo_serialized = URI.open(unsplash_url).read
+    # photo_json = JSON.parse(photo_serialized)
+    # photo_url = photo_json["urls"]["small"]
+      photo_url = Unsplash::Photo.search("#{airport.city_name}, #{airport.country_name}").first[:urls][:small]
+      file = URI.open(photo_url)
+      airport.city_photo.attach(io: file, filename: "city_name.png", content_type: "image/png")
+      airport.save!
+    rescue Unsplash::Error
+    end
   end
 
   def find_or_create_airport(airport_code:, city_name:, country_name:)
