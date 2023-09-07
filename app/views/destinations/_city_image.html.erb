@@ -1,5 +1,4 @@
 <% unless destination.airport_to.country_code == "us" || destination.airport_to.country_code == "ca" %>
-  <!-- <p><%= destination.fly_to_city.downcase.parameterize %>_<%= destination.airport_to.country_code.downcase %> </p> -->
   <%= image_tag "https://images.skypicker.com/?image=https%3A%2F%2Fimages.kiwi.com%2Fphotos%2F1280x720%2F#{destination.fly_to_city.downcase.parameterize}_#{destination.airport_to.country_code.downcase}.jpg", alt: "logo of #{destination.fly_to_city}", class: "summary-img"%>
 <% else %>
   <% if @destination.airport_to.city_photo.attached? %>
