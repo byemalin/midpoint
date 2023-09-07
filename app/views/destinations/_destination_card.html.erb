@@ -3,22 +3,20 @@
   <%= link_to destination_path(destination) do %>
     <%= render "destinations/city_image", destination: destination %>
     <div class="d-flex justify-content-between align-items-center">
-      <div>
+      <div class="w-100 mb-3" style="height: 50px">
         <h4><%= destination.fly_to_city %></h4>
-        <p class="midpoint-grey-color"><%= destination.fly_to_country %></p>
-      </div>
-
-      <%# Reccomended and Midpoint Tags: %>
-      <div class="text-center">
-        <% if destination.is_recommended %>
-          <div class="tag tag-recommended">Recommended</div>
-        <% end %>
-        <% if destination.is_midpoint %>
-          <div class="tag tag-midpoint">Midpoint</div>
-        <% end %>
-        <%# <% if destination.is_cheapest %>
-          <%# <div class="tag tag-cheapest">Cheapest</div> %>
-        <%# <% end %>
+        <div class="d-flex justify-content-between align-items-center tag-container">
+          <p class="midpoint-grey-color"><%= destination.fly_to_country %></p>
+          <% if destination.is_recommended %>
+            <div class="tag tag-recommended">Recommended</div>
+          <% end %>
+          <% if destination.is_midpoint %>
+            <div class="tag tag-midpoint">Midpoint</div>
+          <% end %>
+          <% if destination.is_cheapest %>
+            <div class="tag tag-cheapest">Cheapest</div>
+          <% end %>
+        </div>
       </div>
 
     </div>
@@ -39,7 +37,7 @@
 
     <br>
 
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between align-items-center">
       <small>Total</small>
       <h4><%= destination.total_price.truncate %>€</h5>
     </div>

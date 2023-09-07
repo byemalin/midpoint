@@ -1,9 +1,9 @@
-<%= form_with url: meetups_path, method: :post, autocomplete: "off", class: "horizontal-form", data:{ controller: "datepicker", datepicker_disabled_dates_value: [].to_json} do %>
+<%= form_with url: meetups_path, method: :post, autocomplete: "off", class: "horizontal-form", data:{ controller: "datepicker search", action: "submit->search#loading", datepicker_disabled_dates_value: [].to_json} do %>
 
   <div class="horizontal-form-input-fields-container">
 
     <div id="first-city" class="relative" data-controller="airport-autocomplete">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
         <%= text_field_tag :fly_from_1,
           @meetup ? @meetup.fly_from_1 : params[:fly_from_1],
           class: "search-input-midpoint ps-5 autocomplete",
@@ -15,7 +15,7 @@
     </div>
 
     <div id="second-city" class="relative"  data-controller="airport-autocomplete">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
         <%= text_field_tag :fly_from_2,
           @meetup ? @meetup.fly_from_2 : params[:fly_from_2],
           class: "search-input-midpoint ps-5 autocomplete",
@@ -27,7 +27,7 @@
     </div>
 
     <div class="relative">
-        <i class="fa-regular fa-calendar"></i>
+        <i class="fa-regular fa-calendar search-icon"></i>
         <%= text_field_tag :date_from,
           @meetup ? @meetup.date_from : params[:date_from],
           class: "search-input-midpoint ps-5",
@@ -39,6 +39,15 @@
   </div>
 
   <div class="submit-container-centered">
-    <%= submit_tag "Search", name: "", class: "btn-midpoint btn-primary-midpoint" %>
+
+      <button class="btn-midpoint btn-primary-midpoint" type="submit" data-search-target="submitButton">
+        <span data-search-target="loading" class="d-none">
+          <i class="fa fa-spinner fa-spin"></i>
+          Loading
+        </span>
+        <span data-search-target="search">Search</span>
+      </button>
+
   </div>
 <% end %>
+</div>

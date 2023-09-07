@@ -1,40 +1,42 @@
-
-.horizontal-form-input-fields-container{
+.horizontal-form-input-fields-container {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  gap:40px;
+  gap: 40px;
 }
 
-.horizontal-form{
-  gap:40px;
-  .submit-container-centered{
+.horizontal-form {
+  gap: 40px;
+
+  .submit-container-centered {
     display: flex;
     justify-content: center;
   }
-  i{
-    position:absolute;
+
+  .search-icon {
+    position: absolute;
     left: 20px;
     top: 15px;
   }
-  .relative{
+
+  .relative {
     position: relative;
   }
 
-  ul{
+  ul {
     list-style-type: none;
     background-color: none;
     // border: 1px solid $midpoint-grey;
     // border-radius: 10px;
     padding: 0;
-    margin:0;
+    margin: 0;
     margin-top: 10px;
     position: absolute;
 
     width: 100%;
   }
 
-  li{
+  li {
     padding: 10px;
     background-color: $midpoint-dark-grey;
     margin: 2px 10px;
@@ -42,13 +44,14 @@
     border-radius: 10px;
   }
 
-  li:hover{
+  li:hover {
     filter: brightness(100%);
     background-color: #26242a;
     cursor: pointer;
   }
 
-  .mark, mark {
+  .mark,
+  mark {
     color: $midpoint-secondary;
     padding: 0;
     // background-color: #705eb644;
