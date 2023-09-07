@@ -1,43 +1,43 @@
-<div class="card-midpoint mb-3">
-  <div class="d-flex w-100 justify-content-between align-items-center">
+<div class="card-midpoint flight-summary-card">
+  <div class="align-items-center">
     <h4><%= destination.meetup["city_from_#{flight}"] %> to <%= destination.fly_to_city %></h4>
     <h5><%= destination.meetup["fly_from_#{flight}"] %> to <%= destination.fly_to_code %></h5>
   </div>
 
   <br>
 
-  <div class="d-flex w-100 justify-content-between align-items-end">
-    <p><i class="fa-regular fa-clock summary-section-p"></i> Duration</p>
+  <div class="align-items-end ">
+    <p><i class="fa-regular fa-clock"></i> Duration</p>
     <p><%= destination["duration_#{flight}"] / 60 / 60 %> h <%= destination["duration_#{flight}"] / 60 % 60 %> mins </p>
   </div>
 
-  <div class="d-flex w-100 justify-content-between align-items-end">
-    <p><i class="fa-solid fa-plane-departure summary-section-p"></i> Departure</p>
+  <div class="align-items-end">
+    <p><i class="fa-solid fa-plane-departure"></i> Departure</p>
     <p><%= destination["local_departure_#{flight}"].strftime('%d/%m/%Y')%> at <%= destination["local_departure_#{flight}"].strftime('%I:%M %p')%>  </p>
   </div>
 
-  <div class="d-flex w-100 justify-content-between align-items-end">
-    <p><i class="fa-solid fa-plane-arrival summary-section-p"></i> Arrival</p>
+  <div class="align-items-end">
+    <p><i class="fa-solid fa-plane-arrival"></i> Arrival</p>
     <p><%= destination["local_arrival_#{flight}"].strftime('%d/%m/%Y')%> at <%= destination["local_arrival_#{flight}"].strftime('%I:%M %p')%></p>
   </div>
 
-  <div class="d-flex w-100 justify-content-between align-items-end">
-    <p><i class="fa-solid fa-plane summary-section-p"></i> Airlines</p>
+  <div class="align-items-center mb-2">
+    <p><i class="fa-solid fa-plane"></i> Airlines</p>
     <div>
       <% destination["airlines_#{flight}"].split(", ").each do |code| %>
-      <%= image_tag "https://images.kiwi.com/airlines/32x32/#{code}.png?default=airline.png", alt: "logo of #{code}", class: "summary-logo-img" %>
+        <%= image_tag "https://images.kiwi.com/airlines/32x32/#{code}.png?default=airline.png", alt: "logo of #{code}", class: "ms-1" %>
       <% end %>
     </div>
   </div>
 
-  <div class="d-flex w-100 justify-content-between align-items-end">
-    <p><i class="fa-solid fa-tag summary-section-p"></i> Price</p>
+  <div class="align-items-end border-bottom-midpoint pb-2">
+    <p><i class="fa-solid fa-tag"></i> Price</p>
     <h4><%= destination["price_#{flight}"].truncate %>€</h4>
   </div>
 
   <br>
 
-  <div class="d-flex w-100 justify-content-between align-items-end">
+  <div class="align-items-end">
     <a href="" class="btn-midpoint btn-secondary-midpoint">Copy Link</a>
     <%= link_to "Buy Flight", destination["deep_link_#{flight}"], :target => "_blank", class: "btn-midpoint btn-primary-midpoint"  %>
   </div>

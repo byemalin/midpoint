@@ -65,7 +65,7 @@
   }
 }
 
-.summary-section-p{
+.summary-section p{
   color: $midpoint-grey;
 }
 
@@ -85,4 +85,10 @@
 .summary-logo-img{
   width: 1.5em;
   border-radius: 3%;
+}
+
+.open-ai-text {
+  p {
+    margin: 0.8em;
+  }
 }

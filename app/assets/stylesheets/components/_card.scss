@@ -1,3 +1,4 @@
+// ALL CARDS:
 .card-midpoint {
   border-radius: 16px;
   border: 1px solid $midpoint-grey;
@@ -19,11 +20,7 @@
   grid-gap: 20px;
 }
 
-.open-ai-text {
-  p {
-    margin: 0.8em;
-  }
-}
+
 
 // DESTINATION CARD:
 
@@ -43,25 +40,29 @@
   }
 }
 
-.destination-card-midpoint>div {
+.destination-card-midpoint > div {
   // display: flex;
   justify-content: space-between;
   gap: 5px;
 
   p {
     color: $midpoint-grey;
+    margin: 0 !important;
   }
 }
 
 // tags
 
 .tag {
-  padding: 4px 8px;
+  padding: 3px 8px;
   border-radius: 4px;
+  margin: 2px;
 }
 
 .tag-container {
   margin-top: 5px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .tag-recommended {
@@ -75,5 +76,25 @@
 
 .tag-cheapest {
   background-color: rgb(73, 222, 73);
-  color: black;
+  color: $midpoint-black;
+}
+
+
+// FLIGHT SUMMARY CARD:
+
+.flight-summary-card{
+  margin-bottom: 0.75em;
+  p{
+    // line-height: normal;
+    margin: 8px 0;
+  }
+  i{
+    color: $midpoint-grey;
+  }
+}
+
+.flight-summary-card > div{
+  display: flex;
+  width:  100%;
+  justify-content: space-between;
 }
