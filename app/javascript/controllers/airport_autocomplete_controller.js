@@ -10,8 +10,6 @@ export default class extends Controller {
   ]
 
   connect() {
-    console.log("Airport autocomplete controller connected")
-    console.log(this.element)
 
     const autoCompleteJS = new autoComplete({
         data: {
@@ -52,7 +50,6 @@ export default class extends Controller {
   }
 
   complete(event){
-    console.log("Completing...")
 
     const feedback = event.detail;
     const selection = feedback.selection.value;

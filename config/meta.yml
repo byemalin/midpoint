@@ -1,0 +1,5 @@
+meta_product_name: "Midpoint"
+meta_title: "Midpoint - meet in the middle"
+meta_description: "Bringing far away friends closer together"
+meta_image: "logo_cover.png" # should exist in `app/assets/images/`
+# twitter_account: "@product_twitter_account" # required for Twitter Cards

@@ -20,6 +20,11 @@ class MeetupsController < ApplicationController
     @meetup.user = current_user
     if @meetup.save
       results = FlightApi.new.destinations(@meetup.fly_from_1, @meetup.fly_from_2, @meetup.date_from)
+      if results.empty?
+        flash.now[:alert] = "No destinations in the middle are found"
+        render "pages/home", status: :unprocessable_entity
+        return
+      end
       @meetup.update(
         city_from_1: results.first[:city_from_1],
         city_from_2: results.first[:city_from_2],
@@ -75,14 +80,11 @@ class MeetupsController < ApplicationController
       find_midpoint(@meetup)
       find_recommended(@meetup)
       find_cheapest(@meetup)
-      # find is_recommended
       redirect_to meetup_path(@meetup)
     else
-      # binding.irb
       flash.now[:alert] = @meetup.errors.full_messages.to_sentence
       render "pages/home", status: :unprocessable_entity
     end
-    # iterate over destinations and set midpoint flag to true for closest
   end
 
   def show
@@ -155,13 +157,13 @@ class MeetupsController < ApplicationController
       begin
       # unsplash_url = "https://api.unsplash.com/photos/random?client_id=#{ENV["UNSPLASH_ACCESS_KEY"]}&query=#{CGI.escape(city_name)}"
       # photo_serialized = URI.open(unsplash_url).read
-      # photo_json = JSON.parse(photo_serialized)
-      # photo_url = photo_json["urls"]["small"]
-        photo_url = Unsplash::Photo.search("#{airport.city_name}, #{airport.country_name}").first[:urls][:small]
-        file = URI.open(photo_url)
-        airport.city_photo.attach(io: file, filename: "city_name.png", content_type: "image/png")
-        airport.save!
-      rescue Unsplash::Error
+      # # photo_json = JSON.parse(photo_serialized)
+      # # photo_url = photo_json["urls"]["small"]
+      #   photo_url = Unsplash::Photo.search("#{airport.city_name}, #{airport.country_name}").first[:urls][:small]
+      #   file = URI.open(photo_url)
+      #   airport.city_photo.attach(io: file, filename: "city_name.png", content_type: "image/png")
+      #   airport.save!
+      # rescue Unsplash::Error
       end
     end
   end
