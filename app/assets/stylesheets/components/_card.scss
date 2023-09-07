@@ -7,10 +7,6 @@
 
   transition: 100ms;
   scroll-margin-top: 128px;
-
-  p {
-    margin: 6px;
-  }
 }
 
 .card-midpoint:hover {
@@ -78,5 +74,6 @@
 }
 
 .tag-cheapest {
-  background-color: rgb(52, 183, 52);
+  background-color: rgb(73, 222, 73);
+  color: black;
 }
