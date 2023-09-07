@@ -18,13 +18,13 @@
 
 
     <div class="d-flex justify-content-between">
-      <small>Flight 1</small>
+    <small><%= @meetup.city_from_1 %></small>
       <small class="midpoint-grey-color"><%="%2dh %02dmin" % [destination.duration_1 / 3600, destination.duration_1 / 60 % 60 ]%></small>
       <small class="midpoint-grey-color"><%= destination.price_1.truncate %>€</small>
     </div>
 
     <div class="d-flex justify-content-between">
-      <small>Flight 2</small>
+      <small><%= @meetup.city_from_2 %></small>
       <small class="midpoint-grey-color"><%="%2dh %02dmin" % [destination.duration_2 / 3600, destination.duration_2 / 60 % 60 ]%></small>
       <small class="midpoint-grey-color"><%= destination.price_2.truncate %>€</small>
     </div>
