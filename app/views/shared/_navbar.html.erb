@@ -20,7 +20,7 @@
 
   <% if user_signed_in? %>
     <%= link_to destroy_user_session_path, data: { "turbo-method": :delete } do %>
-      <i class="fa-regular fa-user"></i>
+      <i class="fa-regular fa-user search-icon"></i>
     <% end %>
   <% else %>
     <div>
