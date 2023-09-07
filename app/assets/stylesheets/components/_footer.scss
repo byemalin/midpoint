@@ -52,8 +52,9 @@
 }
 
 
-@media(max-width: 835px) {
+@media(max-width: 755px) {
   .footer-content-midpoint > div{
-    flex-direction: column;
+    // flex-direction: column;
+    // background-color: red;
   }
 }

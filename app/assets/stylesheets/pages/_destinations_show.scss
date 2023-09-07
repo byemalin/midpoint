@@ -32,8 +32,18 @@
     justify-content: space-between;
   }
 
-  .fly-to-city{
-    color: $midpoint-primary;
+  .cities-container-midpoint > div{
+    width: 33%;
+    &:last-child{
+      text-align: end;
+    }
+  }
+
+  .fly-to-city-container{
+    text-align: center;
+    h1{
+      color: $midpoint-primary;
+    }
   }
 
   .arrow-container-midpoint{
