@@ -32,8 +32,18 @@
     justify-content: space-between;
   }
 
-  .fly-to-city{
-    color: $midpoint-primary;
+  .cities-container-midpoint > div{
+    width: 33%;
+    &:last-child{
+      text-align: end;
+    }
+  }
+
+  .fly-to-city-container{
+    text-align: center;
+    h1{
+      color: $midpoint-primary;
+    }
   }
 
   .arrow-container-midpoint{
@@ -65,7 +75,7 @@
   }
 }
 
-.summary-section-p{
+.summary-section p{
   color: $midpoint-grey;
 }
 
@@ -85,4 +95,10 @@
 .summary-logo-img{
   width: 1.5em;
   border-radius: 3%;
+}
+
+.open-ai-text {
+  p {
+    margin: 0.8em;
+  }
 }

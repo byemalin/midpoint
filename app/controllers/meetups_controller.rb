@@ -20,6 +20,11 @@ class MeetupsController < ApplicationController
     @meetup.user = current_user
     if @meetup.save
       results = FlightApi.new.destinations(@meetup.fly_from_1, @meetup.fly_from_2, @meetup.date_from)
+      if results.empty?
+        flash.now[:alert] = "No destinations in the middle are found"
+        render "pages/home", status: :unprocessable_entity
+        return
+      end
       @meetup.update(
         city_from_1: results.first[:city_from_1],
         city_from_2: results.first[:city_from_2],

@@ -1,3 +1,6 @@
+<% content_for :meta_title, "#{@destination.fly_to_city} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_image, @destination.city_img_url %>
+
 <%# Back Button %>
 <div class="container-midpoint flex-left-align-column mt-3 mb-3">
   <%= link_to meetup_path(@destination.meetup.id), class:"btn-midpoint btn-tertiary-midpoint btn-small-midpoint" do%>
@@ -7,6 +10,7 @@
 
 <div class="container-midpoint destinations-show">
 
+  <%# Node Map: %>
   <div class="node-map-midpoint">
     <%# Prices and Hours %>
     <div class="flight-info justify-content-end">
@@ -32,9 +36,19 @@
 
     <%# Cities %>
     <div class="cities-container-midpoint">
-      <h1><%= @destination.meetup.city_from_1 %></h1>
-      <h1 class="fly-to-city"><%= @destination.fly_to_city %></h1>
-      <h1><%= @destination.meetup.city_from_2 %></h1>
+
+      <div>
+        <h1><%= @destination.meetup.city_from_1 %></h1>
+      </div>
+
+      <div class="fly-to-city-container">
+        <h1><%= @destination.fly_to_city %></h1>
+      </div>
+
+      <div>
+        <h1><%= @destination.meetup.city_from_2 %></h1>
+      </div>
+
     </div>
   </div>
 
