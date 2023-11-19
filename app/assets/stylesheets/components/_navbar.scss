@@ -47,12 +47,7 @@
     align-items: center; // Change this from flex-start to center
     padding: 20px;
     gap: 50px;
-
-    img {
-      width: 100%;
-      max-width: 180px;
-    }
-
+    position: relative;
     .navbar-link {
       margin: 10px 0;
     }
