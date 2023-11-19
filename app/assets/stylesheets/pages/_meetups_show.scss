@@ -4,18 +4,37 @@
   align-items: flex-start;
   gap:33px;
 
+  .inner-container-1 {
+    order: 1;
+  }
+
   .sticky-container{
     position: sticky;
     top: 140px;
+    order: 2;
   }
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    display: inline;
+    flex-direction: column;
+
+    .inner-container-1 {
+      order: 2;
+    }
+
+    .sticky-container{
+      position: static;
+      order: 1;
+      .meetups-title {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+    }
   }
 }
 
-.meetups-show > div{
+.meetups-show > div {
   width: 50%;
 
   @media (max-width: 768px) {
@@ -23,11 +42,11 @@
   }
 }
 
-.meetup-sort-buttons{
+.meetup-sort-buttons {
   @media (max-width: 768px) {
     display: flex;
     justify-content: space-between;
-    width: 60%;
-    gap: 10px;
+    align-items: center;
+    width: 100%;
   }
 }
