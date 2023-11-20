@@ -17,7 +17,7 @@ class MeetupsController < ApplicationController
       # Add 4 new properties for departure cities
     )
 
-    @meetup.user = current_user
+    # @meetup.user = current_user
     if @meetup.save
       results = FlightApi.new.destinations(@meetup.fly_from_1, @meetup.fly_from_2, @meetup.date_from)
       if results.empty?
@@ -159,11 +159,11 @@ class MeetupsController < ApplicationController
       # photo_serialized = URI.open(unsplash_url).read
       # # photo_json = JSON.parse(photo_serialized)
       # # photo_url = photo_json["urls"]["small"]
-      #   photo_url = Unsplash::Photo.search("#{airport.city_name}, #{airport.country_name}").first[:urls][:small]
-      #   file = URI.open(photo_url)
-      #   airport.city_photo.attach(io: file, filename: "city_name.png", content_type: "image/png")
-      #   airport.save!
-      # rescue Unsplash::Error
+        photo_url = Unsplash::Photo.search("#{airport.city_name}, #{airport.country_name}").first[:urls][:small]
+        file = URI.open(photo_url)
+        airport.city_photo.attach(io: file, filename: "city_name.png", content_type: "image/png")
+        airport.save!
+      rescue Unsplash::Error
       end
     end
   end

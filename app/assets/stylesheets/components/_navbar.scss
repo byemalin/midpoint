@@ -41,6 +41,22 @@
   .relative {
     position: relative;
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin: 45px 0;
+    min-height: 0 !important;
+    .navbar-link {
+      margin: 0;
+      padding-top: 10px;
+    }
+
+    #navbar-horizontal-form{
+      display: none;
+    }
+  }
 }
 
 .background-black-transparent-navbar{

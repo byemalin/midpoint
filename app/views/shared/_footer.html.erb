@@ -5,19 +5,18 @@
     <div class="border-bottom-midpoint">
       <div>
         <%= image_tag "logos/midpoint-logo.svg" %>
-        <p>Bringing far away friends closer together</p>
+        <%# <p>Bringing far away friends closer together</p> %>
       </div>
       <ul class="footer-links-midpoint">
-        <li><a>About</a></li>
-        <li><a>Contact</a></li>
-        <li><a>GitHub</a></li>
-        <li><a>Terms & Conditions</a></li>
-        <li><a>Privacy</a></li>
+        <li><%= link_to "About", about_path %></li>
+        <li><%= link_to "Contact", contact_path %></li>
+        <li><%= link_to "Terms & Conditions", conditions_path %></li>
+        <li><%= link_to "Privacy", privacy_path %></li>
       </ul>
     </div>
 
     <div>
-      <p>Made with ✨ at Le Wagon</p>
+      <%# <p>Made with ✨ at Le Wagon</p> %>
       <ul class="payment-types-footer-midpoint">
         <li><i class="fa-brands fa-cc-visa"></i></li>
         <li><i class="fa-brands fa-cc-mastercard"></i></li>

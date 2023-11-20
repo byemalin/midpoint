@@ -10,9 +10,8 @@
   data-map-midpoint-value="<%= @midpoint_destination %>"
 >
 
-  <div>
-    <div class="mb-4">
-
+  <div class="inner-container-1">
+    <div class="mb-4 meetup-sort-buttons">
       <%=
         link_to "Best",
         meetup_path(@meetup.id),
@@ -30,8 +29,8 @@
         meetup_path(@meetup.id, sort: "total_duration"),
         class:"btn-midpoint btn-small-midpoint #{params[:sort] == 'total_duration' ? 'btn-primary-midpoint' : 'btn-tertiary-midpoint'}"
       %>
-
     </div>
+
     <div class="cards-midpoint-grid-2">
       <% @destinations.each do |destination| %>
         <%= render "destinations/destination_card", destination: destination %>
@@ -40,11 +39,10 @@
   </div>
 
   <div class="sticky-container">
-    <div class="d-flex w-100 justify-content-between align-items-center">
-      <h4>Trips from <span class="midpoint-primary-color"><%= @meetup.city_from_1 %><span> and <span class="midpoint-primary-color"><%=  @meetup.city_from_2 %></span></h4>
+    <div class="meetups-title d-flex w-100 justify-content-between align-items-center">
+      <h4>Trips from <span class="midpoint-primary-color"><%= @meetup.city_from_1 %><span> and <span class="midpoint-primary-color"><%= @meetup.city_from_2 %></span></h4>
       <h5><%= @destinations.first["local_departure_1"].strftime('%d/%m/%Y')%></h5>
     </div>
-
 
     <div
       class="card-midpoint map"
@@ -52,8 +50,6 @@
     >
       <%# Add new values for d cities %>
     </div>
-
   </div>
 
-</div>
 </div>
